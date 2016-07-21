@@ -1,0 +1,30 @@
+{
+	"compilerOptions": {
+		"listFiles": true,
+		"pretty": true,
+
+		"allowJs": false,
+		"forceConsistentCasingInFileNames": true,
+		"noFallthroughCasesInSwitch": true,
+		"noImplicitAny": true,
+		"noImplicitReturns": true,
+
+		"target": "es6",
+		"noEmitOnError": true,
+		"declaration": true,
+		"sourceMap": true,
+		"outDir": "dist/es6"
+	},
+	"files": [
+		"node_modules/@types/node/index.d.ts",
+		"typings-custom/jsen.d.ts",
+		"src/index.ts"
+	],
+	"exclude": [
+		"dist",
+		"node_modules",
+		"scripts",
+		"test",
+		"tosort"
+	]
+}
