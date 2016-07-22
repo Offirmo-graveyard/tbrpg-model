@@ -17,8 +17,8 @@
 	},
 	"files": [
 		"node_modules/@types/node/index.d.ts",
-		"typings-custom/jsen.d.ts",
-		"src/index.ts"
+		"src/index.ts",
+		"src/weapon-component/weapon-component.ts"
 	],
 	"exclude": [
 		"dist",
