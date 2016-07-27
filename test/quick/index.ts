@@ -4,3 +4,9 @@
 import * as model from '../../src'
 
 console.log('Hello', model)
+
+let armor1: model.ArmorComponent
+
+armor1 = model.build_armor_component({})
+
+console.log(armor1)

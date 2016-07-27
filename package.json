@@ -32,7 +32,7 @@
     "lodash": "^4.13.1"
   },
   "devDependencies": {
-    "@types/jsen": "0.0.17",
+    "@types/jsen": "^0.0.17",
     "@types/lodash": "^0.0.28",
     "@types/node": "^4.0.30",
     "babel-preset-es2015-node-rollup": "^6.1.0",
@@ -54,7 +54,7 @@
     "sinon": "^1.17.4",
     "ts-node": "^1.1.0",
     "tslint": "^3.13.0",
-    "typescript": "^2.1.0-dev.20160721",
+    "typescript": "^2.1.0-dev.20160727",
     "vorpal": "^1.11.2"
   }
 }

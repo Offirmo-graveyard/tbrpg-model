@@ -43,7 +43,12 @@ const rollup_bundles = [
 	}
 ];
 
-
+function debug_promise(p, target) {
+	p.then(
+		() => console.log('* ' + target + ' ✓'),
+		(err) => console.error('! ' + target + ' ❌\n\n!!!!!!!!\n', err)
+	)
+}
 Promise.resolve()
 .then(() => {
 	// Clean up the output directory
@@ -54,15 +59,19 @@ Promise.resolve()
 .then(() => console.log('SUCCESS'), console.error)
 
 function transpile_typescript_to_es6() {
-	return tsc.compile({
+	const es6_files = tsc.compile({
 		'project': '.'
 	})
+
+	debug_promise(es6_files, 'typescript -> ES6')
+
+	return es6_files
 }
 
 // Compile source code into a distributable format with Rollup+Babel
 function transpile_es6_to_bundles() {
 	const allBundles = rollup_bundles.map(config => {
-		return rollup.rollup({
+		const intermediate_bundle = rollup.rollup({
 			entry: 'dist/es6/index.js',
 			external: Object.keys(package.json.dependencies),
 			plugins: [
@@ -74,12 +83,18 @@ function transpile_es6_to_bundles() {
 				})
 			].concat(config.plugins),
 		})
-			.then(bundle => bundle.write({
+		debug_promise(intermediate_bundle, '[' + config.ext + '] ES6 -> rollup bundle')
+
+		const bundle = intermediate_bundle.then(bundle => bundle.write({
 				dest: `dist/${config.moduleName || 'index'}${config.ext}`,
 				format: config.format,
 				sourceMap: !config.minify,
 				moduleName: config.moduleName,
 			}))
+		debug_promise(bundle, '[' + config.ext + '] rollup bundle -> bundle file')
+
+		return bundle
 	})
+
 	return Promise.all(allBundles)
 }

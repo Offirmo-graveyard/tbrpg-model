@@ -3,3 +3,17 @@
 		"noUnusedLocals": true,
 		"noUnusedParameters": true,
 		"strictNullChecks": true,
+
+
+//import jsen = require('jsen')
+//import jsen from 'jsen'
+//import * as jsen from 'jsen'
+//import { jsen } from 'jsen'
+const jsen = require('jsen')
+
+const schema = require('./schema.json')
+/*
+import * as schema from './weapon-component.schema.json'
+import schema from './weapon-component.schema.json'
+export schema from './weapon-component.schema.json'
+*/
