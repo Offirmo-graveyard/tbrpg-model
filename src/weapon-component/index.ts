@@ -1,102 +1,98 @@
-////////////
+////////////////////////////////////
 
+const _lodash = require('lodash')
 const _jsen = require('jsen')
 const _schema = require('./schema.json')
 
 export interface InjectableDependencies {
+	lodash?: any
 	jsen?: any
 	schema?: any
 }
 
 ////////////
 
-import { WeaponComponent, WeaponComponentType } from './types'
+import { WeaponComponentType, IWeaponComponent, IWeaponComponentCreationParams } from './types'
 
-////////////
+const MODULE_ID = 'TBRPG model - WeaponComponent'
+const ALLOWED_TYPES = [ 'base', 'qualifier1', 'qualifier2', 'quality' ]
+
+////////////////////////////////////
 
 
-export default function module(dependencies: InjectableDependencies = {}) {
-	const jsen = dependencies.jsen || _jsen
-	const schema = dependencies.schema || _schema
+export function instantiate_module (dependencies: InjectableDependencies = {}) {
+	const _ = (dependencies.lodash || _lodash) as typeof _lodash
+	const jsen = (dependencies.jsen || _jsen) as typeof _jsen
+	const schema = (dependencies.schema || _schema) as typeof _schema
+
+	////////////
 
 	const is_schema_valid = jsen({'$ref': 'http://json-schema.org/draft-04/schema#'})(schema)
-	if (! is_schema_valid) throw new Error('Adventure model : internal schema is invalid !')
+	if (! is_schema_valid) throw new Error(MODULE_ID + ' - schema is invalid !')
+
+	////////////
 
 	const _validate = jsen(schema, {
 		greedy: true,
 		formats: {},
 	})
+
 	const _build = _validate.build
 
-	function validate(data: Object) {
-		const err: any = new Error('Adventure model : provided data are invalid !')
+	////////////
+
+	function validate (data: IWeaponComponent) {
+		const err: any = new Error(MODULE_ID + ' - validate() - provided data are invalid !')
 		err.bad_data = _.cloneDeep(data)
 		err.validation_errors = []
 
 		// jsen validation
 		if (!_validate(data)) {
 			err.validation_errors = _.cloneDeep(_validate.errors)
-			console.error('Adventure model : validation error !', err.bad_data, err.validation_errors)
+			console.error(err.message, err.bad_data, err.validation_errors)
 			throw err
 		}
 
 		// additional validations
+		// ...
 	}
 
-	function build(data: WeaponComponent = {}) {
+	function create (rawData: IWeaponComponentCreationParams) {
 		// reminder: jsen build creates a copy of data by default
-		data = _build(data, { additionalProperties: false })
+		const data = _build(rawData, { additionalProperties: false }) as IWeaponComponent
+
+		// to ease building from static data, special type inference :
+		data.type = rawData.type || infer_type_from_id(data.id)
+
 		validate(data)
+
 		return data
 	}
 
+	function infer_type_from_id(id: string): WeaponComponentType {
+		const candidate_type =  id.slice(0, id.indexOf('_'))
+		if (_.includes(ALLOWED_TYPES, candidate_type))
+			return candidate_type as WeaponComponentType
+		else return 'base'
+	}
+
 	return {
-		build,
+		create,
 		validate
 	}
 }
 
-const default_instance = module()
-export const build_weapon_component = default_instance.build
+const default_instance = instantiate_module()
 
+////////////////////////////////////
+
+export const create = default_instance.create
+export const validate = default_instance.validate
 
 export {
 	WeaponComponentType,
-	WeaponComponent,
-	_schema as weapon_component_schema,
+	IWeaponComponent,
+	_schema as schema
 }
 
-
-//}
-
-
-
-/*
-
-
-
-
-/////// Methods ///////
-function Adventure(data) {
-	data = build(data || {}, { additionalProperties: false });
-	validate(data);
-
-	_.defaults(this, data);
-}
-
-Adventure.prototype.get = function () {
-	var data = build(this); // REM : perform a copy
-
-	if (data.gains.weapon)
-		data.gains.weapon = data.gains.weapon.get();
-
-	if (data.gains.armor)
-		data.gains.armor = data.gains.armor.get();
-
-	return data;
-};
-
-Adventure.create = function(data) {
-	return new Adventure(data);
-};
-*/
+////////////////////////////////////
