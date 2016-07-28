@@ -1,3 +1,4 @@
+/// <reference types="chai" />
 export interface IModel<I> {
     create(data: Object): I;
     validate(data: I): void;

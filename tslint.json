@@ -10,6 +10,7 @@
 		"no-switch-case-fall-through": true,
 		"no-var-requires": false,
 		"object-literal-sort-keys": false,
+		"ordered-imports": false,
 		"quotemark": [true, "single"],
 		"semicolon": [true, "never"],
 		"trailing-comma": false,

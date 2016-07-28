@@ -11,4 +11,4 @@ export declare function instantiate_module(dependencies?: InjectableDependencies
 };
 export declare const create: (rawData: IWeaponComponentCreationParams) => IWeaponComponent;
 export declare const validate: (data: IWeaponComponent) => void;
-export { WeaponComponentType, IWeaponComponent, _schema as schema };
+export { WeaponComponentType, IWeaponComponent, IWeaponComponentCreationParams, _schema as schema };

@@ -92,6 +92,7 @@ export const validate = default_instance.validate
 export {
 	WeaponComponentType,
 	IWeaponComponent,
+	IWeaponComponentCreationParams,
 	_schema as schema
 }
 

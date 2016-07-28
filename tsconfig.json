@@ -22,6 +22,7 @@
 	},
 	"files": [
 		"node_modules/@types/node/index.d.ts",
+		"typings-custom/unit-tests-global-variables.d.ts",
 		"src/index.ts",
 		"src/utils/static-data-loader.ts",
 		"src/armor-component/index.ts",
