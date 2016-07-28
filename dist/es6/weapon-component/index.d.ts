@@ -1,12 +1,14 @@
 declare const _schema: any;
 export interface InjectableDependencies {
+    lodash?: any;
     jsen?: any;
     schema?: any;
 }
-import { WeaponComponent, WeaponComponentType } from './types';
-export default function module(dependencies?: InjectableDependencies): {
-    build: (base: WeaponComponent) => any;
-    validate: (data: Object) => void;
+import { WeaponComponentType, IWeaponComponent, IWeaponComponentCreationParams } from './types';
+export declare function instantiate_module(dependencies?: InjectableDependencies): {
+    create: (rawData: IWeaponComponentCreationParams) => IWeaponComponent;
+    validate: (data: IWeaponComponent) => void;
 };
-export declare const build_weapon_component: (base: WeaponComponent) => any;
-export { WeaponComponentType, WeaponComponent, _schema as weapon_component_schema };
+export declare const create: (rawData: IWeaponComponentCreationParams) => IWeaponComponent;
+export declare const validate: (data: IWeaponComponent) => void;
+export { WeaponComponentType, IWeaponComponent, _schema as schema };
