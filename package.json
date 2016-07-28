@@ -2,13 +2,10 @@
   "name": "tbrpg-model",
   "version": "0.0.1",
   "description": "Internal model for \"The Boring RPG reloaded\" game",
-  "main": "index.js",
-  "directories": {
-    "test": "test"
-  },
+  "main": "TODO",
   "scripts": {
     "__prod": "~~~~~~~ PRODUCTION ~~~~~~~",
-    "test": "echo 'I should write tests ;-)'",
+    "test": "mocha ./src/**/*.spec.js",
     "build": "node scripts/build.js",
     "np": "np",
     "__dev": "~~~~~~~ DEVELOPMENT ~~~~~~~",
@@ -29,12 +26,15 @@
   "dependencies": {
     "immutable": "^3.8.1",
     "jsen": "^0.6.1",
-    "lodash": "^4.13.1"
+    "lodash": "^4.13.1",
+    "typed-immutable-record": "0.0.3"
   },
   "devDependencies": {
     "@types/jsen": "^0.0.17",
     "@types/lodash": "^0.0.28",
     "@types/node": "^4.0.30",
+    "@types/sinon": "^1.16.26",
+    "@types/sinon-chai": "^2.7.26",
     "babel-preset-es2015-node-rollup": "^6.1.0",
     "babel-preset-es2015-rollup": "^1.1.1",
     "babel-preset-stage-1": "^6.5.0",
@@ -51,7 +51,8 @@
     "rollup": "^0.34.1",
     "rollup-plugin-babel": "^2.4.0",
     "rollup-plugin-uglify": "^1.0.1",
-    "sinon": "^1.17.4",
+    "sinon": "^1.17.5",
+    "sinon-chai": "^2.8.0",
     "ts-node": "^1.1.0",
     "tslint": "^3.13.0",
     "typescript": "^2.1.0-dev.20160727",
