@@ -29,7 +29,7 @@
 		"src/armor-component/spec.ts",
 		"src/armor-component/types.ts",
 		"src/weapon-component/index.ts",
-		"src/weapon-component/spec.ts",
+		"src/weapon-component/index.spec.ts",
 		"src/weapon-component/types.ts"
 	],
 	"exclude": [

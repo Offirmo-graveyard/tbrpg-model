@@ -19,7 +19,6 @@ const ALLOWED_TYPES = [ 'base', 'qualifier1', 'qualifier2', 'quality' ]
 
 ////////////////////////////////////
 
-
 export function instantiate_module (dependencies: InjectableDependencies = {}) {
 	const _ = (dependencies.lodash || _lodash) as typeof _lodash
 	const jsen = (dependencies.jsen || _jsen) as typeof _jsen
@@ -54,26 +53,20 @@ export function instantiate_module (dependencies: InjectableDependencies = {}) {
 		}
 
 		// additional validations
-		// ...
+		if (ALLOWED_TYPES.indexOf(data.type) < 0) {
+			err.validation_errors.push('illegal type')
+			console.error(err.message, err.bad_data, err.validation_errors)
+			throw err
+		}
 	}
 
 	function create (rawData: IWeaponComponentCreationParams) {
 		// reminder: jsen build creates a copy of data by default
 		const data = _build(rawData, { additionalProperties: false }) as IWeaponComponent
 
-		// to ease building from static data, special type inference :
-		data.type = rawData.type || infer_type_from_id(data.id)
-
 		validate(data)
 
 		return data
-	}
-
-	function infer_type_from_id(id: string): WeaponComponentType {
-		const candidate_type =  id.slice(0, id.indexOf('_'))
-		if (_.includes(ALLOWED_TYPES, candidate_type))
-			return candidate_type as WeaponComponentType
-		else return 'base'
 	}
 
 	return {

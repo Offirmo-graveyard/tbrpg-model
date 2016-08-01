@@ -18,6 +18,7 @@ const package = {
 const tsconfig = {
 	json: require('../tsconfig.json')
 }
+const source_files = tsconfig.json.files.filter(s => !s.endsWith('.spec.ts'))
 
 const MODULE_NAME = _.snakeCase(package.json.name)
 
