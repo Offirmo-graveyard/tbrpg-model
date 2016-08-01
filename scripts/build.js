@@ -1,13 +1,17 @@
 #!/bin/sh
 ':' //# http://sambal.org/?p=1014 ; exec /usr/bin/env node "$0" "$@"
 
+// Install the unhandledRejection listeners
+// https://github.com/sindresorhus/loud-rejection
+require('loud-rejection/register')
+
 const _ = require('lodash')
 const fs = require('fs-extra')
 const rollup = require('rollup')
 const rollup_babel = require('rollup-plugin-babel')
 const rollup_uglify = require('rollup-plugin-uglify')
-
 const tsc = require('node-typescript-compiler')
+
 const package = {
 	json: require('../package.json')
 }
