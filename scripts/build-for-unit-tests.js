@@ -1,7 +1,7 @@
 #!/bin/sh
 ':' //# http://sambal.org/?p=1014 ; exec /usr/bin/env node "$0" "$@"
 
-console.log(`* Building module for testing...`)
+console.log(`* Infinitely watching and building module for testing...`)
 
 // Install the unhandledRejection listeners
 // https://github.com/sindresorhus/loud-rejection
@@ -20,9 +20,10 @@ log_promise(
 	.then(() => {
 		// Clean up the output directory
 		fs.emptyDirSync('test/unit/src')
-	})
-	.then(transpile_typescript_for_tests)
+	}),
+	'file cleanup'
 )
+.then(transpile_typescript_for_tests)
 
 function transpile_typescript_for_tests() {
 	const files = tsc.compile(Object.assign({}, tsconfig.json.compilerOptions, {

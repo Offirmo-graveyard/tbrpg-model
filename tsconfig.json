@@ -25,9 +25,6 @@
 		"typings-custom/unit-tests-global-variables.d.ts",
 		"src/index.ts",
 		"src/utils/static-data-loader.ts",
-		"src/armor-component/index.ts",
-		"src/armor-component/spec.ts",
-		"src/armor-component/types.ts",
 		"src/weapon-component/index.ts",
 		"src/weapon-component/index.spec.ts",
 		"src/weapon-component/types.ts"
