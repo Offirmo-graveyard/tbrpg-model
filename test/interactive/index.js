@@ -4,11 +4,10 @@
 
 ////////////////////////////////////////////////////////////
 
-const _ = require('lodash');
-const vorpal = require('vorpal')()
-const prettyjson = require('prettyjson')
-var columnify = require('columnify')
-
+//const _ = require('lodash');
+const vorpal = require('@offirmo/cli-toolbox/framework/vorpal')()
+const prettify_json = require('@offirmo/cli-toolbox/output/prettify-json')
+const columnify = require('@offirmo/cli-toolbox/output/columnify')
 const MUT = require('../unit/src')
 
 ////////////////////////////////////////////////////////////
@@ -17,13 +16,12 @@ const APP_ID = 'TBRPG model'
 vorpal.history(APP_ID)
 vorpal.localStorage(APP_ID)
 
-vorpal.delimiter('test>')
-
-vorpal.log('\nHello from vorpal-based interactive tests !')
-vorpal.log('\nAvailable models:\n' + prettyjson.render(Object.keys(MUT)) + '\n')
+vorpal.log('\nHello from vorpal-based interactive tests !');
+vorpal.log('\nAvailable models:\n' + prettify_json(Object.keys(MUT)) + '\n');
 
 vorpal
 .command('model <model> <cmd>', 'display infos about the target model')
+.autocomplete(Object.keys(MUT))
 .action(function(args, callback) {
 	const model = MUT[args.model]
 	if (!model) {
@@ -33,11 +31,11 @@ vorpal
 
 	//const schema = require(`tbrpg-data/data/${args.model}/schema.json`)
 	const schema = model.schema
-	const columns = Object.keys(schema.properties)
+	const keys = Object.keys(schema.properties)
 
 	switch(args.cmd) {
 		case 'info':
-			console.log('Schema:\n~~~~~~~\n' + prettyjson.render(schema) + '\n~~~~~~~')
+			console.log('Schema:\n~~~~~~~\n' + prettify_json(schema) + '\n~~~~~~~')
 			break
 		case 'raw':
 			const raw_data = require(`tbrpg-data/data/${args.model}`)
@@ -48,25 +46,15 @@ vorpal
 				config: {}
 			})
 			console.log(columns)
-			/*
-			const header = _.map(schema.properties, (val, key) => ({
-				value: key,
-				align : 'left',
-			}))
-			 const t = Table(header,raw_data, {
-				borderColor : "blue",
-				paddingBottom : 0,
-			})
-			console.log(t.render())
-			*/
 			break
 		default:
 			console.error(`! unknown cmd "${args.cmd}"`)
 	}
 	callback()
-})
+});
 
-
-vorpal.show()
+vorpal
+	.delimiter('test>')
+	.show();
 
 vorpal.ui.input('model weapon_component raw')

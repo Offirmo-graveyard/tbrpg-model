@@ -13,7 +13,7 @@
     "dev1": "node scripts/build-for-unit-tests.js",
     "dev1x": "tsc --watch",
     "dev2": "cpx 'src/**/*.json' test/unit/src --watch",
-    "test:interactive": "nodemon test/interactive/index.js",
+    "test:interactive": "test/interactive/index.js",
     "__misc": "~~~~~~~ MISC ~~~~~~~",
     "tsc": "tsc"
   },

@@ -9,5 +9,6 @@
 	"watch": [
 		"test"
 	],
-	"ext": "js json ts map"
+	"ext": "js json ts map",
+	"restartable": false
 }
