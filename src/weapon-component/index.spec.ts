@@ -10,12 +10,12 @@ describe('WeaponComponent Model', function() {
 			it('should work', function () {
 				let out = CUT.create({
 					id: 'foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					type: 'base'
 				})
 				expect(_.cloneDeep(out)).to.deep.equal(_.cloneDeep({
 					id: 'foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					type: 'base',
 					affinities: {}
 				}))
@@ -27,11 +27,11 @@ describe('WeaponComponent Model', function() {
 				// base
 				out = CUT.create({
 					id: 'base_foo',
-					i18n_key: 'm_foo'
+					i18n_radix: 'm_foo'
 				})
 				expect(_.cloneDeep(out)).to.deep.equal(_.cloneDeep({
 					id: 'base_foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					type: 'base',
 					affinities: {}
 				}))
@@ -39,11 +39,11 @@ describe('WeaponComponent Model', function() {
 				// q1
 				out = CUT.create({
 					id: 'qualifier1_foo',
-					i18n_key: 'm_foo'
+					i18n_radix: 'm_foo'
 				})
 				expect(_.cloneDeep(out)).to.deep.equal(_.cloneDeep({
 					id: 'qualifier1_foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					type: 'qualifier1',
 					affinities: {}
 				}))
@@ -51,11 +51,11 @@ describe('WeaponComponent Model', function() {
 				// q2
 				out = CUT.create({
 					id: 'qualifier2_foo',
-					i18n_key: 'm_foo'
+					i18n_radix: 'm_foo'
 				})
 				expect(_.cloneDeep(out)).to.deep.equal(_.cloneDeep({
 					id: 'qualifier2_foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					type: 'qualifier2',
 					affinities: {}
 				}))
@@ -63,11 +63,11 @@ describe('WeaponComponent Model', function() {
 				// quality
 				out = CUT.create({
 					id: 'quality_foo',
-					i18n_key: 'm_foo'
+					i18n_radix: 'm_foo'
 				})
 				expect(_.cloneDeep(out)).to.deep.equal(_.cloneDeep({
 					id: 'quality_foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					type: 'quality',
 					affinities: {}
 				}))
@@ -76,7 +76,7 @@ describe('WeaponComponent Model', function() {
 			it('should validate', function () {
 				let tempfn = function() { CUT.create({
 					id: 'base_foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					type: 'xyz'
 				} as any as CUT.IWeaponComponentCreationParams) }
 				expect(tempfn).to.throw(Error, 'WeaponComponent model : provided data are invalid !')
@@ -85,7 +85,7 @@ describe('WeaponComponent Model', function() {
 			it('should strip extra properties', function () {
 				let out = CUT.create({
 					id: 'base_foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					foo: 'bar'
 				} as any as CUT.IWeaponComponentCreationParams)
 				expect(out).to.not.have.property('foo')
@@ -94,11 +94,11 @@ describe('WeaponComponent Model', function() {
 			it('should provide sane defaults for missing properties', function () {
 				let out = CUT.create({
 					id: 'base_foo',
-					i18n_key: 'm_foo'
+					i18n_radix: 'm_foo'
 				})
 				expect(_.cloneDeep(out)).to.deep.equal(_.cloneDeep({
 					id: 'base_foo',
-					i18n_key: 'm_foo',
+					i18n_radix: 'm_foo',
 					type: 'base',
 					affinities: {}
 				}))

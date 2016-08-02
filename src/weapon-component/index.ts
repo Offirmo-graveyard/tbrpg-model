@@ -2,7 +2,8 @@
 
 const _lodash = require('lodash')
 const _jsen = require('jsen')
-const _schema = require('./schema.json')
+//const _schema = require('./schema.json')
+const _schema = require(`tbrpg-data/data/weapon_component/schema.json`)
 
 export interface InjectableDependencies {
 	lodash?: any

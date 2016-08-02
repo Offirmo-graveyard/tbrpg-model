@@ -7,7 +7,7 @@
 const _ = require('lodash');
 const vorpal = require('vorpal')()
 const prettyjson = require('prettyjson')
-var Table = require('tty-table')
+var columnify = require('columnify')
 
 const MUT = require('../unit/src')
 
@@ -31,26 +31,34 @@ vorpal
 		return callback()
 	}
 
-	const schema = require(`tbrpg-data/data/${args.model}/schema.json`)
+	//const schema = require(`tbrpg-data/data/${args.model}/schema.json`)
+	const schema = model.schema
 	const columns = Object.keys(schema.properties)
 
 	switch(args.cmd) {
 		case 'info':
-			console.log('Schema:\n' + prettyjson.render(schema))
+			console.log('Schema:\n~~~~~~~\n' + prettyjson.render(schema) + '\n~~~~~~~')
 			break
 		case 'raw':
-			var header = _.map(schema.properties, (val, key) => ({
+			const raw_data = require(`tbrpg-data/data/${args.model}`)
+
+			const columns = columnify(raw_data, {
+				truncate: true,
+				columnSplitter: ' | ',
+				config: {}
+			})
+			console.log(columns)
+			/*
+			const header = _.map(schema.properties, (val, key) => ({
 				value: key,
 				align : 'left',
 			}))
-
-			const raw_data = require(`tbrpg-data/data/${args.model}`)
-
-			var t = Table(header,raw_data, {
+			 const t = Table(header,raw_data, {
 				borderColor : "blue",
 				paddingBottom : 0,
 			})
 			console.log(t.render())
+			*/
 			break
 		default:
 			console.error(`! unknown cmd "${args.cmd}"`)
