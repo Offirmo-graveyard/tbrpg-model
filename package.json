@@ -37,8 +37,8 @@
   "devDependencies": {
     "@offirmo/cli-toolbox": "0.0.2",
     "@types/jsen": "^0.0.17",
-    "@types/lodash": "^0.0.28",
-    "@types/node": "^4.0.30",
+    "@types/lodash": "^0.0.29",
+    "@types/node": "^6.0.31",
     "@types/prettyjson": "0.0.27",
     "@types/sinon": "^1.16.26",
     "@types/sinon-chai": "^2.7.26",
@@ -51,7 +51,7 @@
     "fs-extra": "^0.30.0",
     "log-symbols": "^1.0.2",
     "loud-rejection": "^1.6.0",
-    "mocha": "^2.5.3",
+    "mocha": "^3.0.0",
     "node-typescript-compiler": "^1.0.0",
     "nodemon": "^1.10.0",
     "np": "^2.6.0",
@@ -64,6 +64,6 @@
     "sinon-chai": "^2.8.0",
     "ts-node": "^1.1.0",
     "tslint": "^3.13.0",
-    "typescript": "^2.1.0-dev.20160727"
+    "typescript": "^2.1.0-dev.20160803"
   }
 }

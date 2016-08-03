@@ -4,6 +4,8 @@
 
 ////////////////////////////////////////////////////////////
 
+require('@offirmo/cli-toolbox/output/clear-cli')()
+
 //const _ = require('lodash');
 const vorpal = require('@offirmo/cli-toolbox/framework/vorpal')()
 const prettify_json = require('@offirmo/cli-toolbox/output/prettify-json')
