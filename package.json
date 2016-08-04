@@ -28,11 +28,12 @@
   },
   "homepage": "https://github.com/Offirmo/tbrpg-model#readme",
   "dependencies": {
+    "cfonts": "^1.0.2",
     "immutable": "^3.8.1",
     "jsen": "^0.6.1",
     "lodash": "^4.13.1",
-    "typed-immutable-record": "0.0.3",
-    "tbrpg-data": "github:Offirmo/tbrpg-data"
+    "tbrpg-data": "github:Offirmo/tbrpg-data",
+    "typed-immutable-record": "0.0.3"
   },
   "devDependencies": {
     "@offirmo/cli-toolbox": "0.0.2",
