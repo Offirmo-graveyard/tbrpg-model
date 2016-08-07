@@ -2,14 +2,12 @@
 type WeaponComponentType = 'base' | 'qualifier1' | 'qualifier2' | 'quality'
 
 interface IWeaponComponent {
-	id: string
-	i18n_radix: string
+	hid: string
 	type: WeaponComponentType
 }
 
 interface IWeaponComponentCreationParams {
-	id: string
-	i18n_radix: string
+	hid: string
 	type?: WeaponComponentType
 }
 

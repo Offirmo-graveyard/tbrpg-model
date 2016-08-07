@@ -4,12 +4,14 @@
 
 ////////////////////////////////////////////////////////////
 
-require('@offirmo/cli-toolbox/output/clear-cli')()
+require('@offirmo/cli-toolbox/stdout/clear-cli')()
 
 //const _ = require('lodash');
 const vorpal = require('@offirmo/cli-toolbox/framework/vorpal')()
-const prettify_json = require('@offirmo/cli-toolbox/output/prettify-json')
-const columnify = require('@offirmo/cli-toolbox/output/columnify')
+const prettify_json = require('@offirmo/cli-toolbox/string/prettify-json')
+const columnify = require('@offirmo/cli-toolbox/string/columnify')
+const stylizeString = require('@offirmo/cli-toolbox/string/stylize-string')
+
 const MUT = require('../unit/src')
 
 ////////////////////////////////////////////////////////////
@@ -31,7 +33,8 @@ vorpal
 		return callback()
 	}
 
-	//const schema = require(`tbrpg-data/data/${args.model}/schema.json`)
+	//console.log(model)
+	//const schema = require(`tbrpg-static-data/data/${args.model}/schema.json`)
 	const schema = model.schema
 	const keys = Object.keys(schema.properties)
 
@@ -40,13 +43,13 @@ vorpal
 			console.log('Schema:\n~~~~~~~\n' + prettify_json(schema) + '\n~~~~~~~')
 			break
 		case 'raw':
-			const raw_data = require(`tbrpg-data/data/${args.model}`)
+			const raw_data = require(`tbrpg-static-data/data/${args.model}`)
 
-			const columns = columnify(raw_data, {
-				truncate: true,
-				columnSplitter: ' | ',
-				config: {}
-			})
+			const columns = columnify(
+				raw_data
+					.map(model.toString)
+					.map(s => s.slice(model.schema.offirmo_extensions.hid.length +1))
+			)
 			console.log(columns)
 			break
 		default:
@@ -55,8 +58,10 @@ vorpal
 	callback()
 });
 
+
 vorpal
-	.delimiter('test>')
+	.delimiter(stylizeString.red('test>'))
 	.show();
 
 vorpal.ui.input('model weapon_component raw')
+

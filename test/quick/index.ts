@@ -7,7 +7,7 @@ import * as model from '../../src'
 
 import * as loader from '../../src/utils/static-data-loader'
 
-import static_weapon_component_data from '../../src/weapon-component/static-data'
+const static_weapon_component_data = require(`tbrpg-static-data/data/weapon_component`)
 
 console.log('Exported =\n' + prettyjson.render(model))
 
