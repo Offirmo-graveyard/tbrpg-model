@@ -66,6 +66,6 @@
     "sinon-chai": "^2.8.0",
     "ts-node": "^1.1.0",
     "tslint": "^3.13.0",
-    "typescript": "^2.1.0-dev.20160803"
+    "typescript": "^2.1.0-dev.20160808"
   }
 }

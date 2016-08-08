@@ -25,7 +25,7 @@
 		"typings-custom/unit-tests-global-variables.d.ts",
 		"src/index.ts",
 		"src/utils/json-schema-based-model/index.ts",
-		"src/utils/json-schema-based-model/primary_key.ts",
+		"src/utils/json-schema-based-model/get_unique_key.ts",
 		"src/utils/json-schema-based-model/types.ts",
 		"src/weapon/index.ts",
 		"src/weapon/types.ts",

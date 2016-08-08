@@ -22,7 +22,7 @@ console.log('weapon_component_1\n' + prettyjson.render(weapon_component_1))
 
 console.log('weapon components\n' + prettyjson.render(
 		loader.load_from_static_data<model.weapon_component.IWeaponComponent>(
-			model.weapon_component.instantiate_module(),
+			model.weapon_component.create_instance(),
 			static_weapon_component_data,
 			{
 				i18n_radix: 'weapon_'

@@ -1,3 +1,4 @@
+////////////////////////////////////
 
 type WeaponComponentType = 'base' | 'qualifier1' | 'qualifier2' | 'quality'
 
@@ -11,4 +12,12 @@ interface IWeaponComponentCreationParams {
 	type?: WeaponComponentType
 }
 
-export { WeaponComponentType, IWeaponComponent, IWeaponComponentCreationParams }
+////////////////////////////////////
+
+export {
+	WeaponComponentType,
+	IWeaponComponent,
+	IWeaponComponentCreationParams
+}
+
+////////////////////////////////////

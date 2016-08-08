@@ -5,16 +5,19 @@ const jsen = require('jsen')
 
 ////////////
 
-import { IJsonSchema, IJSBModel } from './types'
-import { create_primary_key_builder } from './primary_key'
-//import { create_i18n_keys_builder } from './i18n_keys'
+import { IJsonSchema, IJsonSchemaModel } from './types'
+import { create_human_unique_key_builder } from './get_unique_key'
+//import { create_i18n_keys_builder } from './get_i18n_keys'
 
 ////////////////////////////////////
 
 interface IOptions {
 }
 
-function instantiate_model <IModel, IModelCreationParams>(schema: IJsonSchema, options: IOptions = {}): IJSBModel<IModel, IModelCreationParams> {
+function instantiate_model <IModel, IModelCreationParams>(
+	schema: IJsonSchema,
+	options: IOptions = {}
+): IJsonSchemaModel<IModel, IModelCreationParams> {
 	const MODULE_ID = schema.title
 
 	////////////
@@ -62,7 +65,8 @@ function instantiate_model <IModel, IModelCreationParams>(schema: IJsonSchema, o
 	return {
 		create,
 		validate,
-		toString: create_primary_key_builder<IModel>(schema),
+		schema,
+		get_human_unique_key: create_human_unique_key_builder<IModel>(schema),
 		//get_i18n_keys: create_i18n_keys_builder
 	}
 }
@@ -72,7 +76,7 @@ function instantiate_model <IModel, IModelCreationParams>(schema: IJsonSchema, o
 
 export {
 	IJsonSchema,
-	IJSBModel,
+	IJsonSchemaModel,
 	IOptions,
 	instantiate_model
 }
