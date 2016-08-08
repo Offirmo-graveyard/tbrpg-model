@@ -19,6 +19,7 @@ function instantiate_model <IModel, IModelCreationParams>(
 	options: IOptions = {}
 ): IJsonSchemaModel<IModel, IModelCreationParams> {
 	const MODULE_ID = schema.title
+	const hid = schema.offirmo_extensions.hid
 
 	////////////
 
@@ -66,6 +67,7 @@ function instantiate_model <IModel, IModelCreationParams>(
 		create,
 		validate,
 		schema,
+		hid,
 		get_human_unique_key: create_human_unique_key_builder<IModel>(schema),
 		//get_i18n_keys: create_i18n_keys_builder
 	}

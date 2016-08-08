@@ -14,3 +14,5 @@ https://github.com/rangle/typed-immutable-record
 			console.log(t.render())
 			*/
 			
+
+randoms: [number, number, number, number, number, number]

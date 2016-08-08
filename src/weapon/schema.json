@@ -92,5 +92,12 @@
 		"quality",
 		"base_strength",
 		"enhancement_level"
-	]
+	],
+	"offirmo_extensions": {
+		"hid": "weapon",
+		"is_static": false,
+		"human_unique_key_components": [],
+		"i18n_keys_mandatory": {},
+		"i18n_keys_optional": {}
+	}
 }

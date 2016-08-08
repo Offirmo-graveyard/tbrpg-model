@@ -1,5 +1,6 @@
+////////////////////////////////////
 
-import { IWeaponComponent } from '../weapon_component'
+import { IWeaponComponent, IWeaponComponentCreationParams } from '../weapon_component'
 
 interface IWeapon {
 	base: IWeaponComponent
@@ -11,12 +12,19 @@ interface IWeapon {
 }
 
 interface IWeaponCreationParams {
-	base: IWeaponComponent
-	qualifier1: IWeaponComponent
-	qualifier2: IWeaponComponent
-	quality: IWeaponComponent
+	base: IWeaponComponentCreationParams
+	qualifier1: IWeaponComponentCreationParams
+	qualifier2: IWeaponComponentCreationParams
+	quality: IWeaponComponentCreationParams
 	base_strength: number
 	enhancement_level?: number
 }
 
-export { IWeapon, IWeaponCreationParams }
+////////////////////////////////////
+
+export {
+	IWeapon,
+	IWeaponCreationParams
+}
+
+////////////////////////////////////

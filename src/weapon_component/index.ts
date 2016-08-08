@@ -1,6 +1,6 @@
 ////////////////////////////////////
 
-const _lodash = require('lodash')
+import * as _ from 'lodash'
 const _schema = require('tbrpg-static-data/src/weapon_component/schema.json')
 
 import {
@@ -9,7 +9,6 @@ import {
 } from '../utils/json-schema-based-model'
 
 export interface InjectableDependencies {
-	lodash?: any
 	instantiate_json_schema_based_model?: any
 	schema?: any
 }
@@ -20,8 +19,9 @@ import { WeaponComponentType, IWeaponComponent, IWeaponComponentCreationParams }
 
 ////////////////////////////////////
 
-function create_instance (dependencies: InjectableDependencies = {}): IJsonSchemaModel<IWeaponComponent, IWeaponComponentCreationParams> {
-	const _ = (dependencies.lodash || _lodash) as typeof _lodash
+type WeaponComponentModel = IJsonSchemaModel<IWeaponComponent, IWeaponComponentCreationParams>
+
+function create_instance (dependencies: InjectableDependencies = {}): WeaponComponentModel {
 	const instantiate_json_schema_based_model = (dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
 	const schema = (dependencies.schema || _schema) as typeof _schema
 
@@ -36,6 +36,7 @@ export {
 	WeaponComponentType,
 	IWeaponComponent,
 	IWeaponComponentCreationParams,
+	WeaponComponentModel,
 	_schema as schema,
 	default_instance,
 	create_instance

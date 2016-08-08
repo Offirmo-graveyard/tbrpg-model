@@ -7,13 +7,14 @@
 const clear_cli = require('@offirmo/cli-toolbox/stdout/clear-cli')
 clear_cli()
 
-//const _ = require('lodash');
 const vorpal = require('@offirmo/cli-toolbox/framework/vorpal')()
 const prettify_json = require('@offirmo/cli-toolbox/string/prettify-json')
 const columnify = require('@offirmo/cli-toolbox/string/columnify')
 const stylizeString = require('@offirmo/cli-toolbox/string/stylize-string')
 
 const MUT = require('../unit/src')
+const DB = require('../unit/src/db')
+const mechanics = require('../unit/src/mechanics').create_instance()
 
 ////////////////////////////////////////////////////////////
 
@@ -58,12 +59,16 @@ vorpal
 		case 'raw':
 			const raw_data = require(`tbrpg-static-data/src/${args.model}`)
 
-			const columns = columnify(
+			console.log(columnify(
 				raw_data
 					.map(model_instance.get_human_unique_key)
 					.map(s => s.slice(schema.offirmo_extensions.hid.length +1))
-			)
-			console.log(columns)
+			))
+			break
+
+		case 'demo':
+
+			console.log(mechanics.generate_random_demo_weapon())
 			break
 
 		default:
@@ -77,5 +82,5 @@ vorpal
 	.delimiter(stylizeString.red('test>'))
 	.show();
 
-vorpal.ui.input('model weapon_component raw')
-
+//vorpal.ui.input('model weapon_component raw')
+vorpal.ui.input('model weapon demo')

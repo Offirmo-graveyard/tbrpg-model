@@ -28,6 +28,7 @@ export interface IJsonSchema {
 export interface IJsonSchemaModel<IModel, IModelCreationParams> {
 	create: (rawData: IModelCreationParams) => IModel
 	validate: (data: IModel) => void
+	hid: string
 	schema: IJsonSchema
 	get_human_unique_key: (data: IModel) => string
 }

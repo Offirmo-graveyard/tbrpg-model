@@ -33,6 +33,7 @@
     "immutable": "^3.8.1",
     "jsen": "^0.6.1",
     "lodash": "^4.13.1",
+    "lokijs": "^1.4.1",
     "tbrpg-static-data": "github:Offirmo/tbrpg-static-data",
     "typed-immutable-record": "0.0.3"
   },
@@ -40,6 +41,7 @@
     "@offirmo/cli-toolbox": "0.0.2",
     "@types/jsen": "^0.0.17",
     "@types/lodash": "^0.0.29",
+    "@types/lokijs": "^1.2.27",
     "@types/node": "^6.0.31",
     "@types/prettyjson": "0.0.27",
     "@types/sinon": "^1.16.26",
