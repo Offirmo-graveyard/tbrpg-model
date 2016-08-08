@@ -1,7 +1,5 @@
 ////////////////////////////////////
 
-import * as _ from 'lodash'
-
 import {
 	IJsonSchemaModel,
 	instantiate_model as _instantiate_json_schema_based_model
@@ -34,10 +32,6 @@ function create_instance (dependencies: InjectableDependencies = {}): WeaponMode
 const default_instance = create_instance()
 
 ////////////////////////////////////
-
-export const create = default_instance.create
-export const validate = default_instance.validate
-export const toString = default_instance.toString
 
 export {
 	IWeapon,

@@ -1,7 +1,7 @@
 ////////////////////////////////////
 
-const _ = require('lodash')
-const jsen = require('jsen')
+import * as _ from 'lodash'
+import * as jsen from 'jsen'
 
 ////////////
 

@@ -1,6 +1,5 @@
 ////////////////////////////////////
 
-import * as _ from 'lodash'
 const _schema = require('tbrpg-static-data/src/weapon_component/schema.json')
 
 import {
