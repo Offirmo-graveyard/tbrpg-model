@@ -1,8 +1,8 @@
 'use strict';
 
-var path = require('path');
+const path = require('path')
 
-var format = require('./format-icu-message');
+import { format } from './format-icu-message'
 
 
 describe('format-icu-message', function () {
@@ -112,7 +112,5 @@ describe('format-icu-message', function () {
 				});
 			});
 		});
-
 	});
-
 });
