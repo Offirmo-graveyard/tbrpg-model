@@ -10,7 +10,8 @@
  * We prefer to display the raw key to the user (in UI) rather than nothing.
  */
 
-const _ = require('lodash')
+import * as _ from 'lodash'
+//import * as IntlMessageFormat from 'intl-messageformat'
 const IntlMessageFormat = require('intl-messageformat')
 
 
@@ -22,50 +23,60 @@ const IntlMessageFormat = require('intl-messageformat')
  * @param custom_formats [not recommended]
  * @returns {String}
  */
-function format(message, values, locale, custom_formats, parent_debug_id) {
+function format<T>(message: string, values: T, locale: string = 'en', custom_formats: Object = {}, parent_debug_id: string = '?') {
 	// errors while resolving the message
-	var errors = [];
+	const errors: string[] = []
 
 	// fix parameters without crashing
+	// message: can't be fixed, see later
 	if(!_.isString(locale)) {
-		errors.push('Invalid locale');
-		locale = 'en';
+		errors.push('Invalid locale')
+		locale = 'en'
 	}
-	// message : can't be fixed, see later
-	values = values || {};
-	custom_formats = custom_formats || {};
+	if(!_.isObject(values)) {
+		errors.push('Invalid values')
+		values = {} as T
+	}
+	if(!_.isObject(custom_formats)) {
+		errors.push('Invalid custom_formats')
+		custom_formats = {}
+	}
+	if(!_.isString(parent_debug_id)) {
+		parent_debug_id = '?'
+	}
 
 	// final result
-	var formatted_msg = '[unknown localized message]'; // for now
+	let formatted_msg = '[unknown localized message]' // for now
 
 	// debugging
-	var debug = {
+	const debug = {
+		id: '',
 		prefix: '[i18n|' + locale + '|',
 		message: message || '???',
 		suffix: (parent_debug_id ? ('|' + parent_debug_id) : '') + ']',
 		locale: locale,
 		values: values
-	};
+	}
 	function update_with_best_available_data_so_far() {
-		debug.id = debug.prefix + debug.message + debug.suffix;
+		debug.id = debug.prefix + debug.message + debug.suffix
 		formatted_msg = debug.id; // so far : only a debug message
 	}
-	update_with_best_available_data_so_far();
+	update_with_best_available_data_so_far()
 
 	// try to resolve stuff
 	resolution : {
 		if(!_.isString(message)) {
-			errors.push('Invalid message');
-			break resolution;
+			errors.push('Invalid message')
+			break resolution
 		}
 
-		var message_format;
+		let message_format: IntlMessageFormat<T>
 		try {
-			message_format =  new IntlMessageFormat(message, locale, custom_formats);
+			message_format = new IntlMessageFormat(message, locale, custom_formats)
 		}
 		catch(err) {
-			console.error(debug.id + ' error : unable to parse message format !', err, debug);
-			break resolution;
+			console.error(debug.id + ' error : unable to parse message format !', err, debug)
+			break resolution
 		}
 
 		// eventually
@@ -73,12 +84,14 @@ function format(message, values, locale, custom_formats, parent_debug_id) {
 			formatted_msg = message_format.format(values);
 		}
 		catch(err) {
-			console.error(debug.id + ' error : unable to compile message !', err, debug);
-			break resolution;
+			console.error(debug.id + ' error : unable to compile message !', err, debug)
+			break resolution
 		}
 	}
 
-	return formatted_msg;
+	return formatted_msg
 }
 
-module.exports = format
+export {
+	format
+}

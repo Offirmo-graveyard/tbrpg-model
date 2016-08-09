@@ -23,20 +23,12 @@
   "author": "Offirmo <offirmo.net@gmail.com>",
   "license": "Unlicense",
   "dependencies": {
-    "amdefine": "~1.0.0",
-    "intl": "~1",
-    "intl-messageformat": "~1.1",
-    "intl-relativeformat": "~1.1",
-    "lodash": "~3.10.0",
-    "underscore.string": "~3.2"
+    "intl": "^1",
+    "intl-messageformat": "^1.1",
+    "intl-relativeformat": "^1.1",
+    "lodash": "^4",
+    "underscore.string": "^3"
   },
   "devDependencies": {
-    "bower": "^1.4.1",
-    "chai": "^3.2.0",
-    "eslint": "^0.24.1",
-    "mocha": "^2.2.5",
-    "nsp": "^1.0.3",
-    "pre-commit": "^1.0.10",
-    "requirejs": "^2.1.19"
   }
 }

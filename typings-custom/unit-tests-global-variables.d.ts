@@ -4,6 +4,6 @@
 // NOTE: using those globals is optional, a require() (+boilerplate) still work and will even give correct typings.
 declare const describe: (t: string, f: Function) => void
 declare const context: any
+declare const sinon: any
 declare const it: any
 declare const expect: any
-declare const sinon: any

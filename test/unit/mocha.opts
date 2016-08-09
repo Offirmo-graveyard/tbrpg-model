@@ -1,8 +1,5 @@
---require chai
 --reporter spec
---ui bdd
 --check-leaks
 --es_staging
 --full-trace
 --harmony
---watch-extensions ts

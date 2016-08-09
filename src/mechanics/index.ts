@@ -4,7 +4,7 @@ import * as _ from 'lodash'
 
 ////////////
 
-import { getRandomIndex, getRandomIntInclusive } from '../../incubator/pure-random'
+import { getRandomIndex, getRandomIntInclusive } from '../_incubator/pure-random'
 
 import { IWeapon, IWeaponCreationParams, WeaponModel, default_instance as _weapon_model } from '../weapon'
 import { IWeaponComponent, WeaponComponentType, WeaponComponentModel, default_instance as _weapon_component_model } from '../weapon_component'

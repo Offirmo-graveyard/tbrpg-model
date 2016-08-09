@@ -1,31 +1,37 @@
 'use strict';
 
-// Load and use intl polyfill
-// http://formatjs.io/guides/runtime-environments/#server
-import { areIntlLocalesSupported } from './are-intl-locales-supported'
+/** Auto polyfill current javascript environment Intl so that it supports given locales
+ * http://formatjs.io/guides/runtime-environments/#server
+ */
+
+import { are_Intl_locales_supported } from '../are-intl-locales-supported'
 
 // basic polyfilling
 // This one doesn't need user infos
 if (! global.Intl) {
 	// use and load the polyfill.
-	console.log('* polyfilling entire intl...');
-	global.Intl = require('intl');
+	console.log('* [offirmo-formatjs] polyfilling entire Intl...')
+	global.Intl = require('intl')
 }
 
 // basic auto check
 const USUAL_LOCALES = ['en', 'fr'];
-if (! areIntlLocalesSupported(USUAL_LOCALES)) {
-	console.warn('! Current intl doesn’t support usual locales !', USUAL_LOCALES);
+if (! are_Intl_locales_supported(USUAL_LOCALES)) {
+	console.warn('! [offirmo-formatjs] Current Intl doesn’t support usual locales !', USUAL_LOCALES)
 }
 
-module.exports = function polyfill_intl_for_locales(localesMyAppSupports) {
+function polyfill_intl_for_locales(locales_my_app_needs: string[]) {
 	// Determine if current `Intl` has the locale data we need.
-	if (!areIntlLocalesSupported(localesMyAppSupports)) {
-		// `Intl` exists, but it doesn't have the data we need, so load the
-		// polyfill and replace the constructors with need with the polyfill's.
-		console.log('* polyfilling partial intl...');
-		const IntlPolyfill = require('intl');
-		Intl.NumberFormat   = IntlPolyfill.NumberFormat;
-		Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat;
+	if (!are_Intl_locales_supported(locales_my_app_needs)) {
+		// `Intl` exists, but it doesn't have the data we need, so load the polyfill
+		// and replace the constructors which need it with the polyfill's.
+		console.log(`* [offirmo-formatjs] polyfilling partial intl for [${locales_my_app_needs}]...`)
+		const IntlPolyfill = require('intl')
+		Intl.NumberFormat   = IntlPolyfill.NumberFormat
+		Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat
 	}
-};
+}
+
+export {
+	polyfill_intl_for_locales
+}
