@@ -28,6 +28,7 @@
 		"src/mechanics/index.ts",
 		"src/mechanics/types.ts",
 		"src/utils/json-schema-based-model/get_unique_key.ts",
+		"src/utils/json-schema-based-model/index.spec.ts",
 		"src/utils/json-schema-based-model/index.ts",
 		"src/utils/json-schema-based-model/types.ts",
 		"src/weapon/index.ts",

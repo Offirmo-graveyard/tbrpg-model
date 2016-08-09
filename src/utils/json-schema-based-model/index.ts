@@ -18,6 +18,9 @@ function instantiate_model <IModel, IModelCreationParams>(
 	schema: IJsonSchema,
 	options: IOptions = {}
 ): IJsonSchemaModel<IModel, IModelCreationParams> {
+	if (! schema || ! _.isObject(schema) || !schema.offirmo_extensions)
+		throw new Error('json-schema-based-model: schema is invalid !')
+
 	const MODULE_ID = schema.title
 	const hid = schema.offirmo_extensions.hid
 
