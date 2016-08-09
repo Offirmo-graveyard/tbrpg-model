@@ -81,7 +81,7 @@
 			"description": "this weapon enhancement level",
 			"type": "integer",
 			"minimum": 0,
-			"maximum": 10,
+			"maximum": 8,
 			"default": 0
 		}
 	},

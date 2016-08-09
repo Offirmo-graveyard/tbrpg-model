@@ -35,15 +35,15 @@
     "lodash": "^4.13.1",
     "lokijs": "^1.4.1",
     "tbrpg-static-data": "github:Offirmo/tbrpg-static-data",
-    "typed-immutable-record": "0.0.3"
+    "typed-immutable-record": "^0.0.3"
   },
   "devDependencies": {
-    "@offirmo/cli-toolbox": "0.0.2",
+    "@offirmo/cli-toolbox": "^0.0.3",
     "@types/jsen": "^0.0.17",
-    "@types/lodash": "^0.0.29",
+    "@types/lodash": "^4.14.30",
     "@types/lokijs": "^1.2.27",
     "@types/node": "^6.0.31",
-    "@types/prettyjson": "0.0.27",
+    "@types/prettyjson": "^0.0.27",
     "@types/sinon": "^1.16.26",
     "@types/sinon-chai": "^2.7.26",
     "babel-preset-es2015-node-rollup": "^6.1.0",
@@ -56,7 +56,7 @@
     "log-symbols": "^1.0.2",
     "loud-rejection": "^1.6.0",
     "mocha": "^3.0.0",
-    "node-typescript-compiler": "^1.0.0",
+    "node-typescript-compiler": "^1.1.0",
     "nodemon": "^1.10.0",
     "np": "^2.6.0",
     "npm-run-all": "^2.3.0",

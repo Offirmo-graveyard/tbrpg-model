@@ -1,10 +1,15 @@
 
+export type AllowedType = string | number
+
 export interface IJsonSchemaTypeDescription {
 	description: string
 	type: string
 	properties: {
 		[k: string]: IJsonSchemaTypeDescription
-	}
+	},
+	minimum?: number
+	maximum?: number
+	default?: AllowedType
 }
 
 export interface IOffirmoJsonSchemaExtension {
