@@ -5,7 +5,7 @@ const _schema = require('tbrpg-static-data/src/weapon_component/schema.json')
 import {
 	IJsonSchemaModel,
 	instantiate_model as _instantiate_json_schema_based_model
-} from '../utils/json-schema-based-model'
+} from '../../incubator/json-schema-based-model'
 
 export interface InjectableDependencies {
 	instantiate_json_schema_based_model?: any

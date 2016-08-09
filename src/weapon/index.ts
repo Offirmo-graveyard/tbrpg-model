@@ -3,7 +3,7 @@
 import {
 	IJsonSchemaModel,
 	instantiate_model as _instantiate_json_schema_based_model
-} from '../utils/json-schema-based-model'
+} from '../../incubator/json-schema-based-model'
 
 const _schema = require('./schema.json')
 
