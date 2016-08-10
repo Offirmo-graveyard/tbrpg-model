@@ -8,7 +8,7 @@ import { are_Intl_locales_supported } from '../are-intl-locales-supported'
 
 // basic polyfilling
 // This one doesn't need user infos
-if (! global.Intl) {
+if (!global.Intl) {
 	// use and load the polyfill.
 	console.log('* [offirmo-formatjs] polyfilling entire Intl...')
 	global.Intl = require('intl')
@@ -16,7 +16,7 @@ if (! global.Intl) {
 
 // basic auto check
 const USUAL_LOCALES = ['en', 'fr'];
-if (! are_Intl_locales_supported(USUAL_LOCALES)) {
+if (!are_Intl_locales_supported(USUAL_LOCALES)) {
 	console.warn('! [offirmo-formatjs] Current Intl doesn’t support usual locales !', USUAL_LOCALES)
 }
 
@@ -27,11 +27,11 @@ function polyfill_intl_for_locales(locales_my_app_needs: string[]) {
 		// and replace the constructors which need it with the polyfill's.
 		console.log(`* [offirmo-formatjs] polyfilling partial intl for [${locales_my_app_needs}]...`)
 		const IntlPolyfill = require('intl')
-		Intl.NumberFormat   = IntlPolyfill.NumberFormat
+		Intl.NumberFormat = IntlPolyfill.NumberFormat
 		Intl.DateTimeFormat = IntlPolyfill.DateTimeFormat
 	}
 }
 
 export {
-	polyfill_intl_for_locales
+polyfill_intl_for_locales
 }

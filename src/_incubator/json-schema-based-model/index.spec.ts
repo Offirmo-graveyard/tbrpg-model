@@ -12,21 +12,21 @@ describe('Json Schema based Model', function() {
 		answer: number
 	}
 
-	describe('instantiate_model()', function () {
+	describe('instantiate_model()', function() {
 
-		context('with INCORRECT parameters', function () {
+		context('with INCORRECT parameters', function() {
 
-			context('when schema is not provided', function () {
+			context('when schema is not provided', function() {
 
-				it('should throw a corresponding error', function () {
+				it('should throw a corresponding error', function() {
 					expect(() => (instantiate_model as any)()).to.throw(Error, 'json-schema-based-model: schema is invalid !')
 				})
 
 			})
 
-			context('when schema is invalid', function () {
+			context('when schema is invalid', function() {
 
-				it('should throw a corresponding error', function () {
+				it('should throw a corresponding error', function() {
 					expect(() => (instantiate_model as any)({})).to.throw(Error, 'json-schema-based-model: schema is invalid !')
 				})
 
@@ -34,7 +34,7 @@ describe('Json Schema based Model', function() {
 
 		})
 
-		context('with correct parameters', function () {
+		context('with correct parameters', function() {
 
 		})
 

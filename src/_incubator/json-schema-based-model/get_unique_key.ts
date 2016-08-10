@@ -21,6 +21,5 @@ function create_human_unique_key_builder<IModel>(schema: IJsonSchema): (data: IM
 ////////////////////////////////////
 
 export {
-	create_human_unique_key_builder
+create_human_unique_key_builder
 }
-

@@ -20,10 +20,10 @@ function are_Intl_locales_supported(locales: string | string[]): boolean {
 	if (!locales)
 		throw new Error('areIntlLocalesSupported - locales must be supplied.')
 
-	if (! Array.isArray(locales))
-		locales = [ (locales as string) ]
+	if (!Array.isArray(locales))
+		locales = [(locales as string)]
 
-	const intlConstructors: ITestableForLocales[]  = [
+	const intlConstructors: ITestableForLocales[] = [
 		Intl.Collator,
 		Intl.DateTimeFormat,
 		Intl.NumberFormat
@@ -39,5 +39,5 @@ function are_Intl_locales_supported(locales: string | string[]): boolean {
 }
 
 export {
-	are_Intl_locales_supported
+are_Intl_locales_supported
 }

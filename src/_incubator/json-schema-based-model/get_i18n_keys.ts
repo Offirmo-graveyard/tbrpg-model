@@ -30,5 +30,5 @@ function create_i18n_keys_builder<IModel>(schema: IJsonSchema, lang: string) {
 ////////////////////////////////////
 
 export {
-	create_i18n_keys_builder
+create_i18n_keys_builder
 }

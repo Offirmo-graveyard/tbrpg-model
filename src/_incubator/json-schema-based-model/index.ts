@@ -14,11 +14,11 @@ import { create_human_unique_key_builder } from './get_unique_key'
 interface IOptions {
 }
 
-function instantiate_model <IModel, IModelCreationParams>(
+function instantiate_model<IModel, IModelCreationParams>(
 	schema: IJsonSchema,
 	options: IOptions = {}
 ): IJsonSchemaModel<IModel, IModelCreationParams> {
-	if (! schema || ! _.isObject(schema) || !schema.offirmo_extensions)
+	if (!schema || !_.isObject(schema) || !schema.offirmo_extensions)
 		throw new Error('json-schema-based-model: schema is invalid !')
 
 	const MODULE_ID = schema.title
@@ -26,8 +26,8 @@ function instantiate_model <IModel, IModelCreationParams>(
 
 	////////////
 
-	const is_schema_valid = jsen({'$ref': 'http://json-schema.org/draft-04/schema#'})(schema)
-	if (! is_schema_valid) throw new Error(MODULE_ID + ' - schema is invalid !')
+	const is_schema_valid = jsen({ '$ref': 'http://json-schema.org/draft-04/schema#' })(schema)
+	if (!is_schema_valid) throw new Error(MODULE_ID + ' - schema is invalid !')
 
 	////////////
 
@@ -40,7 +40,7 @@ function instantiate_model <IModel, IModelCreationParams>(
 
 	////////////
 
-	function validate (data: IModel): void {
+	function validate(data: IModel): void {
 		// prepare the error
 		const err: any = new Error(MODULE_ID + ' - validate() - provided data are invalid !')
 		err.bad_data = _.cloneDeep(data)
@@ -57,7 +57,7 @@ function instantiate_model <IModel, IModelCreationParams>(
 		// TODO one day
 	}
 
-	function create (rawData: IModelCreationParams): IModel {
+	function create(rawData: IModelCreationParams): IModel {
 		// reminder: jsen build creates a copy of data by default
 		const data = _build(rawData, { additionalProperties: false }) as IModel
 
@@ -80,10 +80,10 @@ function instantiate_model <IModel, IModelCreationParams>(
 
 
 export {
-	IJsonSchema,
-	IJsonSchemaModel,
-	IOptions,
-	instantiate_model
+IJsonSchema,
+IJsonSchemaModel,
+IOptions,
+instantiate_model
 }
 
 ////////////////////////////////////

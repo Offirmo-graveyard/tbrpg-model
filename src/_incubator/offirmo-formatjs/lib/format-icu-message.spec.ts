@@ -5,15 +5,15 @@ const path = require('path')
 import { format } from './format-icu-message'
 
 
-describe('format-icu-message', function () {
+describe('format-icu-message', function() {
 
-	it('should expose a function', function () {
+	it('should expose a function', function() {
 		expect(format).to.be.a('function');
 	});
 
-	describe('format()', function () {
+	describe('format()', function() {
 
-		context('when passed correct parameters', function () {
+		context('when passed correct parameters', function() {
 
 			var test_cases = [
 				{
@@ -65,8 +65,8 @@ describe('format-icu-message', function () {
 				},
 			];
 
-			test_cases.forEach(function (test_case: any) {
-				it('should format correctly "' + test_case.message + '"', function () {
+			test_cases.forEach(function(test_case: any) {
+				it('should format correctly "' + test_case.message + '"', function() {
 					var res = format<any>(
 						test_case.message,
 						test_case.values,
@@ -80,7 +80,7 @@ describe('format-icu-message', function () {
 
 		});
 
-		context('when passed incorrect parameters', function () {
+		context('when passed incorrect parameters', function() {
 
 			var test_cases = [
 				{
@@ -98,19 +98,19 @@ describe('format-icu-message', function () {
 				}
 			];
 
-			test_cases.forEach(function (test_case: any, index: number) {
+			test_cases.forEach(function(test_case: any, index: number) {
 				it('should return a best effort string,' +
-					' as explicit as possible and containing maximum information - case #' + index, function () {
-					var res = format<any>(
-						test_case.message,
-						test_case.values,
-						test_case.locale,
-						test_case.custom_formats,
-						'TC#123' // example debug id
-					);
+					' as explicit as possible and containing maximum information - case #' + index, function() {
+						var res = format<any>(
+							test_case.message,
+							test_case.values,
+							test_case.locale,
+							test_case.custom_formats,
+							'TC#123' // example debug id
+						);
 
-					expect(res).to.equal(test_case.expected);
-				});
+						expect(res).to.equal(test_case.expected);
+					});
 			});
 		});
 	});

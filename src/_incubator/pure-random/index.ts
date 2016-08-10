@@ -19,7 +19,7 @@ function getRandomIndex(random: number, length: number) {
 }
 
 export {
-	getRandomIntX,
-	getRandomIntInclusive,
-	getRandomIndex,
+getRandomIntX,
+getRandomIntInclusive,
+getRandomIndex,
 }
