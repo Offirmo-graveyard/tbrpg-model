@@ -1,6 +1,3 @@
-'use strict';
-
-const path = require('path')
 
 import { format } from './format-icu-message'
 
@@ -8,14 +5,14 @@ import { format } from './format-icu-message'
 describe('format-icu-message', function() {
 
 	it('should expose a function', function() {
-		expect(format).to.be.a('function');
-	});
+		expect(format).to.be.a('function')
+	})
 
 	describe('format()', function() {
 
 		context('when passed correct parameters', function() {
 
-			var test_cases = [
+			const test_cases = [
 				{
 					message: 'foo',
 					expected: 'foo'
@@ -33,7 +30,7 @@ describe('format-icu-message', function() {
 					// TODO check the suspicious triple space
 					expected: 'Il est 6:56:07   et tout va bien.',
 					values: {
-						now: 1234567890
+						now: new Date(1234567890)
 					}
 				},
 				{
@@ -67,14 +64,14 @@ describe('format-icu-message', function() {
 
 			test_cases.forEach(function(test_case: any) {
 				it('should format correctly "' + test_case.message + '"', function() {
-					var res = format<any>(
+					const res = format<any>(
 						test_case.message,
 						test_case.values,
 						test_case.locale,
 						test_case.custom_formats
-					);
+					)
 
-					expect(res).to.equal(test_case.expected);
+					expect(res).to.equal(test_case.expected)
 				});
 			});
 
@@ -82,10 +79,10 @@ describe('format-icu-message', function() {
 
 		context('when passed incorrect parameters', function() {
 
-			var test_cases = [
+			const test_cases = [
 				{
 					locale: null, // will auto fallback to en
-					message: 'Il est {now, time, long  } et tout va bien.',
+					message: 'Il est {now, time, long} et tout va bien.',
 					expected: 'Il est 6:56:07 AM  et tout va bien.', // fr string with en formatted date
 					values: {
 						now: 1234567890
@@ -96,22 +93,22 @@ describe('format-icu-message', function() {
 					message: null,
 					expected: '[i18n|fr|???|TC#123]'
 				}
-			];
+			]
 
 			test_cases.forEach(function(test_case: any, index: number) {
 				it('should return a best effort string,' +
 					' as explicit as possible and containing maximum information - case #' + index, function() {
-						var res = format<any>(
+						const res = format<any>(
 							test_case.message,
 							test_case.values,
 							test_case.locale,
 							test_case.custom_formats,
 							'TC#123' // example debug id
-						);
+						)
 
-						expect(res).to.equal(test_case.expected);
-					});
-			});
-		});
-	});
-});
+						expect(res).to.equal(test_case.expected)
+					})
+			})
+		})
+	})
+})
