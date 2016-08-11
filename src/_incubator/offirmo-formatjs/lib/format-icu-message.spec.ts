@@ -1,8 +1,15 @@
+import { format, IErrorReporter } from './format-icu-message'
+import * as sinon from 'sinon'
 
-import { format } from './format-icu-message'
-
+const timezone = true
 
 describe('format-icu-message', function() {
+
+	let error_reporter: IErrorReporter
+
+	beforeEach(() => {
+		error_reporter = sinon.spy() as IErrorReporter
+	})
 
 	it('should expose a function', function() {
 		expect(format).to.be.a('function')
@@ -11,6 +18,14 @@ describe('format-icu-message', function() {
 	describe('format()', function() {
 
 		context('when passed correct parameters', function() {
+
+			afterEach(() => {
+				const call: any = (error_reporter as any).firstCall
+				if (call)
+					console.error(call.args)
+
+				expect(error_reporter).to.not.have.been.called
+			})
 
 			const test_cases = [
 				{
@@ -28,7 +43,7 @@ describe('format-icu-message', function() {
 					locale: 'fr',
 					message: 'Il est {now, time, long} et tout va bien.',
 					// TODO check the suspicious triple space
-					expected: 'Il est 6:56:07   et tout va bien.',
+					expected: `Il est ${timezone ? 7 : 6}:56:07   et tout va bien.`,
 					values: {
 						now: new Date(1234567890)
 					}
@@ -37,7 +52,7 @@ describe('format-icu-message', function() {
 					locale: 'en',
 					message: 'It’s {now, time, long} and all is well.',
 					// TODO check the suspicious double space
-					expected: 'It’s 6:56:07 AM  and all is well.',
+					expected: `It’s ${timezone ? 7 : 6}:56:07 AM  and all is well.`,
 					values: {
 						now: 1234567890
 					}
@@ -60,7 +75,7 @@ describe('format-icu-message', function() {
 						percentBlackCats: 0.234
 					}
 				},
-			];
+			]
 
 			test_cases.forEach(function(test_case: any) {
 				it('should format correctly "' + test_case.message + '"', function() {
@@ -68,22 +83,27 @@ describe('format-icu-message', function() {
 						test_case.message,
 						test_case.values,
 						test_case.locale,
-						test_case.custom_formats
+						test_case.custom_formats,
+						'TC#123', // example debug id
+						error_reporter
 					)
 
 					expect(res).to.equal(test_case.expected)
-				});
-			});
-
-		});
+				})
+			})
+		})
 
 		context('when passed incorrect parameters', function() {
+
+			afterEach(() => {
+				expect(error_reporter).to.have.been.calledOnce
+			})
 
 			const test_cases = [
 				{
 					locale: null, // will auto fallback to en
 					message: 'Il est {now, time, long} et tout va bien.',
-					expected: 'Il est 6:56:07 AM  et tout va bien.', // fr string with en formatted date
+					expected: `Il est ${timezone ? 7 : 6}:56:07 AM  et tout va bien.`, // fr string with en formatted date
 					values: {
 						now: 1234567890
 					}
@@ -98,16 +118,17 @@ describe('format-icu-message', function() {
 			test_cases.forEach(function(test_case: any, index: number) {
 				it('should return a best effort string,' +
 					' as explicit as possible and containing maximum information - case #' + index, function() {
-						const res = format<any>(
-							test_case.message,
-							test_case.values,
-							test_case.locale,
-							test_case.custom_formats,
-							'TC#123' // example debug id
-						)
+					const res = format<any>(
+						test_case.message,
+						test_case.values,
+						test_case.locale,
+						test_case.custom_formats,
+						'TC#123', // example debug id
+						error_reporter
+					)
 
-						expect(res).to.equal(test_case.expected)
-					})
+					expect(res).to.equal(test_case.expected)
+				})
 			})
 		})
 	})

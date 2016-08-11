@@ -46,7 +46,7 @@ function format<T>(
 		locale = 'en'
 	}
 	if (!_.isObject(values)) {
-		problems.push('invalid values')
+		// value may not be needed, don't report a problem
 		values = {} as T
 	}
 	if (!_.isObject(custom_formats)) {
@@ -124,5 +124,7 @@ function format<T>(
 }
 
 export {
-format
+	format,
+	IError,
+	IErrorReporter,
 }
