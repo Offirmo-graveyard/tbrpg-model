@@ -36,6 +36,8 @@
 		"src/_incubator/offirmo-formatjs/lib/are-intl-locales-supported.ts",
 		"src/_incubator/offirmo-formatjs/lib/format-icu-message.spec.ts",
 		"src/_incubator/offirmo-formatjs/lib/format-icu-message.ts",
+		"src/_incubator/offirmo-formatjs/lib/format-key.spec.ts",
+		"src/_incubator/offirmo-formatjs/lib/format-key.ts",
 		"src/weapon/index.ts",
 		"src/weapon/types.ts",
 		"src/weapon_component/index.ts",

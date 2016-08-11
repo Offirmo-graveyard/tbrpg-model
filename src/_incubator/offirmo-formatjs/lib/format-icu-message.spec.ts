@@ -1,5 +1,6 @@
-import { format, IErrorReporter } from './format-icu-message'
 import * as sinon from 'sinon'
+
+import { format, IErrorReporter } from './format-icu-message'
 
 const timezone = true
 
@@ -79,7 +80,7 @@ describe('format-icu-message', function() {
 
 			test_cases.forEach(function(test_case: any) {
 				it('should format correctly "' + test_case.message + '"', function() {
-					const res = format<any>(
+					const res = format(
 						test_case.message,
 						test_case.values,
 						test_case.locale,
@@ -118,7 +119,7 @@ describe('format-icu-message', function() {
 			test_cases.forEach(function(test_case: any, index: number) {
 				it('should return a best effort string,' +
 					' as explicit as possible and containing maximum information - case #' + index, function() {
-					const res = format<any>(
+					const res = format(
 						test_case.message,
 						test_case.values,
 						test_case.locale,

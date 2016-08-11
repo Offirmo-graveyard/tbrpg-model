@@ -27,14 +27,14 @@ const default_error_reporter: IErrorReporter = (err: IError) => {
  * @param custom_formats [not recommended]
  * @returns {String}
  */
-function format<T>(
+function format(
 	message: string,
-	values: T,
+	values?: Object,
 	locale: string = 'en',
 	custom_formats: Object = {},
 	parent_debug_id: string = '?',
 	error_reporter: IErrorReporter = default_error_reporter
-) {
+): string {
 	// errors while resolving the message
 	const problems: string[] = []
 	let underlying_error: Error | undefined
@@ -47,7 +47,7 @@ function format<T>(
 	}
 	if (!_.isObject(values)) {
 		// value may not be needed, don't report a problem
-		values = {} as T
+		values = {}
 	}
 	if (!_.isObject(custom_formats)) {
 		problems.push('invalid custom formats')
@@ -85,7 +85,7 @@ function format<T>(
 			break resolution
 		}
 
-		let message_format: IntlMessageFormat<T>
+		let message_format: IntlMessageFormat<any>
 		try {
 			message_format = new IntlMessageFormat(message, locale, custom_formats)
 		}
@@ -108,6 +108,7 @@ function format<T>(
 
 	if (underlying_error || problems.length) {
 		const err: IError = new Error('Unable to properly format the given ICU message !') as IError
+		err.src = 'format-icu-message.format'
 		err.params = {
 			message,
 			values,
