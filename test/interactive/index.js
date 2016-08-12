@@ -15,6 +15,8 @@ const stylizeString = require('@offirmo/cli-toolbox/string/stylize-string')
 ////////////
 
 const icu_container = require('../unit/src/_incubator/offirmo-formatjs/lib/icu-data-container').default_instance
+const format_key = require('../unit/src/_incubator/offirmo-formatjs/lib/format-key')
+
 const MUT = require('../unit/src')
 const DB = require('../unit/src/db')
 const mechanics = require('../unit/src/mechanics').create_instance()
@@ -23,7 +25,13 @@ const mechanics = require('../unit/src/mechanics').create_instance()
 
 let locale = 'en'
 let intl
-icu_container.on_locale_change(i => intl = i)
+icu_container.on_locale_change(i => {
+	intl = i
+
+	console.log(`* Switched locale to "${intl.locale}", ${Object.keys(intl.messages).length} keys found.`)
+	const greetings = format_key.format('hello', {}, intl)
+	console.log(greetings)
+})
 
 ////////////
 const APP_ID = 'TBRPG model'
@@ -49,7 +57,13 @@ vorpal
 	.command('set_locale <locale>', 'change locale')
 	.autocomplete(MUT.supported_locales)
 	.action((args, callback) => {
-		console.log('TODO !!!')
+		const messages = 	Object.assign({}, require('./i18n/' + args.locale), MUT.get_i18n_data(args.locale))
+
+		icu_container.set_icu_data(
+			args.locale,
+			messages
+		)
+
 		callback()
 	})
 

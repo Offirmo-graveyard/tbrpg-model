@@ -21,6 +21,7 @@ function create_instance() {
 			messages: messages,
 			formats: custom_formats || {}
 		}
+		intl.messages.locale = locale
 
 		locale_change_listeners.map((listener: IIntlChangeListener) => listener(intl))
 	}

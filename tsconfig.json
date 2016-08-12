@@ -41,6 +41,8 @@
 		"src/_incubator/offirmo-formatjs/lib/icu-data-container.spec.ts",
 		"src/_incubator/offirmo-formatjs/lib/icu-data-container.ts",
 		"src/_incubator/offirmo-formatjs/lib/types.ts",
+		"src/weapon/i18n/en.ts",
+		"src/weapon/i18n/fr.ts",
 		"src/weapon/index.ts",
 		"src/weapon/types.ts",
 		"src/weapon_component/index.ts",

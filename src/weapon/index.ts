@@ -6,6 +6,8 @@ import {
 } from '../_incubator/json-schema-based-model'
 
 const _schema = require('./schema.json')
+import * as i18n_en from './i18n/en'
+import * as i18n_fr from './i18n/fr'
 
 ////////////
 
@@ -31,15 +33,29 @@ function create_instance(dependencies: InjectableDependencies = {}): WeaponModel
 
 const default_instance = create_instance()
 
+////////////
+
+function get_i18n_data (locale: string): Object {
+	switch(locale) {
+		case 'en':
+			return i18n_en
+		case 'fr':
+			return i18n_fr
+		default:
+			return {}
+	}
+}
+
 ////////////////////////////////////
 
 export {
-IWeapon,
-IWeaponCreationParams,
-WeaponModel,
-_schema as schema,
-default_instance,
-create_instance,
+	IWeapon,
+	IWeaponCreationParams,
+	WeaponModel,
+	_schema as schema,
+	default_instance,
+	create_instance,
+	get_i18n_data,
 }
 
 ////////////////////////////////////
