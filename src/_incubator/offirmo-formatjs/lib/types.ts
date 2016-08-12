@@ -1,3 +1,27 @@
+////////////////////////////////////
+
+type LocaleCode = string
+
+interface IMessagesStore {
+	locale?: string
+	[key: string]: undefined | string | Function
+}
+
+interface IIntl {
+	locale: LocaleCode
+	messages: IMessagesStore
+	formats?: Object
+}
+
+interface ICustomFormatFunction {
+	(): (values: Object, intl: IIntl, libs: any, debug_id: string) => string
+}
+
+interface IIntlChangeListener {
+	(i: IIntl): (i: IIntl) => void
+}
+
+////////////
 
 interface IError extends Error {
 	src: string
@@ -8,23 +32,16 @@ interface IError extends Error {
 
 type IErrorReporter = (e: IError) => void
 
-interface ICustomFormatFunction {
-	(): (values: Object, intl: IIntl, libs: any, debug_id: string) => string
-}
-
-interface IIntl {
-	locale: string
-	messages: {
-		locale?: string
-		[key: string]: undefined | string | Function
-	}
-	formats?: Object
-}
-
+////////////////////////////////////
 
 export {
-	IError,
-	IErrorReporter,
+	LocaleCode,
+	IMessagesStore,
 	IIntl,
 	ICustomFormatFunction,
+	IIntlChangeListener,
+	IError,
+	IErrorReporter,
 }
+
+////////////////////////////////////

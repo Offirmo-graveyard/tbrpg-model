@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 import * as sinon from 'sinon'
 
-const timezone = true
+const timezone = false
 
 import {
 	IIntl,

@@ -12,12 +12,20 @@ const prettify_json = require('@offirmo/cli-toolbox/string/prettify-json')
 const columnify = require('@offirmo/cli-toolbox/string/columnify')
 const stylizeString = require('@offirmo/cli-toolbox/string/stylize-string')
 
+////////////
+
+const icu_container = require('../unit/src/_incubator/offirmo-formatjs/lib/icu-data-container').default_instance
 const MUT = require('../unit/src')
 const DB = require('../unit/src/db')
 const mechanics = require('../unit/src/mechanics').create_instance()
 
 ////////////////////////////////////////////////////////////
 
+let locale = 'en'
+let intl
+icu_container.on_locale_change(i => intl = i)
+
+////////////
 const APP_ID = 'TBRPG model'
 vorpal.history(APP_ID)
 vorpal.localStorage(APP_ID)
@@ -25,6 +33,7 @@ vorpal.localStorage(APP_ID)
 vorpal.log('\nHello from vorpal-based interactive tests !');
 vorpal.log('\nAvailable models:\n' + prettify_json(Object.keys(MUT)) + '\n');
 
+////////////
 
 vorpal
 .command('x', 'clear screen')
@@ -33,6 +42,18 @@ vorpal
 	clear_cli()
 	return callback()
 })
+
+////////////
+
+vorpal
+	.command('set_locale <locale>', 'change locale')
+	.autocomplete(MUT.supported_locales)
+	.action((args, callback) => {
+		console.log('TODO !!!')
+		callback()
+	})
+
+////////////
 
 vorpal
 .command('model <model> <cmd>', 'display infos about the target model')
@@ -75,8 +96,9 @@ vorpal
 			console.error(`! unknown cmd "${args.cmd}"`)
 	}
 	callback()
-});
+})
 
+////////////////////////////////////
 
 vorpal
 	.delimiter(stylizeString.red('test>'))

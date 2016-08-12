@@ -2,7 +2,7 @@ import * as sinon from 'sinon'
 
 import { format, IErrorReporter } from './format-icu-message'
 
-const timezone = true
+const timezone = false
 
 describe('format-icu-message', function() {
 
