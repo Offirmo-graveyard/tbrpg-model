@@ -6,8 +6,8 @@ import {
 } from '../_incubator/json-schema-based-model'
 
 const _schema = require('./schema.json')
-import * as i18n_en from './i18n/en'
-import * as i18n_fr from './i18n/fr'
+import i18n_en from './i18n/en'
+import i18n_fr from './i18n/fr'
 
 ////////////
 

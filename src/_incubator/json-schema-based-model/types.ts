@@ -36,4 +36,5 @@ export interface IJsonSchemaModel<IModel, IModelCreationParams> {
 	hid: string
 	schema: IJsonSchema
 	get_human_unique_key: (data: IModel) => string
+	//get_i18n_keys: (data: IModel) => string[]
 }

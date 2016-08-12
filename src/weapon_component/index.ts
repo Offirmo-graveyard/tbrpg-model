@@ -2,7 +2,7 @@
 
 const _schema = require('tbrpg-static-data/src/weapon_component/schema.json')
 const i18n_en = require('tbrpg-static-data/src/weapon_component/i18n/en.json')
-const i18n_fr = require('tbrpg-static-data/src/weapon_component/i18n/en.json')
+const i18n_fr = require('tbrpg-static-data/src/weapon_component/i18n/fr.json')
 
 import {
 	IJsonSchemaModel,

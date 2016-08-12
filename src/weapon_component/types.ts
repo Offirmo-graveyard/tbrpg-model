@@ -1,8 +1,12 @@
 ////////////////////////////////////
 
+import { ITBRPGModel } from '../types'
+
+////////////////////////////////////
+
 type WeaponComponentType = 'base' | 'qualifier1' | 'qualifier2' | 'quality'
 
-interface IWeaponComponent {
+interface IWeaponComponent /* extends ITBRPGModel */ {
 	hid: string
 	type: WeaponComponentType
 }

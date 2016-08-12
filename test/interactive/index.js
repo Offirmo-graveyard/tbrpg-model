@@ -29,6 +29,7 @@ icu_container.on_locale_change(i => {
 	intl = i
 
 	console.log(`* Switched locale to "${intl.locale}", ${Object.keys(intl.messages).length} keys found.`)
+	console.log(columnify(Object.keys(intl.messages)))
 	const greetings = format_key.format('hello', {}, intl)
 	console.log(greetings)
 })
@@ -102,8 +103,12 @@ vorpal
 			break
 
 		case 'demo':
+			const weapon = mechanics.generate_random_demo_weapon()
+			console.log(prettify_json(weapon))
 
-			console.log(mechanics.generate_random_demo_weapon())
+			const weapon_human_name = format_key.format('weapon', weapon, intl)
+			console.log(weapon_human_name)
+
 			break
 
 		default:
@@ -119,4 +124,5 @@ vorpal
 	.show();
 
 //vorpal.ui.input('model weapon_component raw')
+vorpal.exec('set_locale fr')
 vorpal.ui.input('model weapon demo')

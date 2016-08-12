@@ -89,9 +89,8 @@ function format_single_key(
 
 		try {
 			if (_.isFunction(message)) {
-				debug.message = '<function>'
+				debug.message = key + '<function>'
 				const build_message: ICustomFormatFunction = message as ICustomFormatFunction
-				debug.message = '?!?'
 				const exposed = {
 					_: _,
 					_s: _s,
