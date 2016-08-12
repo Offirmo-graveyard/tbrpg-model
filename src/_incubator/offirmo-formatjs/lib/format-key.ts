@@ -8,7 +8,7 @@ import * as _s from 'underscore.string'
 
 ////////////
 
-import { IIntl, IError, IErrorReporter } from './types'
+import { IIntl, ICustomFormatFunction, IError, IErrorReporter } from './types'
 import { format as format_icu_message } from './format-icu-message'
 
 ////////////////////////////////////
@@ -90,7 +90,7 @@ function format_single_key(
 		try {
 			if (_.isFunction(message)) {
 				debug.message = '<function>'
-				const build_message = message
+				const build_message: ICustomFormatFunction = message as ICustomFormatFunction
 				debug.message = '?!?'
 				const exposed = {
 					_: _,
@@ -108,7 +108,7 @@ function format_single_key(
 			else {
 				debug.message = message as string
 				formatted_msg = format_icu_message(
-					message,
+					message as string,
 					values,
 					intl.locale,
 					intl.formats,

@@ -14,11 +14,11 @@ interface IIntl {
 }
 
 interface ICustomFormatFunction {
-	(): (values: Object, intl: IIntl, libs: any, debug_id: string) => string
+	(values: Object, intl: IIntl, libs: any, debug_id: string): string
 }
 
 interface IIntlChangeListener {
-	(i: IIntl): (i: IIntl) => void
+	(i: IIntl): void
 }
 
 ////////////
