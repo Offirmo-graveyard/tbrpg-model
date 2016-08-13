@@ -7,10 +7,21 @@
 const clear_cli = require('@offirmo/cli-toolbox/stdout/clear-cli')
 clear_cli()
 
+// thank you http://patorjk.com/software/taag/#p=display&h=3&v=0&f=Rectangles&t=Online%20%20Adventures
+console.log('\n' +
+	' _____       _  _              _____    _                 _                        \n' +
+	'|     | ___ | ||_| ___  ___   |  _  | _| | _ _  ___  ___ | |_  _ _  ___  ___  ___  \n' +
+	'|  |  ||   || || ||   || -_|  |     || . || | || -_||   ||  _|| | ||  _|| -_||_ -| \n' +
+	'|_____||_|_||_||_||_|_||___|  |__|__||___| \\_/ |___||_|_||_|  |___||_|  |___||___| \n' +
+	'                                                                                   \n'
+)
+
+////////////
+
 const vorpal = require('@offirmo/cli-toolbox/framework/vorpal')()
 const prettify_json = require('@offirmo/cli-toolbox/string/prettify-json')
 const columnify = require('@offirmo/cli-toolbox/string/columnify')
-const stylizeString = require('@offirmo/cli-toolbox/string/stylize-string')
+const stylizeString = require('@offirmo/cli-toolbox/string/stylize')
 
 ////////////
 
@@ -21,6 +32,10 @@ const MUT = require('../unit/src')
 const DB = require('../unit/src/db')
 const mechanics = require('../unit/src/mechanics').create_instance()
 
+////////////
+
+const ux = require('./ux')
+
 ////////////////////////////////////////////////////////////
 
 let locale = 'en'
@@ -29,7 +44,7 @@ icu_container.on_locale_change(i => {
 	intl = i
 
 	console.log(`* Switched locale to "${intl.locale}", ${Object.keys(intl.messages).length} keys found.`)
-	console.log(columnify(Object.keys(intl.messages)))
+	//console.log(columnify(Object.keys(intl.messages)))
 	const greetings = format_key.format('hello', {}, intl)
 	console.log(greetings)
 })
@@ -39,7 +54,7 @@ const APP_ID = 'TBRPG model'
 vorpal.history(APP_ID)
 vorpal.localStorage(APP_ID)
 
-vorpal.log('\nHello from vorpal-based interactive tests !');
+vorpal.log('\nHello from vorpal-based TBRPG UX !');
 vorpal.log('\nAvailable models:\n' + prettify_json(Object.keys(MUT)) + '\n');
 
 ////////////
@@ -106,8 +121,9 @@ vorpal
 			const weapon = mechanics.generate_random_demo_weapon()
 			console.log(prettify_json(weapon))
 
-			const weapon_human_name = format_key.format('weapon', weapon, intl)
-			console.log(weapon_human_name)
+			ux.display_weapon(weapon, intl)
+			//const weapon_human_name = format_key.format('weapon', weapon, intl)
+			//console.log(weapon_human_name)
 
 			break
 

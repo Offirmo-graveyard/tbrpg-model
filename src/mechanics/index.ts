@@ -9,6 +9,11 @@ import { getRandomIndex, getRandomIntInclusive } from '../_incubator/pure-random
 import { IWeapon, IWeaponCreationParams, WeaponModel, default_instance as _weapon_model } from '../weapon'
 import { IWeaponComponent, WeaponComponentType, WeaponComponentModel, default_instance as _weapon_component_model } from '../weapon_component'
 import { LokiDb, create_static_db_instance } from '../db'
+import {
+	quality_related_weapon_strength_multiplier,
+	quality_related_weapon_strength_spread,
+	weapon_enhancement_multiplier
+} from './constants'
 
 ////////////
 
@@ -17,9 +22,6 @@ export interface InjectableDependencies {
 	weapon_component_model?: WeaponComponentModel
 	weapon_model?: WeaponModel
 }
-
-////////////
-
 
 ////////////////////////////////////
 
@@ -81,10 +83,26 @@ function create_instance(dependencies: InjectableDependencies = {}) {
 	}
 }
 
+function get_weapon_damage (weapon: IWeapon): number[] {
+	const spread = quality_related_weapon_strength_spread[weapon.quality.hid] as number
+	const strength_multiplier = quality_related_weapon_strength_multiplier[weapon.quality.hid] as number
+	const enhancement_multiplier = (1 + weapon_enhancement_multiplier * weapon.enhancement_level)
+
+	// make a constrained interval, smaller for powerful weapons which have bigger numbers
+	const min_strength = Math.max(weapon.base_strength - spread, 1)
+	const max_strength = Math.min(weapon.base_strength + spread, 20)
+
+	return [
+		Math.round(min_strength * strength_multiplier * enhancement_multiplier),
+		Math.round(max_strength * strength_multiplier * enhancement_multiplier)
+	]
+}
+
 ////////////////////////////////////
 
 export {
-create_instance,
+	create_instance,
+	get_weapon_damage,
 }
 
 ////////////////////////////////////

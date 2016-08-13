@@ -23,10 +23,6 @@
 	"files": [
 		"node_modules/@types/node/index.d.ts",
 		"typings-custom/unit-tests-global-variables.d.ts",
-		"src/db/index.ts",
-		"src/db/types.ts",
-		"src/mechanics/index.ts",
-		"src/mechanics/types.ts",
 		"src/_incubator/json-schema-based-model/get_unique_key.ts",
 		"src/_incubator/json-schema-based-model/index.spec.ts",
 		"src/_incubator/json-schema-based-model/index.ts",
@@ -41,13 +37,21 @@
 		"src/_incubator/offirmo-formatjs/lib/icu-data-container.spec.ts",
 		"src/_incubator/offirmo-formatjs/lib/icu-data-container.ts",
 		"src/_incubator/offirmo-formatjs/lib/types.ts",
+		"src/common/i18n/en.ts",
+		"src/common/i18n/fr.ts",
+		"src/db/index.ts",
+		"src/db/types.ts",
+		"src/mechanics/constants.ts",
+		"src/mechanics/index.ts",
+		"src/mechanics/types.ts",
 		"src/weapon/i18n/en.ts",
 		"src/weapon/i18n/fr.ts",
 		"src/weapon/index.ts",
 		"src/weapon/types.ts",
 		"src/weapon_component/index.ts",
 		"src/weapon_component/types.ts",
-		"src/index.ts"
+		"src/index.ts",
+		"src/types.ts"
 	],
 	"exclude": [
 		"dist",
