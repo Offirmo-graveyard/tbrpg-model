@@ -13,13 +13,16 @@ clear_cli()
 
 
 // thank you http://patorjk.com/software/taag/#p=display&h=3&v=0&f=Rectangles&t=Online%20%20Adventures
-console.log('\n' +
+const displayInAsciiArtFont = require('@offirmo/cli-toolbox/stdout/display_in_ascii_art_font')
+
+displayInAsciiArtFont('TBRPG reloaded', {colors: ['yellow', 'candy']})
+/*console.log('\n' +
 	' _____       _  _              _____    _                 _                        \n' +
 	'|     | ___ | ||_| ___  ___   |  _  | _| | _ _  ___  ___ | |_  _ _  ___  ___  ___  \n' +
 	'|  |  ||   || || ||   || -_|  |     || . || | || -_||   ||  _|| | ||  _|| -_||_ -| \n' +
 	'|_____||_|_||_||_||_|_||___|  |__|__||___| \\_/ |___||_|_||_|  |___||_|  |___||___| \n' +
 	'                                                                                   \n'
-)
+)*/
 
 ////////////
 
@@ -33,10 +36,11 @@ const stylizeString = require('@offirmo/cli-toolbox/string/stylize')
 const icu_container = require('../unit/src/_incubator/offirmo-formatjs/lib/icu-data-container').default_instance
 const format_key = require('../unit/src/_incubator/offirmo-formatjs/lib/format-key')
 
-const MUT = require('../unit/src')
+const TBRPG = require('../unit/src')
 const DB = require('../unit/src/db')
-const mechanics = require('../unit/src/mechanics').create_instance()
-const store = require('../unit/src/saga').default_store
+const mechanics = TBRPG.mechanics.create_instance()
+
+const game = require('./game')
 
 ////////////
 
@@ -61,13 +65,13 @@ vorpal.history(APP_ID)
 vorpal.localStorage(APP_ID)
 
 vorpal.log('\nHello from vorpal-based TBRPG UX !');
-vorpal.log('\nAvailable models:\n' + prettify_json(Object.keys(MUT)) + '\n');
+vorpal.log('\nAvailable models:\n' + prettify_json(Object.keys(TBRPG)) + '\n');
 
 ////////////
 
 vorpal
 .command('x', 'clear screen')
-.autocomplete(Object.keys(MUT))
+.autocomplete(Object.keys(TBRPG))
 .action((args, callback) => {
 	clear_cli()
 	return callback()
@@ -77,9 +81,9 @@ vorpal
 
 vorpal
 .command('set_locale <locale>', 'change locale')
-.autocomplete(MUT.supported_locales)
+.autocomplete(TBRPG.supported_locales)
 .action((args, callback) => {
-	const messages = 	Object.assign({}, require('./i18n/' + args.locale), MUT.get_i18n_data(args.locale))
+	const messages = 	Object.assign({}, require('./i18n/' + args.locale), TBRPG.get_i18n_data(args.locale))
 
 	icu_container.set_icu_data(
 		args.locale,
@@ -93,9 +97,9 @@ vorpal
 
 vorpal
 .command('model <model> <cmd>', 'display infos about the target model')
-.autocomplete(Object.keys(MUT))
+.autocomplete(Object.keys(TBRPG))
 .action((args, callback) => {
-	const model = MUT[args.model]
+	const model = TBRPG[args.model]
 	//console.log(model)
 	if (!model) {
 		console.error(`! unknown model "${args.model}"`)
@@ -161,6 +165,6 @@ vorpal.ui.input('model adventure demo')
 
 ////////////////////////////////////
 
-store.subscribe(function () {
-	console.log('state changed !')
+game.store.subscribe(function () {
+	console.log('state changed ! (from UX)')
 })

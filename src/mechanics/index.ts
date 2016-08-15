@@ -135,7 +135,6 @@ function create_instance(dependencies: InjectableDependencies = {}) {
 		]
 	}
 
-
 	function generate_random_demo_adventure(): IAdventure {
 		const good = Random.bool(90)(engine)
 		const archetype = Random.pick(engine, adventure_archetypes[good ? 'good' : 'bad'])
@@ -170,7 +169,7 @@ function create_instance(dependencies: InjectableDependencies = {}) {
 	}
 }
 
-function get_weapon_damage (weapon: IWeapon): number[] {
+function get_weapon_damage_range (weapon: IWeapon): [ number, number ] {
 	const spread = quality_related_weapon_strength_spread[weapon.quality.hid]
 	const strength_multiplier = quality_related_weapon_strength_multiplier[weapon.quality.hid]
 	const enhancement_multiplier = (1 + weapon_enhancement_multiplier * weapon.enhancement_level)
@@ -185,11 +184,15 @@ function get_weapon_damage (weapon: IWeapon): number[] {
 	]
 }
 
+function get_weapon_medium_damage (weapon: IWeapon): number {
+xxxx
+}
+
 ////////////////////////////////////
 
 export {
 	create_instance,
-	get_weapon_damage,
+	get_weapon_damage_range,
 }
 
 ////////////////////////////////////

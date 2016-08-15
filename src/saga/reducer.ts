@@ -67,7 +67,7 @@ const implied_state_symbol = Symbol('implied_state')
 const reducer: ReduxReducer<ISaga> = (state: ISaga = initial_state, action: ReduxAction): ISaga => {
 	let implied_state: IImpliedState
 
-	console.log("From reducer", action)
+	console.log('* Saga reducer was dispatched an action: ', action)
 
 	if (! (state as any)[implied_state_symbol]) {
 		(state as any)[implied_state_symbol] = {

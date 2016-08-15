@@ -1,3 +1,4 @@
+TODO moment.js + typings
 
 https://github.com/rangle/typed-immutable-record
 

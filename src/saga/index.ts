@@ -30,6 +30,11 @@ function create_store(): ReduxStore<ISaga> {
 
 const default_store = create_store()
 
+////////////
+
+// primitives
+// * sort the inventory 1) equiped W -> A 2) unequiped W+A, by dmg 3) misc objects
+// *
 ////////////////////////////////////
 
 export {

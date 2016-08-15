@@ -6,3 +6,6 @@ node_modules
 
 # temp dirs
 test/unit/src
+
+# temp files
+.~xxxlock.calculations.ods#

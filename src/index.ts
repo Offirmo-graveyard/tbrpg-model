@@ -9,6 +9,8 @@ import * as saga from './saga'
 import * as weapon from './weapon'
 import * as weapon_component from './weapon_component'
 
+import * as mechanics from './mechanics'
+
 ////////////
 
 import i18n_en from './common/i18n/en'
@@ -40,6 +42,8 @@ export {
 	saga,
 	weapon_component,
 	weapon,
+
+	mechanics,
 }
 
 ////////////////////////////////////
