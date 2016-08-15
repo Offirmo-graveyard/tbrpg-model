@@ -1,10 +1,10 @@
 import {
-	LocaleCode,
-	IMessagesStore,
-	IIntl,
-	IIntlChangeListener,
+	//LocaleCode,
+	//IMessagesStore,
+	//IIntl,
+	//IIntlChangeListener,
 	default_instance,
-	create_instance,
+	//create_instance,
 } from './icu-data-container'
 
 describe('icu-data-container', function () {

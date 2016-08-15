@@ -1,6 +1,6 @@
 ////////////////////////////////////
 
-import * as _ from 'lodash'
+//import * as _ from 'lodash'
 
 ////////////
 
@@ -84,8 +84,8 @@ function create_instance(dependencies: InjectableDependencies = {}) {
 }
 
 function get_weapon_damage (weapon: IWeapon): number[] {
-	const spread = quality_related_weapon_strength_spread[weapon.quality.hid] as number
-	const strength_multiplier = quality_related_weapon_strength_multiplier[weapon.quality.hid] as number
+	const spread = quality_related_weapon_strength_spread[weapon.quality.hid]
+	const strength_multiplier = quality_related_weapon_strength_multiplier[weapon.quality.hid]
 	const enhancement_multiplier = (1 + weapon_enhancement_multiplier * weapon.enhancement_level)
 
 	// make a constrained interval, smaller for powerful weapons which have bigger numbers

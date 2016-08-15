@@ -5,11 +5,8 @@ const timezone = false
 
 import {
 	IIntl,
-	IError,
 	IErrorReporter,
-	format,
-	format_single_key,
-	format_multiple_keys,
+	format
 } from './format-key'
 
 

@@ -5,7 +5,16 @@ import * as Loki from 'lokijs'
 ////////////
 
 import { IWeaponComponent, IWeaponComponentCreationParams, WeaponComponentModel, default_instance as _weapon_component_model } from '../weapon_component'
+/*
+declare module 'tbrpg-static-data/src/weapon_component' {
+	const data: IWeaponComponentCreationParams[]
+	export default data
+}
+import _weapon_component_static_data from 'tbrpg-static-data/src/weapon_component'
+*/
+
 const _weapon_component_static_data = require('tbrpg-static-data/src/weapon_component')
+
 
 import { LokiDb } from './types'
 

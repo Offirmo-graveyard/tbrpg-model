@@ -57,8 +57,7 @@ function display_weapon(weapon, intl) {
 `${stylize_string.bold(weapon_h)}
 ${rarity_label} ${colorize_according_quality(quality_h, weapon.quality.hid)}
 ${enhancement_label} ${ get_enhancement_indicator(weapon)}
-${damage[0]} - ${damage[1]}
-foo`,
+${damage[0]} - ${damage[1]}`,
 		{padding: 1, margin: 1, borderStyle: 'double', borderColor: get_color_for_quality(weapon.quality.hid)}
 	))
 }

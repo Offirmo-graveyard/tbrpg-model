@@ -5,18 +5,17 @@ import * as jsen from 'jsen'
 
 ////////////
 
-import { IJsonSchema, IJsonSchemaModel } from './types'
+import {
+	IJsonSchema,
+	IJsonSchemaModel
+} from './types'
 import { create_human_unique_key_builder } from './get_unique_key'
 //import { create_i18n_keys_builder } from './get_i18n_keys'
 
 ////////////////////////////////////
 
-interface IOptions {
-}
-
 function instantiate_model<IModel, IModelCreationParams>(
-	schema: IJsonSchema,
-	options: IOptions = {}
+	schema: IJsonSchema
 ): IJsonSchemaModel<IModel, IModelCreationParams> {
 	if (!schema || !_.isObject(schema) || !schema.offirmo_extensions)
 		throw new Error('json-schema-based-model: schema is invalid !')
@@ -78,11 +77,9 @@ function instantiate_model<IModel, IModelCreationParams>(
 
 ////////////////////////////////////
 
-
 export {
 	IJsonSchema,
 	IJsonSchemaModel,
-	IOptions,
 	instantiate_model
 }
 

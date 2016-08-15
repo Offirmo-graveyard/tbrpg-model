@@ -1,7 +1,8 @@
+////////////////////////////////////
 
-export type AllowedType = string | number
+type AllowedType = string | number
 
-export interface IJsonSchemaTypeDescription {
+interface IJsonSchemaTypeDescription {
 	description: string
 	type: string
 	properties: {
@@ -12,14 +13,14 @@ export interface IJsonSchemaTypeDescription {
 	default?: AllowedType
 }
 
-export interface IOffirmoJsonSchemaExtension {
+interface IOffirmoJsonSchemaExtension {
 	hid: string
 	human_unique_key_components: string[]
 	i18n_keys_mandatory: Object // TODO
 	i18n_keys_optional: Object
 }
 
-export interface IJsonSchema {
+interface IJsonSchema {
 	title: string
 	type: any
 	additionalProperties: boolean
@@ -30,7 +31,7 @@ export interface IJsonSchema {
 	}
 }
 
-export interface IJsonSchemaModel<IModel, IModelCreationParams> {
+interface IJsonSchemaModel<IModel, IModelCreationParams> {
 	create: (rawData: IModelCreationParams) => IModel
 	validate: (data: IModel) => void
 	hid: string
@@ -38,3 +39,15 @@ export interface IJsonSchemaModel<IModel, IModelCreationParams> {
 	get_human_unique_key: (data: IModel) => string
 	//get_i18n_keys: (data: IModel) => string[]
 }
+
+////////////////////////////////////
+
+export {
+	AllowedType,
+	IJsonSchemaTypeDescription,
+	IOffirmoJsonSchemaExtension,
+	IJsonSchema,
+	IJsonSchemaModel,
+}
+
+////////////////////////////////////

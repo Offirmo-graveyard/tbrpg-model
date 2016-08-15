@@ -9,6 +9,12 @@
 			"minimum": 0,
 			"default": 123
 		},
+		"random_count": {
+			"description": "for repeatability, the number of random used so far",
+			"type": "integer",
+			"minimum": 0,
+			"default": 0
+		},
 		"click_count": {
 			"description": "count of player interactions (good or bad)",
 			"type": "integer",

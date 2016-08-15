@@ -3,7 +3,8 @@
 interface IConstHash {
 	[k: string]: number
 }
-const quality_related_bonus: IConstHash = {
+
+const quality_related_strength_bonus_at_generation: IConstHash = {
 	common:      0,
 	uncommon:    1,
 	rare:        3,
@@ -38,7 +39,7 @@ const weapon_enhancement_multiplier = 0.2
 
 export {
 	IConstHash,
-	quality_related_bonus,
+	quality_related_strength_bonus_at_generation,
 	quality_related_weapon_strength_multiplier,
 	quality_related_weapon_strength_spread,
 	weapon_enhancement_multiplier

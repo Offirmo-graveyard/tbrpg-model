@@ -1,16 +1,15 @@
-import * as _ from 'lodash'
-
 import {
-	IJsonSchemaModel,
 	instantiate_model
 } from './index'
 
 describe('Json Schema based Model', function() {
 
+	/*
 	interface ITestModel {
 		question: string
 		answer: number
 	}
+	*/
 
 	describe('instantiate_model()', function() {
 
