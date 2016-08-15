@@ -46,6 +46,7 @@ function get_enhancement_indicator(weapon) {
 	})
 }
 
+
 function display_weapon(weapon, intl) {
 	const weapon_h = _i('weapon', weapon, intl)
 	const quality_h = _i(`weapon_component|quality,${weapon.quality.hid}|main`, {}, intl)
@@ -62,9 +63,14 @@ ${damage[0]} - ${damage[1]}`,
 	))
 }
 
+function display_adventure(adventure, intl) {
+	console.log('TODO display_adventure')
+}
+
 ////////////////////////////////////
 
 module.exports = {
+	display_adventure,
 	display_weapon
 }
 

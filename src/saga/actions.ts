@@ -10,10 +10,6 @@ import { ISaga } from './types'
 
 ////////////////////////////////////
 
-//type ActionType = 'set_random_seed' | 'click' | 'equip_inventory_item' | 'sell_inventory_item'
-
-////////////
-
 interface IActionSetRandomSeed extends ReduxAction {
 	seed: number
 }
@@ -27,28 +23,31 @@ function on_set_random_seed(state: ISaga, action: IActionSetRandomSeed) {
 
 ////////////////////////////////////
 
-export {
-	IActionSetRandomSeed,
-	on_set_random_seed
+interface IActionPlay extends ReduxAction {
+	click_date_moment_utc: number
+}
+
+function on_play(state: ISaga, action: IActionPlay) {
+	state.click_count++
+
+/*
+	next_allowed_click_date_moment_utc: number
+
+	valid_click_count: number
+*/
+
+	return state
 }
 
 ////////////////////////////////////
 
-/*
- import {
- ACTIVATE_LOCATION
- } from './actions';
+export {
+	IActionSetRandomSeed,
+	on_set_random_seed,
 
- import { Map } from 'immutable';
+	IActionPlay,
+	on_play,
 
- const initialState = Map({})
+}
 
- export let ui = (state = initialState, action) => {
- switch (action.type) {
- case ACTIVATE_LOCATION:
- return state.set('activeLocationId', action.id);
- default:
- return state;
- }
- };
- */
+////////////////////////////////////

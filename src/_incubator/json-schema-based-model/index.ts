@@ -17,8 +17,11 @@ import { create_human_unique_key_builder } from './get_unique_key'
 function instantiate_model<IModel, IModelCreationParams>(
 	schema: IJsonSchema
 ): IJsonSchemaModel<IModel, IModelCreationParams> {
-	if (!schema || !_.isObject(schema) || !schema.offirmo_extensions)
-		throw new Error('json-schema-based-model: schema is invalid !')
+
+	if (!schema || !_.isObject(schema))
+		throw new Error('json-schema-based-model: schema is not an object !')
+	if (!schema.offirmo_extensions)
+		throw new Error('json-schema-based-model: schema is missing offirmo extensions !')
 
 	const MODULE_ID = schema.title
 	const hid = schema.offirmo_extensions.hid

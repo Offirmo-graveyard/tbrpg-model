@@ -7,6 +7,11 @@
 const clear_cli = require('@offirmo/cli-toolbox/stdout/clear-cli')
 clear_cli()
 
+
+//const json = require('@offirmo/cli-toolbox/fs/json')
+//json.read(__dirname + '/../../src/adventure/schema.json').then(data => console.log(data))
+
+
 // thank you http://patorjk.com/software/taag/#p=display&h=3&v=0&f=Rectangles&t=Online%20%20Adventures
 console.log('\n' +
 	' _____       _  _              _____    _                 _                        \n' +
@@ -31,6 +36,7 @@ const format_key = require('../unit/src/_incubator/offirmo-formatjs/lib/format-k
 const MUT = require('../unit/src')
 const DB = require('../unit/src/db')
 const mechanics = require('../unit/src/mechanics').create_instance()
+const store = require('../unit/src/saga').default_store
 
 ////////////
 
@@ -70,18 +76,18 @@ vorpal
 ////////////
 
 vorpal
-	.command('set_locale <locale>', 'change locale')
-	.autocomplete(MUT.supported_locales)
-	.action((args, callback) => {
-		const messages = 	Object.assign({}, require('./i18n/' + args.locale), MUT.get_i18n_data(args.locale))
+.command('set_locale <locale>', 'change locale')
+.autocomplete(MUT.supported_locales)
+.action((args, callback) => {
+	const messages = 	Object.assign({}, require('./i18n/' + args.locale), MUT.get_i18n_data(args.locale))
 
-		icu_container.set_icu_data(
-			args.locale,
-			messages
-		)
+	icu_container.set_icu_data(
+		args.locale,
+		messages
+	)
 
-		callback()
-	})
+	callback()
+})
 
 ////////////
 
@@ -113,32 +119,48 @@ vorpal
 			console.log(columnify(
 				raw_data
 					.map(model_instance.get_human_unique_key)
-					.map(s => s.slice(schema.offirmo_extensions.hid.length +1))
+					.map(s => s.slice(schema.offirmo_extensions.hid.length + 1))
 			))
 			break
 
 		case 'demo':
-			const weapon = mechanics.generate_random_demo_weapon()
-			console.log(prettify_json(weapon))
+			switch(args.model) {
+				case 'weapon':
+					const weapon = mechanics.generate_random_demo_weapon()
+					console.log(prettify_json(weapon))
+					ux.display_weapon(weapon, intl)
+					break
+				case 'adventure':
+					const adventure = mechanics.generate_random_demo_adventure()
+					console.log(prettify_json(adventure))
+					ux.display_adventure(adventure, intl)
+					break
 
-			ux.display_weapon(weapon, intl)
-			//const weapon_human_name = format_key.format('weapon', weapon, intl)
-			//console.log(weapon_human_name)
+			}
 
 			break
 
 		default:
 			console.error(`! unknown cmd "${args.cmd}"`)
 	}
+
 	callback()
 })
 
 ////////////////////////////////////
 
 vorpal
-	.delimiter(stylizeString.red('test>'))
-	.show();
+.delimiter(stylizeString.red('test>'))
+.show()
 
-//vorpal.ui.input('model weapon_component raw')
 vorpal.exec('set_locale fr')
-vorpal.ui.input('model weapon demo')
+//vorpal.ui.input('model adventure_archetype raw')
+//vorpal.ui.input('model weapon_component raw')
+//vorpal.ui.input('model weapon demo')
+vorpal.ui.input('model adventure demo')
+
+////////////////////////////////////
+
+store.subscribe(function () {
+	console.log('state changed !')
+})

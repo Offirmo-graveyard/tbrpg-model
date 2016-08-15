@@ -26,3 +26,23 @@ randoms: [number, number, number, number, number, number]
 
 
 		
+
+
+/*
+ import {
+ ACTIVATE_LOCATION
+ } from './actions';
+
+ import { Map } from 'immutable';
+
+ const initialState = Map({})
+
+ export let ui = (state = initialState, action) => {
+ switch (action.type) {
+ case ACTIVATE_LOCATION:
+ return state.set('activeLocationId', action.id);
+ default:
+ return state;
+ }
+ };
+ */

@@ -18,7 +18,8 @@ describe('Json Schema based Model', function() {
 			context('when schema is not provided', function() {
 
 				it('should throw a corresponding error', function() {
-					expect(() => (instantiate_model as any)()).to.throw(Error, 'json-schema-based-model: schema is invalid !')
+					expect(() => (instantiate_model as any)()).to.throw(Error, 'json-schema-based-model: schema is not an' +
+						' object !')
 				})
 
 			})
@@ -26,7 +27,8 @@ describe('Json Schema based Model', function() {
 			context('when schema is invalid', function() {
 
 				it('should throw a corresponding error', function() {
-					expect(() => (instantiate_model as any)({})).to.throw(Error, 'json-schema-based-model: schema is invalid !')
+					expect(() => (instantiate_model as any)({})).to.throw(Error, 'json-schema-based-model: schema is' +
+						' missing offirmo extensions !')
 				})
 
 			})

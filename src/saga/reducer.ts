@@ -8,11 +8,12 @@ import {
 	Reducer as ReduxReducer,
 } from 'redux'
 
-const random = require('random-js') // TODO typings
+//const random = require('random-js') // TODO typings
 
 ////////////
 
-import { ISaga, ISagaCreationParams } from './types'
+import { default_instance } from './model'
+import { ISaga } from './types'
 import {
 	IActionSetRandomSeed,
 	on_set_random_seed
@@ -47,23 +48,59 @@ const initial_state: ISaga = {
 	}
 }
 
+interface IImpliedState {
+
+	random: {
+		engine: {
+			seed: (seed: number) => void,
+			discard: (count: number) => void
+		},
+		generator: any
+	},
+
+}
+
+const implied_state_symbol = Symbol('implied_state')
+
 ////////////
 
 const reducer: ReduxReducer<ISaga> = (state: ISaga = initial_state, action: ReduxAction): ISaga => {
-	// quick check
-	default_instance.validate(store.getState())
+	let implied_state: IImpliedState
+
+	console.log("From reducer", action)
+
+	if (! (state as any)[implied_state_symbol]) {
+		(state as any)[implied_state_symbol] = {
+
+		}
+	}
+	implied_state = (state as any)[implied_state_symbol] as IImpliedState
+
+	// inbound check
+	default_instance.validate(state)
 
 	switch (action.type) {
 		case 'set_random_seed':
-			return on_set_random_seed(state, action as IActionSetRandomSeed)
+			state = on_set_random_seed(state, action as IActionSetRandomSeed)
+			break
+
+		case '@@redux/INIT':
+			break
+
 		default:
-			throw new Error('Unknown action !')
+			throw new Error('Reducer: Unknown action !')
 	}
+
+	//  outbound check
+	default_instance.validate(state)
+
+	return state
 }
 
 ////////////////////////////////////
 
 export {
+	reducer
 }
 
 ////////////////////////////////////
