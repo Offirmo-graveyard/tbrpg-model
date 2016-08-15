@@ -8,4 +8,4 @@ node_modules
 test/unit/src
 
 # temp files
-.~xxxlock.calculations.ods#
+.~lock.calculations.ods#
