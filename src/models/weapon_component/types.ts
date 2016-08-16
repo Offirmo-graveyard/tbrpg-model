@@ -20,10 +20,10 @@ interface IWeaponComponentCreationParams {
 ////////////////////////////////////
 
 export {
-	WeaponComponentType,
-	//WeaponQualityType,
-	IWeaponComponent,
-	IWeaponComponentCreationParams
+WeaponComponentType,
+//WeaponQualityType,
+IWeaponComponent,
+IWeaponComponentCreationParams
 }
 
 ////////////////////////////////////

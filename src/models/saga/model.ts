@@ -7,7 +7,7 @@ import {
 	IJsonSchema,
 	IJsonSchemaModel,
 	instantiate_model as _instantiate_json_schema_based_model
-} from '../_incubator/json-schema-based-model'
+} from '../../_incubator/json-schema-based-model'
 
 ////////////
 
@@ -40,12 +40,12 @@ const default_instance = create_instance()
 ////////////
 
 export {
-	ISaga,
-	ISagaCreationParams,
-	SagaModel,
-	_schema as schema,
-	default_instance,
-	create_instance,
+ISaga,
+ISagaCreationParams,
+SagaModel,
+_schema as schema,
+default_instance,
+create_instance,
 }
 
 ////////////////////////////////////

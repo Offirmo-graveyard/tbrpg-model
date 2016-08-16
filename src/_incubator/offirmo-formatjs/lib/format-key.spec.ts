@@ -10,7 +10,7 @@ import {
 } from './format-key'
 
 
-describe('format-key', function () {
+describe('format-key', function() {
 
 	let error_reporter: IErrorReporter
 
@@ -69,7 +69,7 @@ describe('format-key', function () {
 					values.weapon_qualif_1_key,
 					values.weapon_key,
 				], values)
-				.map(libs._s.capitalize)
+					.map(libs._s.capitalize)
 
 				return parts.join(' ')
 			},
@@ -97,13 +97,13 @@ describe('format-key', function () {
 		//broken_fn: '[i18n|en|?!?|test en]'
 	}
 
-	it('should expose a function', function () {
+	it('should expose a function', function() {
 		expect(format).to.be.a('function')
 	})
 
-	describe('format() with a single key', function () {
+	describe('format() with a single key', function() {
 
-		context('when passed correct parameters', function () {
+		context('when passed correct parameters', function() {
 
 			afterEach(() => {
 				const call: any = (error_reporter as any).firstCall
@@ -113,31 +113,31 @@ describe('format-key', function () {
 				expect(error_reporter).to.not.have.been.called
 			})
 
-			it('should format correctly for fr', function () {
-				_.forEach(expected_fr, function (value, key) {
+			it('should format correctly for fr', function() {
+				_.forEach(expected_fr, function(value, key) {
 					const res = format(key as string, test_values, intl_fr, 'test fr', error_reporter)
 					expect(res, 'test ' + key + '@fr').to.equal(value)
 				})
 			})
 
-			it('should format correctly for en', function () {
-				_.forEach(expected_en, function (value, key) {
+			it('should format correctly for en', function() {
+				_.forEach(expected_en, function(value, key) {
 					const res = format(key as string, test_values, intl_en, 'test en', error_reporter)
 					expect(res, 'test ' + key + '@en').to.equal(value)
 				})
 			})
 		})
 
-		context('when passed incorrect parameters', function () {
+		context('when passed incorrect parameters', function() {
 			it('should handle it')
 			// TODO test broken_xy
 		})
 
 	})
 
-	describe('format() with multiple keys', function () {
+	describe('format() with multiple keys', function() {
 
-		context('when passed correct parameters', function () {
+		context('when passed correct parameters', function() {
 
 			afterEach(() => {
 				const call: any = (error_reporter as any).firstCall
@@ -147,7 +147,7 @@ describe('format-key', function () {
 				expect(error_reporter).to.not.have.been.called
 			})
 
-			it('should format correctly for fr', function () {
+			it('should format correctly for fr', function() {
 				const res = format(
 					['weapon_sword', 'weaponqualif1_sinister', 'weaponqualif2_apprentice'],
 					test_values, intl_fr, 'test fr', error_reporter
@@ -156,7 +156,7 @@ describe('format-key', function () {
 				expect(res).to.deep.equal(['épée', 'sinistre', 'd’apprenti'])
 			})
 
-			it('should format correctly for en', function () {
+			it('should format correctly for en', function() {
 				const res = format(
 					['weapon_sword', 'weaponqualif1_sinister', 'weaponqualif2_apprentice'],
 					test_values, intl_en, 'test en', error_reporter
@@ -166,7 +166,7 @@ describe('format-key', function () {
 			})
 		})
 
-		context('when passed incorrect parameters', function () {
+		context('when passed incorrect parameters', function() {
 			it('should handle it')
 		})
 	})

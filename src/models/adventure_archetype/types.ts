@@ -55,9 +55,9 @@ interface IAdventureArchetypeCreationParams {
 ////////////////////////////////////
 
 export {
-	CoinsGain,
-	IAdventureArchetype,
-	IAdventureArchetypeCreationParams
+CoinsGain,
+IAdventureArchetype,
+IAdventureArchetypeCreationParams
 }
 
 ////////////////////////////////////

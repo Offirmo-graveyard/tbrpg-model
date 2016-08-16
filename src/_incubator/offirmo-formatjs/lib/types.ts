@@ -35,13 +35,13 @@ type IErrorReporter = (e: IError) => void
 ////////////////////////////////////
 
 export {
-	LocaleCode,
-	IMessagesStore,
-	IIntl,
-	ICustomFormatFunction,
-	IIntlChangeListener,
-	IError,
-	IErrorReporter,
+LocaleCode,
+IMessagesStore,
+IIntl,
+ICustomFormatFunction,
+IIntlChangeListener,
+IError,
+IErrorReporter,
 }
 
 ////////////////////////////////////

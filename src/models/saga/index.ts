@@ -38,8 +38,8 @@ const default_store = create_store()
 ////////////////////////////////////
 
 export {
-	create_store,
-	default_store,
+create_store,
+default_store,
 }
 
 ////////////////////////////////////

@@ -12,34 +12,34 @@ import {
 	IAdventureCreationParams,
 	AdventureModel,
 	default_instance as _adventure_model
-} from '../adventure'
+} from '../models/adventure'
 
 import {
 	IAdventureArchetype,
 	AdventureArchetypeModel,
 	default_instance as _adventure_archetype_model
-} from '../adventure_archetype'
+} from '../models/adventure_archetype'
 
 import {
 	IWeapon,
 	IWeaponCreationParams,
 	WeaponModel,
 	default_instance as _weapon_model
-} from '../weapon'
+} from '../models/weapon'
 
 import {
 	IWeaponComponent,
 	WeaponComponentType,
 	WeaponComponentModel,
 	default_instance as _weapon_component_model
-} from '../weapon_component'
+} from '../models/weapon_component'
 
 import { LokiDb, create_static_db_instance } from '../db'
 import {
 	quality_related_weapon_strength_multiplier,
 	quality_related_weapon_strength_spread,
 	weapon_enhancement_multiplier,
-//	coins_gain_intervals,
+	//	coins_gain_intervals,
 } from './constants'
 import * as consts from './constants'
 
@@ -99,7 +99,7 @@ function create_instance(dependencies: InjectableDependencies = {}) {
 		return weapon_components[type][random_id]
 	}
 
-	function instantiate_adventure_archetype(engine: any, aa: IAdventureArchetype): [ IAdventure, number ] {
+	function instantiate_adventure_archetype(engine: any, aa: IAdventureArchetype): [IAdventure, number] {
 		let random_use_count = 0
 		const gains = aa.post.gains
 		const adventure_data: IAdventureCreationParams = {
@@ -124,7 +124,7 @@ function create_instance(dependencies: InjectableDependencies = {}) {
 		}
 
 		if (gains.coins !== 'none') {
-//			const interval = (coins_gain_intervals[gains.coins]) as [number, number]
+			//			const interval = (coins_gain_intervals[gains.coins]) as [number, number]
 			const interval = consts.coins_gain_intervals[gains.coins]
 			adventure_data.gains.coins = Random.integer(interval[0], interval[1])(engine), ++random_use_count
 		}
@@ -169,12 +169,12 @@ function create_instance(dependencies: InjectableDependencies = {}) {
 	}
 }
 
-function get_weapon_damage_range (weapon: IWeapon): [ number, number ] {
+function get_weapon_damage_range(weapon: IWeapon): [number, number] {
 	const spread = quality_related_weapon_strength_spread[weapon.quality.hid]
 	const strength_multiplier = quality_related_weapon_strength_multiplier[weapon.quality.hid]
 	const enhancement_multiplier = (1 + weapon_enhancement_multiplier * weapon.enhancement_level)
 
-	// make a constrained interval, smaller for powerful weapons which have bigger numbers
+	// constrain interval
 	const min_strength = Math.max(weapon.base_strength - spread, 1)
 	const max_strength = Math.min(weapon.base_strength + spread, 20)
 
@@ -184,8 +184,9 @@ function get_weapon_damage_range (weapon: IWeapon): [ number, number ] {
 	]
 }
 
-function get_weapon_medium_damage (weapon: IWeapon): number {
-xxxx
+function get_weapon_medium_damage(weapon: IWeapon): number {
+	const damage_range = get_weapon_damage_range(weapon)
+	return (damage_range[0] + damage_range[1]) / 2
 }
 
 ////////////////////////////////////
@@ -193,6 +194,7 @@ xxxx
 export {
 	create_instance,
 	get_weapon_damage_range,
+	get_weapon_medium_damage,
 }
 
 ////////////////////////////////////

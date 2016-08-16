@@ -41,7 +41,7 @@ const initial_state: ISaga = {
 		coins: 0,
 		tokens: 0
 	},
-	inventory:[],
+	inventory: [],
 	skills: [],
 	flags: {
 		recent_adventure_ids: []
@@ -69,7 +69,7 @@ const reducer: ReduxReducer<ISaga> = (state: ISaga = initial_state, action: Redu
 
 	console.log('* Saga reducer was dispatched an action: ', action)
 
-	if (! (state as any)[implied_state_symbol]) {
+	if (!(state as any)[implied_state_symbol]) {
 		(state as any)[implied_state_symbol] = {
 
 		}
@@ -100,7 +100,7 @@ const reducer: ReduxReducer<ISaga> = (state: ISaga = initial_state, action: Redu
 ////////////////////////////////////
 
 export {
-	reducer
+reducer
 }
 
 ////////////////////////////////////

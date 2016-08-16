@@ -8,7 +8,7 @@ import {
 	IJsonSchema,
 	IJsonSchemaModel,
 	instantiate_model as _instantiate_json_schema_based_model
-} from '../_incubator/json-schema-based-model'
+} from '../../_incubator/json-schema-based-model'
 
 export interface InjectableDependencies {
 	instantiate_json_schema_based_model?: any
@@ -34,8 +34,8 @@ const default_instance = create_instance()
 
 ////////////
 
-function get_i18n_data (locale: string): Object {
-	switch(locale) {
+function get_i18n_data(locale: string): Object {
+	switch (locale) {
 		case 'en':
 			return i18n_en
 		case 'fr':
@@ -48,14 +48,14 @@ function get_i18n_data (locale: string): Object {
 ////////////////////////////////////
 
 export {
-	CoinsGain,
-	IAdventureArchetype,
-	IAdventureArchetypeCreationParams,
-	AdventureArchetypeModel,
-	_schema as schema,
-	default_instance,
-	create_instance,
-	get_i18n_data,
+CoinsGain,
+IAdventureArchetype,
+IAdventureArchetypeCreationParams,
+AdventureArchetypeModel,
+_schema as schema,
+default_instance,
+create_instance,
+get_i18n_data,
 }
 
 ////////////////////////////////////

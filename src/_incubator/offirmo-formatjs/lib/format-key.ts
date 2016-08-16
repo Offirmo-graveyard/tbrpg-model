@@ -148,7 +148,7 @@ function format_multiple_keys(
 	parent_debug_id: string = '?',
 	error_reporter: IErrorReporter = default_error_reporter
 ): string[] {
-	return  keys.map(key => format_single_key(key, values, intl, parent_debug_id, error_reporter))
+	return keys.map(key => format_single_key(key, values, intl, parent_debug_id, error_reporter))
 }
 
 function format(
@@ -159,16 +159,16 @@ function format(
 	error_reporter: IErrorReporter = default_error_reporter
 ): string | string[] {
 	if (_.isArray(key))
-		return format_multiple_keys(key as string [], values, intl, parent_debug_id, error_reporter)
+		return format_multiple_keys(key as string[], values, intl, parent_debug_id, error_reporter)
 	else
 		return format_single_key(key as string, values, intl, parent_debug_id, error_reporter)
 }
 
 export {
-	IIntl,
-	IError,
-	IErrorReporter,
-	format,
-	format_single_key,
-	format_multiple_keys,
+IIntl,
+IError,
+IErrorReporter,
+format,
+format_single_key,
+format_multiple_keys,
 }

@@ -43,11 +43,11 @@ interface IJsonSchemaModel<IModel, IModelCreationParams> {
 ////////////////////////////////////
 
 export {
-	AllowedType,
-	IJsonSchemaTypeDescription,
-	IOffirmoJsonSchemaExtension,
-	IJsonSchema,
-	IJsonSchemaModel,
+AllowedType,
+IJsonSchemaTypeDescription,
+IOffirmoJsonSchemaExtension,
+IJsonSchema,
+IJsonSchemaModel,
 }
 
 ////////////////////////////////////

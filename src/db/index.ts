@@ -10,14 +10,14 @@ import {
 	IWeaponComponentCreationParams,
 	WeaponComponentModel,
 	default_instance as _weapon_component_model
-} from '../weapon_component'
+} from '../models/weapon_component'
 
 import {
 	IAdventureArchetype,
 	IAdventureArchetypeCreationParams,
 	AdventureArchetypeModel,
 	default_instance as _adventure_archetype_model
-} from '../adventure_archetype'
+} from '../models/adventure_archetype'
 
 
 /*
@@ -46,7 +46,7 @@ export interface InjectableDependencies {
 
 ////////////////////////////////////
 
-function create_static_db_instance (dependencies: InjectableDependencies = {}): LokiDb {
+function create_static_db_instance(dependencies: InjectableDependencies = {}): LokiDb {
 	const static_db = (dependencies.static_db || new Loki('loki_static.json')) as LokiDb
 	//const dynamic_db = (dependencies.dynamic_db || new Loki('loki_dynamic.json')) as LokiDb
 	const adventure_archetype_model = (dependencies.adventure_archetype_model || _adventure_archetype_model) as AdventureArchetypeModel
@@ -69,8 +69,8 @@ function create_static_db_instance (dependencies: InjectableDependencies = {}): 
 ////////////////////////////////////
 
 export {
-	LokiDb,
-	create_static_db_instance,
+LokiDb,
+create_static_db_instance,
 }
 
 ////////////////////////////////////

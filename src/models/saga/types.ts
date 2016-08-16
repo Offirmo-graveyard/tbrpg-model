@@ -37,8 +37,8 @@ interface ISagaCreationParams extends ISaga {
 ////////////////////////////////////
 
 export {
-	ISaga,
-	ISagaCreationParams,
+ISaga,
+ISagaCreationParams,
 }
 
 ////////////////////////////////////

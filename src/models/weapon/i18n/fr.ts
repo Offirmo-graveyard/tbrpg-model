@@ -7,7 +7,7 @@ export default {
 			`weapon_component|base,${weapon.base.hid}|main`,
 			`weapon_component|qualifier1,${weapon.qualifier1.hid}|main`,
 			`weapon_component|qualifier2,${weapon.qualifier2.hid}|main`
-		], {gender: weapon_gender})
+		], { gender: weapon_gender })
 
 		parts[0] = libs._.capitalize(parts[0])
 

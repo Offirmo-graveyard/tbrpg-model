@@ -20,6 +20,3 @@ export default {
 	item_detail_upgrade_level: 'Améliorations',
 	item_detail_weapon_damage: 'Dégâts : {min_damage, number} - {max_damage, number}',
 }
-
-
-

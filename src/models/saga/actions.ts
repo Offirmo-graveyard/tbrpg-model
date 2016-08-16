@@ -30,11 +30,11 @@ interface IActionPlay extends ReduxAction {
 function on_play(state: ISaga, action: IActionPlay) {
 	state.click_count++
 
-/*
-	next_allowed_click_date_moment_utc: number
-
-	valid_click_count: number
-*/
+	/*
+		next_allowed_click_date_moment_utc: number
+	
+		valid_click_count: number
+	*/
 
 	return state
 }
@@ -42,11 +42,11 @@ function on_play(state: ISaga, action: IActionPlay) {
 ////////////////////////////////////
 
 export {
-	IActionSetRandomSeed,
-	on_set_random_seed,
+IActionSetRandomSeed,
+on_set_random_seed,
 
-	IActionPlay,
-	on_play,
+IActionPlay,
+on_play,
 
 }
 

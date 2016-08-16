@@ -39,7 +39,7 @@ function create_instance() {
 	}
 
 	function off_locale_change(listener_to_remove: IIntlChangeListener) {
-		if (! _.includes(locale_change_listeners, listener_to_remove))
+		if (!_.includes(locale_change_listeners, listener_to_remove))
 			throw new Error('Trying to remove a locale change listener which is not present !')
 
 		locale_change_listeners = _.reject(locale_change_listeners, listener => (listener === listener_to_remove))
@@ -61,12 +61,12 @@ const default_instance = create_instance()
 ////////////////////////////////////
 
 export {
-	LocaleCode,
-	IMessagesStore,
-	IIntl,
-	IIntlChangeListener,
-	default_instance,
-	create_instance,
+LocaleCode,
+IMessagesStore,
+IIntl,
+IIntlChangeListener,
+default_instance,
+create_instance,
 }
 
 ////////////////////////////////////

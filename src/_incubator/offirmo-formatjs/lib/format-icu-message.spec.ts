@@ -119,17 +119,17 @@ describe('format-icu-message', function() {
 			test_cases.forEach(function(test_case: any, index: number) {
 				it('should return a best effort string,' +
 					' as explicit as possible and containing maximum information - case #' + index, function() {
-					const res = format(
-						test_case.message,
-						test_case.values,
-						test_case.locale,
-						test_case.custom_formats,
-						'TC#123', // example debug id
-						error_reporter
-					)
+						const res = format(
+							test_case.message,
+							test_case.values,
+							test_case.locale,
+							test_case.custom_formats,
+							'TC#123', // example debug id
+							error_reporter
+						)
 
-					expect(res).to.equal(test_case.expected)
-				})
+						expect(res).to.equal(test_case.expected)
+					})
 			})
 		})
 	})

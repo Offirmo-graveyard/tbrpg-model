@@ -5,5 +5,5 @@
 type LokiDb = Loki
 
 export {
-	LokiDb,
+LokiDb,
 }
