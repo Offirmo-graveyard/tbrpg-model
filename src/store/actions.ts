@@ -4,9 +4,11 @@ import {
 	Action as ReduxAction,
 } from 'redux'
 
+import * as moment from 'moment'
+
 ////////////
 
-import { ISaga } from './types'
+import { ISaga } from '../models/saga/types'
 
 ////////////////////////////////////
 
@@ -24,7 +26,7 @@ function on_set_random_seed(state: ISaga, action: IActionSetRandomSeed) {
 ////////////////////////////////////
 
 interface IActionPlay extends ReduxAction {
-	click_date_moment_utc: number
+	click_date_moment_utc: moment.Moment
 }
 
 function on_play(state: ISaga, action: IActionPlay) {
@@ -32,7 +34,7 @@ function on_play(state: ISaga, action: IActionPlay) {
 
 	/*
 		next_allowed_click_date_moment_utc: number
-	
+
 		valid_click_count: number
 	*/
 
@@ -42,12 +44,11 @@ function on_play(state: ISaga, action: IActionPlay) {
 ////////////////////////////////////
 
 export {
-IActionSetRandomSeed,
-on_set_random_seed,
+	IActionSetRandomSeed,
+	on_set_random_seed,
 
-IActionPlay,
-on_play,
-
+	IActionPlay,
+	on_play,
 }
 
 ////////////////////////////////////

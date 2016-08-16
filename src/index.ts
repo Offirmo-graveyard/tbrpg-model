@@ -9,6 +9,7 @@ import * as saga from './models/saga'
 import * as weapon from './models/weapon'
 import * as weapon_component from './models/weapon_component'
 
+import * as store from './store'
 import * as mechanics from './mechanics'
 
 ////////////
@@ -18,8 +19,17 @@ import i18n_fr from './common/i18n/fr'
 
 ////////////////////////////////////
 
-const supported_locales = ['en', 'fr']
+const models = {
+	adventure,
+	adventure_archetype,
+	saga,
+	weapon_component,
+	weapon,
+}
 
+////////////
+
+const supported_locales = ['en', 'fr']
 
 function get_i18n_data(locale: string): Object {
 	return Object.assign(
@@ -34,16 +44,13 @@ function get_i18n_data(locale: string): Object {
 ////////////////////////////////////
 
 export {
-supported_locales,
-get_i18n_data,
+	models,
 
-adventure,
-adventure_archetype,
-saga,
-weapon_component,
-weapon,
+	mechanics,
+	store,
 
-mechanics,
+	supported_locales,
+	get_i18n_data,
 }
 
 ////////////////////////////////////

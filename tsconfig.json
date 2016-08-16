@@ -62,10 +62,7 @@
 		"src/models/adventure/types.ts",
 		"src/models/adventure_archetype/index.ts",
 		"src/models/adventure_archetype/types.ts",
-		"src/models/saga/actions.ts",
 		"src/models/saga/index.ts",
-		"src/models/saga/model.ts",
-		"src/models/saga/reducer.ts",
 		"src/models/saga/types.ts",
 		"src/models/weapon/i18n/en.ts",
 		"src/models/weapon/i18n/fr.ts",
@@ -73,6 +70,9 @@
 		"src/models/weapon/types.ts",
 		"src/models/weapon_component/index.ts",
 		"src/models/weapon_component/types.ts",
+		"src/store/actions.ts",
+		"src/store/index.ts",
+		"src/store/reducer.ts",
 		"src/types.ts"
 	],
 	"exclude": [

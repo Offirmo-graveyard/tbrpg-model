@@ -8,12 +8,15 @@ import {
 	Reducer as ReduxReducer,
 } from 'redux'
 
+import * as moment from 'moment'
+
 //const random = require('random-js') // TODO typings
 
 ////////////
 
-import { default_instance } from './model'
-import { ISaga } from './types'
+import { ISaga } from '../models/saga/types'
+import { default_instance } from '../models/saga'
+
 import {
 	IActionSetRandomSeed,
 	on_set_random_seed
@@ -26,7 +29,7 @@ const initial_state: ISaga = {
 	random_count: 0,
 	click_count: 0,
 	valid_click_count: 0,
-	next_allowed_click_date_moment_utc: 0,
+	next_allowed_click_date_moment_utc: moment(0).utc(),
 	stats: {
 		level: 1,
 		health: 1,
@@ -100,7 +103,7 @@ const reducer: ReduxReducer<ISaga> = (state: ISaga = initial_state, action: Redu
 ////////////////////////////////////
 
 export {
-reducer
+	reducer
 }
 
 ////////////////////////////////////

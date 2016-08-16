@@ -99,7 +99,7 @@ vorpal
 .command('model <model> <cmd>', 'display infos about the target model')
 .autocomplete(Object.keys(TBRPG))
 .action((args, callback) => {
-	const model = TBRPG[args.model]
+	const model = TBRPG.models[args.model]
 	//console.log(model)
 	if (!model) {
 		console.error(`! unknown model "${args.model}"`)

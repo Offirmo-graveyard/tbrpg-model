@@ -1,6 +1,7 @@
 ////////////////////////////////////
 
 //import { IWeapon } from '../weapon'
+import * as moment from 'moment'
 
 ////////////
 
@@ -9,7 +10,7 @@ interface ISaga {
 	random_count: number
 	click_count: number
 	valid_click_count: number
-	next_allowed_click_date_moment_utc: number
+	next_allowed_click_date_moment_utc: moment.Moment
 	stats: {
 		level: number
 		health: number

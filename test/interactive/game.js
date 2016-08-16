@@ -2,7 +2,7 @@
 
 const TBRPG = require('../unit/src')
 
-const store = TBRPG.saga.default_store
+const store = TBRPG.store.default_store
 
 store.subscribe(() => console.log('* Game state change detected ! (from game)'))
 
