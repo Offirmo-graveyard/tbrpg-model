@@ -7,7 +7,7 @@ import * as moment from 'moment'
 
 interface ISaga {
 	random_seed: number
-	random_count: number
+	random_usage_count: number
 	click_count: number
 	valid_click_count: number
 	next_allowed_click_date_moment_utc: moment.Moment
@@ -38,8 +38,8 @@ interface ISagaCreationParams extends ISaga {
 ////////////////////////////////////
 
 export {
-ISaga,
-ISagaCreationParams,
+	ISaga,
+	ISagaCreationParams,
 }
 
 ////////////////////////////////////

@@ -9,7 +9,7 @@
 			"minimum": 0,
 			"default": 123
 		},
-		"random_count": {
+		"random_usage_count": {
 			"description": "for repeatability, the number of random used so far",
 			"type": "integer",
 			"minimum": 0,

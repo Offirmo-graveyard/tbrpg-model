@@ -10,7 +10,7 @@ import {
 
 import * as moment from 'moment'
 
-//const random = require('random-js') // TODO typings
+import { Random } from 'random-js'
 
 ////////////
 
@@ -22,11 +22,14 @@ import {
 	on_set_random_seed
 } from './actions'
 
+import { IDerivedState } from './types'
+
+
 ////////////
 
 const initial_state: ISaga = {
 	random_seed: 1234,
-	random_count: 0,
+	random_usage_count: 0,
 	click_count: 0,
 	valid_click_count: 0,
 	next_allowed_click_date_moment_utc: moment(0).utc(),
@@ -51,36 +54,36 @@ const initial_state: ISaga = {
 	}
 }
 
-interface IImpliedState {
-
-	random: {
-		engine: {
-			seed: (seed: number) => void,
-			discard: (count: number) => void
-		},
-		generator: any
-	},
-
-}
-
-const implied_state_symbol = Symbol('implied_state')
+const derived_state_sym = Symbol('derived_state')
 
 ////////////
 
+function derive_state(state: ISaga, derived_state?: IDerivedState): IDerivedState {
+	derived_state = derived_state || {
+			randomjs_engine: Random.engines.mt19937(),
+			last_random_usage_count: -1,
+			last_random_seed: -1
+		}
+
+	if (state.random_seed !== derived_state.last_random_seed
+	|| state.random_usage_count < derived_state.last_random_usage_count) {
+
+	}
+	return derived_state
+}
+
 const reducer: ReduxReducer<ISaga> = (state: ISaga = initial_state, action: ReduxAction): ISaga => {
-	let implied_state: IImpliedState
+	let derived_state: IDerivedState
 
 	console.log('* Saga reducer was dispatched an action: ', action)
 
-	if (!(state as any)[implied_state_symbol]) {
-		(state as any)[implied_state_symbol] = {
-
-		}
-	}
-	implied_state = (state as any)[implied_state_symbol] as IImpliedState
-
 	// inbound check
 	default_instance.validate(state)
+
+	derived_state = (state as any)[derived_state_sym] = derive_state(
+		state,
+		(state as any)[derived_state_sym] as IDerivedState
+	)
 
 	switch (action.type) {
 		case 'set_random_seed':
@@ -103,7 +106,8 @@ const reducer: ReduxReducer<ISaga> = (state: ISaga = initial_state, action: Redu
 ////////////////////////////////////
 
 export {
-	reducer
+initial_state,
+reducer,
 }
 
 ////////////////////////////////////

@@ -18,7 +18,7 @@ interface IActionSetRandomSeed extends ReduxAction {
 
 function on_set_random_seed(state: ISaga, action: IActionSetRandomSeed) {
 	state.random_seed = action.seed
-	state.random_count = 0
+	state.random_usage_count = 0
 
 	return state
 }

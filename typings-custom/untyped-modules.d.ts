@@ -4,3 +4,8 @@
 // TODO report bug
 
 // TODO report bug how to make "unused parameters" ignore a param
+
+
+declare module 'random-js' {
+
+}

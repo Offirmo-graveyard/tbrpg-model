@@ -52,6 +52,7 @@
     "@types/moment": "^2.13.0",
     "@types/node": "^6.0.31",
     "@types/prettyjson": "^0.0.27",
+    "@types/random-js": "^1.0.26",
     "@types/redux": "^3.5.27",
     "@types/sinon": "^1.16.27",
     "@types/underscore.string": "^0.0.27",
