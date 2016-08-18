@@ -2,6 +2,9 @@ TODO moment.js + typings
 
 https://github.com/rangle/typed-immutable-record
 
+http://mewo2.com/notes/naming-language/
+http://mewo2.com/notes/terrain/ Generating fantasy maps
+https://github.com/dariusk/NaNoGenMo-2015/issues/156
 
 			/*
 			const header = _.map(schema.properties, (val, key) => ({
