@@ -2,7 +2,7 @@
 
 type AllowedType = string | number
 
-interface IJsonSchemaTypeDescription {
+interface IJsonSchemaTypeDescription extends JSON {
 	description: string
 	type: string
 	properties: {
@@ -20,7 +20,7 @@ interface IOffirmoJsonSchemaExtension {
 	i18n_keys_optional: Object
 }
 
-interface IJsonSchema {
+interface IJsonSchema extends JSON {
 	title: string
 	type: any
 	additionalProperties: boolean
@@ -43,11 +43,11 @@ interface IJsonSchemaModel<IModel, IModelCreationParams> {
 ////////////////////////////////////
 
 export {
-AllowedType,
-IJsonSchemaTypeDescription,
-IOffirmoJsonSchemaExtension,
-IJsonSchema,
-IJsonSchemaModel,
+	AllowedType,
+	IJsonSchemaTypeDescription,
+	IOffirmoJsonSchemaExtension,
+	IJsonSchema,
+	IJsonSchemaModel,
 }
 
 ////////////////////////////////////
