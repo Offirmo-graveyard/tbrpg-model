@@ -4,7 +4,7 @@ import {
 	//IIntl,
 	//IIntlChangeListener,
 	default_instance,
-	//create_instance,
+	//factory,
 } from './icu-data-container'
 
 describe('icu-data-container', function() {

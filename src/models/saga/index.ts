@@ -28,14 +28,14 @@ type SagaModel = IJsonSchemaModel<ISaga, ISagaCreationParams>
 
 ////////////////////////////////////
 
-function create_instance(dependencies: InjectableDependencies = {}): SagaModel {
+function factory(dependencies: InjectableDependencies = {}): SagaModel {
 	const instantiate_json_schema_based_model = (dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
 	const schema = (dependencies.schema || _schema) as IJsonSchema
 
 	return instantiate_json_schema_based_model<ISaga, ISagaCreationParams>(schema)
 }
 
-const default_instance = create_instance()
+const default_instance = factory()
 
 ////////////
 
@@ -45,7 +45,7 @@ export {
 	SagaModel,
 	_schema as schema,
 	default_instance,
-	create_instance,
+	factory,
 }
 
 ////////////////////////////////////

@@ -1,4 +1,4 @@
-/** A resolved click adventure, i.e. ~an instance of an adventure archetype
+/** A resolved click adventure, i.e. an instance of an adventure archetype
  *
  */
 
@@ -29,14 +29,16 @@ type AdventureModel = IJsonSchemaModel<IAdventure, IAdventureCreationParams>
 
 ////////////////////////////////////
 
-function create_instance(dependencies: InjectableDependencies = {}): AdventureModel {
-	const instantiate_json_schema_based_model = (dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
-	const schema = (dependencies.schema || _schema) as IJsonSchema
+function factory(dependencies: InjectableDependencies = {}): AdventureModel {
+	const instantiate_json_schema_based_model =
+		(dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
+	const schema =
+		(dependencies.schema || _schema) as IJsonSchema
 
 	return instantiate_json_schema_based_model<IAdventure, IAdventureCreationParams>(schema)
 }
 
-const default_instance = create_instance()
+const default_instance = factory()
 
 ////////////
 
@@ -54,13 +56,13 @@ function get_i18n_data(locale: string): Object {
 ////////////////////////////////////
 
 export {
-IAdventure,
-IAdventureCreationParams,
-AdventureModel,
-_schema as schema,
-default_instance,
-create_instance,
-get_i18n_data,
+	IAdventure,
+	IAdventureCreationParams,
+	AdventureModel,
+	_schema as schema,
+	default_instance,
+	factory,
+	get_i18n_data,
 }
 
 ////////////////////////////////////

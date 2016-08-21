@@ -23,14 +23,16 @@ import { CoinsGain, IAdventureArchetype, IAdventureArchetypeCreationParams } fro
 
 type AdventureArchetypeModel = IJsonSchemaModel<IAdventureArchetype, IAdventureArchetypeCreationParams>
 
-function create_instance(dependencies: InjectableDependencies = {}): AdventureArchetypeModel {
-	const instantiate_json_schema_based_model = (dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
-	const schema = (dependencies.schema || _schema) as IJsonSchema
+function factory(dependencies: InjectableDependencies = {}): AdventureArchetypeModel {
+	const instantiate_json_schema_based_model =
+		(dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
+	const schema =
+		(dependencies.schema || _schema) as IJsonSchema
 
 	return instantiate_json_schema_based_model<IAdventureArchetype, IAdventureArchetypeCreationParams>(schema)
 }
 
-const default_instance = create_instance()
+const default_instance = factory()
 
 ////////////
 
@@ -48,14 +50,14 @@ function get_i18n_data(locale: string): Object {
 ////////////////////////////////////
 
 export {
-CoinsGain,
-IAdventureArchetype,
-IAdventureArchetypeCreationParams,
-AdventureArchetypeModel,
-_schema as schema,
-default_instance,
-create_instance,
-get_i18n_data,
+	CoinsGain,
+	IAdventureArchetype,
+	IAdventureArchetypeCreationParams,
+	AdventureArchetypeModel,
+	_schema as schema,
+	default_instance,
+	factory,
+	get_i18n_data,
 }
 
 ////////////////////////////////////

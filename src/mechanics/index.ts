@@ -34,7 +34,7 @@ import {
 	default_instance as _weapon_component_model
 } from '../models/weapon_component'
 
-import { LokiDb, create_static_db_instance } from '../db'
+import { LokiDb, factory } from '../db'
 import {
 	quality_related_weapon_strength_multiplier,
 	quality_related_weapon_strength_spread,
@@ -73,7 +73,7 @@ engine.autoSeed()
  */
 
 function create_instance(dependencies: InjectableDependencies = {}) {
-	const static_db = (dependencies.static_db || create_static_db_instance()) as LokiDb
+	const static_db = (dependencies.static_db || factory()) as LokiDb
 	const adventure_model = (dependencies.adventure_model || _adventure_model) as AdventureModel
 	const adventure_archetype_model = (dependencies.adventure_archetype_model || _adventure_archetype_model) as AdventureArchetypeModel
 	const weapon_model = (dependencies.weapon_model || _weapon_model) as WeaponModel

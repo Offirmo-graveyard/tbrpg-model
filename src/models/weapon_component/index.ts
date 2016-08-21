@@ -23,14 +23,14 @@ import { WeaponComponentType, IWeaponComponent, IWeaponComponentCreationParams }
 
 type WeaponComponentModel = IJsonSchemaModel<IWeaponComponent, IWeaponComponentCreationParams>
 
-function create_instance(dependencies: InjectableDependencies = {}): WeaponComponentModel {
+function factory(dependencies: InjectableDependencies = {}): WeaponComponentModel {
 	const instantiate_json_schema_based_model = (dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
 	const schema = (dependencies.schema || _schema) as IJsonSchema
 
 	return instantiate_json_schema_based_model<IWeaponComponent, IWeaponComponentCreationParams>(schema)
 }
 
-const default_instance = create_instance()
+const default_instance = factory()
 
 ////////////
 
@@ -54,7 +54,7 @@ IWeaponComponentCreationParams,
 WeaponComponentModel,
 _schema as schema,
 default_instance,
-create_instance,
+factory,
 get_i18n_data,
 }
 
