@@ -165,10 +165,10 @@ function format(
 }
 
 export {
-IIntl,
-IError,
-IErrorReporter,
-format,
-format_single_key,
-format_multiple_keys,
+	IIntl,
+	IError,
+	IErrorReporter,
+	format,
+	format_single_key,
+	format_multiple_keys,
 }

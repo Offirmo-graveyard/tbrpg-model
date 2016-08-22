@@ -39,5 +39,5 @@ function are_Intl_locales_supported(locales: string | string[]): boolean {
 }
 
 export {
-are_Intl_locales_supported
+	are_Intl_locales_supported
 }

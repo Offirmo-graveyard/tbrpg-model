@@ -61,12 +61,12 @@ const default_instance = create_instance()
 ////////////////////////////////////
 
 export {
-LocaleCode,
-IMessagesStore,
-IIntl,
-IIntlChangeListener,
-default_instance,
-create_instance,
+	LocaleCode,
+	IMessagesStore,
+	IIntl,
+	IIntlChangeListener,
+	default_instance,
+	create_instance,
 }
 
 ////////////////////////////////////
