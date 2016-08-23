@@ -6,8 +6,8 @@ import * as jsen from 'jsen'
 ////////////
 
 import {
-	IJsonSchema,
-	IJsonSchemaModel
+	IJsonSchemaExtended,
+	IJsonSchemaBasedModel
 } from './types'
 import { create_human_unique_key_builder } from './get_unique_key'
 //import { create_i18n_keys_builder } from './get_i18n_keys'
@@ -15,8 +15,8 @@ import { create_human_unique_key_builder } from './get_unique_key'
 ////////////////////////////////////
 
 function instantiate_model<IModel, IModelCreationParams>(
-	schema: IJsonSchema
-): IJsonSchemaModel<IModel, IModelCreationParams> {
+	schema: IJsonSchemaExtended
+): IJsonSchemaBasedModel<IModel, IModelCreationParams> {
 
 	if (!schema || !_.isObject(schema))
 		throw new Error('json-schema-based-model: schema is not an object !')
@@ -51,7 +51,7 @@ function instantiate_model<IModel, IModelCreationParams>(
 		// jsen validation
 		if (!_validate(data)) {
 			err.validation_errors = _.cloneDeep(_validate.errors)
-			console.error(err.message, err.bad_data, err.validation_errors)
+			//console.error(err.message, err.bad_data, err.validation_errors)
 			throw err
 		}
 
@@ -81,8 +81,8 @@ function instantiate_model<IModel, IModelCreationParams>(
 ////////////////////////////////////
 
 export {
-IJsonSchema,
-IJsonSchemaModel,
+IJsonSchemaExtended,
+IJsonSchemaBasedModel,
 instantiate_model
 }
 

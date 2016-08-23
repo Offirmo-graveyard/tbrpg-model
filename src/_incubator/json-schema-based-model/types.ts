@@ -2,22 +2,16 @@
 
 type AllowedType = string | number
 
-interface IJsonSchemaTypeDescription extends JSON {
+// sub-interface of JSON-schema
+interface ITypeDescription extends JSON {
 	description: string
 	type: string
 	properties: {
-		[k: string]: IJsonSchemaTypeDescription
+		[k: string]: ITypeDescription
 	},
 	minimum?: number
 	maximum?: number
 	default?: AllowedType
-}
-
-interface IOffirmoJsonSchemaExtension {
-	hid: string
-	human_unique_key_components: string[]
-	i18n_keys_mandatory: Object // TODO
-	i18n_keys_optional: Object
 }
 
 interface IJsonSchema extends JSON {
@@ -25,29 +19,39 @@ interface IJsonSchema extends JSON {
 	type: any
 	additionalProperties: boolean
 	required: string[]
-	offirmo_extensions: IOffirmoJsonSchemaExtension
 	properties: {
-		[k: string]: IJsonSchemaTypeDescription
+		[k: string]: ITypeDescription
 	}
 }
 
-interface IJsonSchemaModel<IModel, IModelCreationParams> {
+interface IOffirmoExtension {
+	hid: string
+	human_unique_key_components: string[]
+	i18n_keys_mandatory: Object // TODO
+	i18n_keys_optional: Object
+}
+
+interface IJsonSchemaExtended extends IJsonSchema {
+	offirmo_extensions: IOffirmoExtension
+}
+
+interface IJsonSchemaBasedModel<IModel, IModelCreationParams> {
+	hid: string
+	schema: IJsonSchemaExtended
 	create: (rawData: IModelCreationParams) => IModel
 	validate: (data: IModel) => void
-	hid: string
-	schema: IJsonSchema
 	get_human_unique_key: (data: IModel) => string
-	//get_i18n_keys: (data: IModel) => string[]
 }
 
 ////////////////////////////////////
 
 export {
 	AllowedType,
-	IJsonSchemaTypeDescription,
-	IOffirmoJsonSchemaExtension,
+	ITypeDescription,
 	IJsonSchema,
-	IJsonSchemaModel,
+	IOffirmoExtension,
+	IJsonSchemaExtended,
+	IJsonSchemaBasedModel,
 }
 
 ////////////////////////////////////

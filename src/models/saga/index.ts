@@ -4,8 +4,8 @@
 ////////////////////////////////////
 
 import {
-	IJsonSchema,
-	IJsonSchemaModel,
+	IJsonSchemaExtended,
+	IJsonSchemaBasedModel,
 	instantiate_model as _instantiate_json_schema_based_model
 } from '../../_incubator/json-schema-based-model'
 
@@ -19,18 +19,18 @@ import { ISaga, ISagaCreationParams } from './types'
 
 export interface InjectableDependencies {
 	instantiate_json_schema_based_model?: any
-	schema?: IJsonSchema
+	schema?: IJsonSchemaExtended
 }
 
 ////////////
 
-type SagaModel = IJsonSchemaModel<ISaga, ISagaCreationParams>
+type SagaModel = IJsonSchemaBasedModel<ISaga, ISagaCreationParams>
 
 ////////////////////////////////////
 
 function factory(dependencies: InjectableDependencies = {}): SagaModel {
 	const instantiate_json_schema_based_model = (dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
-	const schema = (dependencies.schema || _schema) as IJsonSchema
+	const schema = (dependencies.schema || _schema) as IJsonSchemaExtended
 
 	return instantiate_json_schema_based_model<ISaga, ISagaCreationParams>(schema)
 }

@@ -50,3 +50,31 @@ randoms: [number, number, number, number, number, number]
  }
  };
  */
+
+
+
+		"src/common/i18n/en.ts",
+		"src/common/i18n/fr.ts",
+		"src/db/index.ts",
+		"src/db/types.ts",
+		"src/index.ts",
+		"src/mechanics/constants.ts",
+		"src/mechanics/index.ts",
+		"src/mechanics/types.ts",
+		"src/models/adventure/i18n/en.ts",
+		"src/models/adventure/i18n/fr.ts",
+		"src/models/adventure/index.ts",
+		"src/models/adventure/types.ts",
+		"src/models/adventure_archetype/index.ts",
+		"src/models/adventure_archetype/types.ts",
+		"src/models/saga/index.ts",
+		"src/models/saga/types.ts",
+		"src/models/weapon/i18n/en.ts",
+		"src/models/weapon/i18n/fr.ts",
+		"src/models/weapon/index.ts",
+		"src/models/weapon/types.ts",
+		"src/store/actions.ts",
+		"src/store/index.ts",
+		"src/store/reducer.ts",
+		"src/types.ts"
+		

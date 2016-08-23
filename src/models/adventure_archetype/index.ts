@@ -5,14 +5,14 @@ const i18n_en = require('tbrpg-static-data/src/adventure_archetype/i18n/en.json'
 const i18n_fr = require('tbrpg-static-data/src/adventure_archetype/i18n/fr.json')
 
 import {
-	IJsonSchema,
-	IJsonSchemaModel,
+	IJsonSchemaExtended,
+	IJsonSchemaBasedModel,
 	instantiate_model as _instantiate_json_schema_based_model
 } from '../../_incubator/json-schema-based-model'
 
 export interface InjectableDependencies {
 	instantiate_json_schema_based_model?: any
-	schema?: IJsonSchema
+	schema?: IJsonSchemaExtended
 }
 
 ////////////
@@ -21,13 +21,13 @@ import { CoinsGain, IAdventureArchetype, IAdventureArchetypeCreationParams } fro
 
 ////////////////////////////////////
 
-type AdventureArchetypeModel = IJsonSchemaModel<IAdventureArchetype, IAdventureArchetypeCreationParams>
+type AdventureArchetypeModel = IJsonSchemaBasedModel<IAdventureArchetype, IAdventureArchetypeCreationParams>
 
 function factory(dependencies: InjectableDependencies = {}): AdventureArchetypeModel {
 	const instantiate_json_schema_based_model =
 		(dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
 	const schema =
-		(dependencies.schema || _schema) as IJsonSchema
+		(dependencies.schema || _schema) as IJsonSchemaExtended
 
 	return instantiate_json_schema_based_model<IAdventureArchetype, IAdventureArchetypeCreationParams>(schema)
 }

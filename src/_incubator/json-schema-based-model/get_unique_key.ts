@@ -1,6 +1,6 @@
 ////////////////////////////////////
 
-import { IJsonSchema } from './types'
+import { IJsonSchemaExtended } from './types'
 
 ////////////////////////////////////
 
@@ -8,7 +8,7 @@ const KEY_SEPARATOR = '|'
 
 ////////////////////////////////////
 
-function create_human_unique_key_builder<IModel>(schema: IJsonSchema): (data: IModel) => string {
+function create_human_unique_key_builder<IModel>(schema: IJsonSchemaExtended): (data: IModel) => string {
 	const model_hid = schema.offirmo_extensions.hid
 	const primary_key_components = schema.offirmo_extensions.human_unique_key_components
 

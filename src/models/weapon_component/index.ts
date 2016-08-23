@@ -1,61 +1,41 @@
 ////////////////////////////////////
 
-const _schema = require('tbrpg-static-data/src/weapon_component/schema.json')
-const i18n_en = require('tbrpg-static-data/src/weapon_component/i18n/en.json')
-const i18n_fr = require('tbrpg-static-data/src/weapon_component/i18n/fr.json')
-
 import {
-	IJsonSchema,
-	IJsonSchemaModel,
-	instantiate_model as _instantiate_json_schema_based_model
+	IJsonSchemaExtended,
+	IJsonSchemaBasedModel,
+	instantiate_model as instantiate_json_schema_based_model
 } from '../../_incubator/json-schema-based-model'
 
 export interface InjectableDependencies {
-	instantiate_json_schema_based_model?: any
-	schema?: IJsonSchema
+	schema: IJsonSchemaExtended
 }
 
 ////////////
 
-import { WeaponComponentType, IWeaponComponent, IWeaponComponentCreationParams } from './types'
+import {
+	WeaponComponentType,
+	IWeaponComponent,
+	IWeaponComponentCreationParams
+} from './types'
 
 ////////////////////////////////////
 
-type WeaponComponentModel = IJsonSchemaModel<IWeaponComponent, IWeaponComponentCreationParams>
+type WeaponComponentModel = IJsonSchemaBasedModel<IWeaponComponent, IWeaponComponentCreationParams>
 
-function factory(dependencies: InjectableDependencies = {}): WeaponComponentModel {
-	const instantiate_json_schema_based_model = (dependencies.instantiate_json_schema_based_model || _instantiate_json_schema_based_model) as typeof _instantiate_json_schema_based_model
-	const schema = (dependencies.schema || _schema) as IJsonSchema
+function factory(dependencies: InjectableDependencies): WeaponComponentModel {
+	const schema = dependencies.schema
 
 	return instantiate_json_schema_based_model<IWeaponComponent, IWeaponComponentCreationParams>(schema)
-}
-
-const default_instance = factory()
-
-////////////
-
-function get_i18n_data(locale: string): Object {
-	switch (locale) {
-		case 'en':
-			return i18n_en
-		case 'fr':
-			return i18n_fr
-		default:
-			return {}
-	}
 }
 
 ////////////////////////////////////
 
 export {
-WeaponComponentType,
-IWeaponComponent,
-IWeaponComponentCreationParams,
-WeaponComponentModel,
-_schema as schema,
-default_instance,
-factory,
-get_i18n_data,
+	WeaponComponentType,
+	IWeaponComponent,
+	IWeaponComponentCreationParams,
+	WeaponComponentModel,
+	factory,
 }
 
 ////////////////////////////////////
