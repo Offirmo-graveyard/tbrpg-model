@@ -1,9 +1,5 @@
 ////////////////////////////////////
 
-//import { ITBRPGModel } from '../types'
-
-////////////////////////////////////
-
 type WeaponComponentType = 'base' | 'qualifier1' | 'qualifier2' | 'quality'
 //type WeaponQualityType = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'artifact'
 
@@ -20,10 +16,10 @@ interface IWeaponComponentCreationParams {
 ////////////////////////////////////
 
 export {
-WeaponComponentType,
-//WeaponQualityType,
-IWeaponComponent,
-IWeaponComponentCreationParams
+	WeaponComponentType,
+	//WeaponQualityType,
+	IWeaponComponent,
+	IWeaponComponentCreationParams
 }
 
 ////////////////////////////////////

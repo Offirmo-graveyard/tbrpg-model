@@ -23,8 +23,8 @@ interface IWeaponCreationParams {
 ////////////////////////////////////
 
 export {
-IWeapon,
-IWeaponCreationParams
+	IWeapon,
+	IWeaponCreationParams
 }
 
 ////////////////////////////////////
