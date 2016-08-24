@@ -1,5 +1,6 @@
 /** A component of a weapon. 4 types, when assembled, make a base random weapon.
  */
+
 ////////////////////////////////////
 
 import {

@@ -33,6 +33,7 @@ interface ISaga {
 }
 
 interface ISagaCreationParams extends ISaga {
+	// TODO
 }
 
 ////////////////////////////////////
