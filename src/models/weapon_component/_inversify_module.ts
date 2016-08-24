@@ -4,6 +4,8 @@ import { KernelModule, interfaces } from "inversify"
 
 import { IJsonSchemaExtended } from '../../_incubator/json-schema-based-model'
 
+////////////
+
 import { ITranslationStore } from '../../common/types'
 
 import {
@@ -22,7 +24,7 @@ const i18n_fr: ITranslationStore = require('tbrpg-static-data/src/weapon_compone
 
 ////////////////////////////////////
 
-let SIDS = {
+let RSRCIDS = {
 	Schema: Symbol('Schema'),
 	StaticData: Symbol('StaticData'),
 	Factory: Symbol('Factory'),
@@ -32,15 +34,15 @@ let SIDS = {
 
 const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
-	bind<IJsonSchemaExtended>(SIDS.Schema)
+	bind<IJsonSchemaExtended>(RSRCIDS.Schema)
 		.toConstantValue(default_schema as IJsonSchemaExtended)
 
-	bind<IWeaponComponentCreationParams[]>(SIDS.StaticData)
+	bind<IWeaponComponentCreationParams[]>(RSRCIDS.StaticData)
 		.toConstantValue(default_static_data as IWeaponComponentCreationParams[])
 
-	bind<interfaces.Factory<WeaponComponentModel>>(SIDS.Factory)
+	bind<interfaces.Factory<WeaponComponentModel>>(RSRCIDS.Factory)
 		.toFactory<WeaponComponentModel>((context: interfaces.Context) => () => factory({
-			schema: context.kernel.get<IJsonSchemaExtended>(SIDS.Schema)
+			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.Schema)
 		}))
 
 	bind<ITranslationStore>('intl.en')
@@ -51,7 +53,7 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 })
 
 export {
-	SIDS,
+	RSRCIDS,
 	kernel_module
 }
 
