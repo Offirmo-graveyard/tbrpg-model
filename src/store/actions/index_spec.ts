@@ -1,4 +1,4 @@
-
+/*
 import {
 	IActionSetRandomSeed,
 	on_set_random_seed,
@@ -6,7 +6,7 @@ import {
 	IActionPlay,
 	on_play,
 } from './index'
-
+*/
 
 describe('redux store actions', function() {
 

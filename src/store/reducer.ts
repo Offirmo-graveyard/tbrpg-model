@@ -60,7 +60,7 @@ const initial_state: ISaga = {
 	}
 }
 
-const derived_state_sym: symbol = Symbol('derived_state')
+const derived_state_sym: any = Symbol('derived_state')
 
 ////////////
 
@@ -89,9 +89,9 @@ function factory(dependencies: InjectableDependencies): TBRPGReducer {
 		console.log('* Saga reducer was dispatched an action: ', action)
 
 		// inbound check
-		saga_model.validate(state)
+		saga_model.validate(state);
 
-		derived_state = (state as any)[derived_state_sym] = derive_state(
+		(state as any)[derived_state_sym] = derived_state = derive_state(
 			state,
 			(state as any)[derived_state_sym] as IDerivedState
 		)
@@ -119,6 +119,7 @@ function factory(dependencies: InjectableDependencies): TBRPGReducer {
 
 export {
 	InjectableDependencies,
+	TBRPGReducer,
 	initial_state,
 	factory,
 }
