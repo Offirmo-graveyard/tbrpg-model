@@ -1,4 +1,4 @@
-/** A user's saga = full game state
+/** A user's saga reducer
  */
 
 ////////////////////////////////////
@@ -10,25 +10,25 @@ import {
 
 ////////////
 
-export interface InjectableDependencies {
-	instantiate_json_schema_based_model?: any
-	schema?: any
-}
+import { ISaga } from '../models/saga/types'
+import {
+	InjectableDependencies as ReducerInjectableDependencies,
+	factory as reducer_factory
+} from './reducer'
 
 ////////////
 
-import { ISaga } from '../models/saga/types'
-import { reducer } from './reducer'
+interface InjectableDependencies extends ReducerInjectableDependencies {
+}
 
 ////////////////////////////////////
 
-function create_store(): ReduxStore<ISaga> {
-	const store = createStore(reducer)
+function factory(dependencies: InjectableDependencies): ReduxStore<ISaga> {
+	const reducer = reducer_factory(dependencies)
+	const store = createStore<ISaga>(reducer)
 
 	return store
 }
-
-const default_store = create_store()
 
 ////////////
 
@@ -38,8 +38,8 @@ const default_store = create_store()
 ////////////////////////////////////
 
 export {
-	create_store,
-	default_store,
+	InjectableDependencies,
+	factory,
 }
 
 ////////////////////////////////////

@@ -14,8 +14,14 @@ import { Random } from 'random-js'
 
 ////////////
 
-import { ISaga } from '../models/saga/types'
-import { default_instance } from '../models/saga'
+import { ISaga, SagaModel } from '../models/saga'
+
+interface InjectableDependencies {
+	saga_model: SagaModel
+}
+
+////////////
+
 
 import {
 	IActionSetRandomSeed,
@@ -54,9 +60,11 @@ const initial_state: ISaga = {
 	}
 }
 
-const derived_state_sym = Symbol('derived_state')
+const derived_state_sym: symbol = Symbol('derived_state')
 
 ////////////
+
+type TBRPGReducer = ReduxReducer<ISaga>
 
 function derive_state(state: ISaga, derived_state?: IDerivedState): IDerivedState {
 	derived_state = derived_state || {
@@ -66,48 +74,53 @@ function derive_state(state: ISaga, derived_state?: IDerivedState): IDerivedStat
 		}
 
 	if (state.random_seed !== derived_state.last_random_seed
-	|| state.random_usage_count < derived_state.last_random_usage_count) {
+		|| state.random_usage_count < derived_state.last_random_usage_count) {
 
 	}
 	return derived_state
 }
 
-const reducer: ReduxReducer<ISaga> = (state: ISaga = initial_state, action: ReduxAction): ISaga => {
-	let derived_state: IDerivedState
+function factory(dependencies: InjectableDependencies): TBRPGReducer {
+	const saga_model = dependencies.saga_model
 
-	console.log('* Saga reducer was dispatched an action: ', action)
+	return (state: ISaga = initial_state, action: ReduxAction): ISaga => {
+		let derived_state: IDerivedState
 
-	// inbound check
-	default_instance.validate(state)
+		console.log('* Saga reducer was dispatched an action: ', action)
 
-	derived_state = (state as any)[derived_state_sym] = derive_state(
-		state,
-		(state as any)[derived_state_sym] as IDerivedState
-	)
+		// inbound check
+		saga_model.validate(state)
 
-	switch (action.type) {
-		case 'set_random_seed':
-			state = on_set_random_seed(state, action as IActionSetRandomSeed)
-			break
+		derived_state = (state as any)[derived_state_sym] = derive_state(
+			state,
+			(state as any)[derived_state_sym] as IDerivedState
+		)
 
-		case '@@redux/INIT':
-			break
+		switch (action.type) {
+			case 'set_random_seed':
+				state = on_set_random_seed(state, action as IActionSetRandomSeed)
+				break
 
-		default:
-			throw new Error('Reducer: Unknown action !')
+			case '@@redux/INIT':
+				break
+
+			default:
+				throw new Error('Reducer: Unknown action !')
+		}
+
+		//  outbound check
+		saga_model.validate(state)
+
+		return state
 	}
-
-	//  outbound check
-	default_instance.validate(state)
-
-	return state
 }
 
 ////////////////////////////////////
 
 export {
-initial_state,
-reducer,
+	InjectableDependencies,
+	initial_state,
+	factory,
 }
 
 ////////////////////////////////////

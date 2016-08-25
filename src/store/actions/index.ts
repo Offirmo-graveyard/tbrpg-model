@@ -8,7 +8,7 @@ import * as moment from 'moment'
 
 ////////////
 
-import { ISaga } from '../models/saga/types'
+import { ISaga } from '../../models/saga/types'
 
 ////////////////////////////////////
 

@@ -46,7 +46,7 @@ import * as consts from './constants'
 
 ////////////
 
-export interface InjectableDependencies {
+interface InjectableDependencies {
 	static_db?: LokiDb
 	adventure_model?: AdventureModel
 	adventure_archetype_model?: AdventureArchetypeModel
@@ -192,6 +192,7 @@ function get_weapon_medium_damage(weapon: IWeapon): number {
 ////////////////////////////////////
 
 export {
+	InjectableDependencies,
 	create_instance,
 	get_weapon_damage_range,
 	get_weapon_medium_damage,

@@ -35,7 +35,7 @@ import { LokiDb } from './types'
 
 ////////////
 
-export interface InjectableDependencies {
+interface InjectableDependencies {
 	static_db?: any
 	//dynamic_db?: any
 	adventure_archetype_model?: AdventureArchetypeModel
@@ -69,6 +69,7 @@ function factory(dependencies: InjectableDependencies = {}): LokiDb {
 ////////////////////////////////////
 
 export {
+	InjectableDependencies,
 	LokiDb,
 	factory,
 }

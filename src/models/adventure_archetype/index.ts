@@ -10,7 +10,7 @@ import {
 	instantiate_model as _instantiate_json_schema_based_model
 } from '../../_incubator/json-schema-based-model'
 
-export interface InjectableDependencies {
+interface InjectableDependencies {
 	instantiate_json_schema_based_model?: any
 	schema?: IJsonSchemaExtended
 }
@@ -50,6 +50,7 @@ function get_i18n_data(locale: string): Object {
 ////////////////////////////////////
 
 export {
+	InjectableDependencies,
 	CoinsGain,
 	IAdventureArchetype,
 	IAdventureArchetypeCreationParams,

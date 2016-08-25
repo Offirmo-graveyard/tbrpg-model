@@ -11,7 +11,7 @@ import {
 
 ////////////
 
-export interface InjectableDependencies {
+interface InjectableDependencies {
 	schema: IJsonSchemaExtended
 }
 
@@ -32,6 +32,7 @@ function factory(dependencies: InjectableDependencies): WeaponModel {
 ////////////////////////////////////
 
 export {
+	InjectableDependencies,
 	IWeapon,
 	IWeaponCreationParams,
 	WeaponModel,

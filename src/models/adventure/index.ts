@@ -16,7 +16,7 @@ import i18n_fr from './i18n/fr'
 
 ////////////
 
-export interface InjectableDependencies {
+interface InjectableDependencies {
 	instantiate_json_schema_based_model?: any
 	schema?: IJsonSchemaExtended
 }
@@ -56,6 +56,7 @@ function get_i18n_data(locale: string): Object {
 ////////////////////////////////////
 
 export {
+	InjectableDependencies,
 	IAdventure,
 	IAdventureCreationParams,
 	AdventureModel,
