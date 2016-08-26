@@ -10,7 +10,7 @@ import {
 
 ////////////
 
-import { ISaga } from '../models/saga/types'
+import { IState } from './types'
 import {
 	InjectableDependencies as ReducerInjectableDependencies,
 	factory as reducer_factory
@@ -23,9 +23,9 @@ interface InjectableDependencies extends ReducerInjectableDependencies {
 
 ////////////////////////////////////
 
-function factory(dependencies: InjectableDependencies): ReduxStore<ISaga> {
+function factory(dependencies: InjectableDependencies): ReduxStore<IState> {
 	const reducer = reducer_factory(dependencies)
-	const store = createStore<ISaga>(reducer)
+	const store = createStore<IState>(reducer)
 
 	return store
 }

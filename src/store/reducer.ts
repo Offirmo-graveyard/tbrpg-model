@@ -14,7 +14,9 @@ import { Random } from 'random-js'
 
 ////////////
 
-import { ISaga, SagaModel } from '../models/saga'
+import { SagaModel } from '../models/saga'
+
+import { IState } from './types'
 
 interface InjectableDependencies {
 	saga_model: SagaModel
@@ -25,15 +27,15 @@ interface InjectableDependencies {
 
 import {
 	IActionSetRandomSeed,
-	on_set_random_seed
+	on_set_random_seed,
+	IActionPlay,
+	on_play,
 } from './actions'
-
-import { IDerivedState } from './types'
 
 
 ////////////
 
-const initial_state: ISaga = {
+const initial_state: IState = {
 	random_seed: 1234,
 	random_usage_count: 0,
 	click_count: 0,
@@ -57,48 +59,35 @@ const initial_state: ISaga = {
 	skills: [],
 	flags: {
 		recent_adventure_ids: []
+	},
+	internal: {
+		randomjs_engine: Random.engines.mt19937(),
+		//last_random_usage_count: -1,
+		//last_random_seed: -1
 	}
 }
-
-const derived_state_sym: any = Symbol('derived_state')
 
 ////////////
 
-type TBRPGReducer = ReduxReducer<ISaga>
+type IReducer = ReduxReducer<IState>
 
-function derive_state(state: ISaga, derived_state?: IDerivedState): IDerivedState {
-	derived_state = derived_state || {
-			randomjs_engine: Random.engines.mt19937(),
-			last_random_usage_count: -1,
-			last_random_seed: -1
-		}
-
-	if (state.random_seed !== derived_state.last_random_seed
-		|| state.random_usage_count < derived_state.last_random_usage_count) {
-
-	}
-	return derived_state
-}
-
-function factory(dependencies: InjectableDependencies): TBRPGReducer {
+function factory(dependencies: InjectableDependencies): IReducer {
 	const saga_model = dependencies.saga_model
 
-	return (state: ISaga = initial_state, action: ReduxAction): ISaga => {
-		let derived_state: IDerivedState
+	return (state: IState = initial_state, action: ReduxAction): IState => {
 
 		console.log('* Saga reducer was dispatched an action: ', action)
 
 		// inbound check
 		saga_model.validate(state);
 
-		(state as any)[derived_state_sym] = derived_state = derive_state(
-			state,
-			(state as any)[derived_state_sym] as IDerivedState
-		)
-
 		switch (action.type) {
 			case 'set_random_seed':
 				state = on_set_random_seed(state, action as IActionSetRandomSeed)
+				break
+
+			case 'play':
+				state = on_play(state, action as IActionPlay)
 				break
 
 			case '@@redux/INIT':
@@ -119,7 +108,7 @@ function factory(dependencies: InjectableDependencies): TBRPGReducer {
 
 export {
 	InjectableDependencies,
-	TBRPGReducer,
+	IReducer,
 	initial_state,
 	factory,
 }

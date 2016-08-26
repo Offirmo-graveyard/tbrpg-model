@@ -8,17 +8,20 @@ import * as moment from 'moment'
 
 ////////////
 
-import { ISaga } from '../../models/saga/types'
+import { IState } from '../types'
 
 ////////////////////////////////////
 
 interface IActionSetRandomSeed extends ReduxAction {
+	type: 'set_random_seed'
 	seed: number
 }
 
-function on_set_random_seed(state: ISaga, action: IActionSetRandomSeed) {
+function on_set_random_seed(state: IState, action: IActionSetRandomSeed): IState {
 	state.random_seed = action.seed
 	state.random_usage_count = 0
+
+	//xxx more
 
 	return state
 }
@@ -26,10 +29,11 @@ function on_set_random_seed(state: ISaga, action: IActionSetRandomSeed) {
 ////////////////////////////////////
 
 interface IActionPlay extends ReduxAction {
+	type: 'play'
 	click_date_moment_utc: moment.Moment
 }
 
-function on_play(state: ISaga, action: IActionPlay) {
+function on_play(state: IState, action: IActionPlay): IState {
 	state.click_count++
 
 	/*
