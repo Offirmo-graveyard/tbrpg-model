@@ -10,7 +10,7 @@ import {
 
 import * as moment from 'moment'
 
-import { Random } from 'random-js'
+import { Random } from '@offirmo/random'
 
 ////////////
 

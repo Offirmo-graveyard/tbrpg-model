@@ -1,6 +1,6 @@
 ////////////////////////////////////
 
-import { Engine } from 'random-js'
+import { MT19937 } from '@offirmo/random'
 
 ////////////
 
@@ -12,9 +12,9 @@ import { ISaga } from '../models/saga'
  */
 interface IState extends ISaga {
 	internal: {
-		randomjs_engine: Engine
-		last_random_usage_count: number
-		last_random_seed: number
+		randomjs_engine: MT19937
+		//last_random_usage_count: number
+		//last_random_seed: number
 	}
 }
 
