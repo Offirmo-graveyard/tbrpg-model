@@ -3,12 +3,13 @@
 
 ////////////////////////////////////
 
+import * as _ from 'lodash'
+import * as moment from 'moment'
+
 import {
 	Action as ReduxAction,
 	Reducer as ReduxReducer,
 } from 'redux'
-
-import * as moment from 'moment'
 
 import { Random } from '@offirmo/random'
 
@@ -24,20 +25,18 @@ interface InjectableDependencies {
 
 ////////////
 
-
 import {
+	IActionTest_XXX,
+	on_test_xxx,
 	IActionSetRandomSeed,
 	on_set_random_seed,
 	IActionPlay,
 	on_play,
 } from './actions'
 
-
 ////////////
 
 const initial_state: IState = {
-	random_seed: 1234,
-	random_usage_count: 0,
 	click_count: 0,
 	valid_click_count: 0,
 	next_allowed_click_date_moment_utc: moment(0).utc(),
@@ -60,10 +59,13 @@ const initial_state: IState = {
 	flags: {
 		recent_adventure_ids: []
 	},
+	prng_state: {
+		seed: 1234,
+		use_count: 0
+	},
+	// additions, non persistable
 	internal: {
-		randomjs_engine: Random.engines.mt19937(),
-		//last_random_usage_count: -1,
-		//last_random_seed: -1
+		prng: null
 	}
 }
 
@@ -77,11 +79,24 @@ function factory(dependencies: InjectableDependencies): IReducer {
 	return (state: IState = initial_state, action: ReduxAction): IState => {
 
 		console.log('* Saga reducer was dispatched an action: ', action)
+		if (!state)
+			state = _.cloneDeep(initial_state)
 
 		// inbound check
-		saga_model.validate(state);
+		saga_model.validate(state)
+
+		if (!state.internal.prng) {
+			state.internal.prng = Random.engines
+				.mt19937()
+				.seed(state.prng_state.seed)
+				.discard(state.prng_state.use_count)
+		}
 
 		switch (action.type) {
+			case 'test_xxx':
+				state = on_test_xxx(state, action as IActionTest_XXX)
+				break
+
 			case 'set_random_seed':
 				state = on_set_random_seed(state, action as IActionSetRandomSeed)
 				break
@@ -97,6 +112,8 @@ function factory(dependencies: InjectableDependencies): IReducer {
 				throw new Error('Reducer: Unknown action !')
 		}
 
+		state.prng_state.use_count = state.internal.prng!.getUseCount()
+
 		//  outbound check
 		saga_model.validate(state)
 
@@ -108,8 +125,9 @@ function factory(dependencies: InjectableDependencies): IReducer {
 
 export {
 	InjectableDependencies,
-	IReducer,
+	IState,
 	initial_state,
+	IReducer,
 	factory,
 }
 

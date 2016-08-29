@@ -25,24 +25,24 @@ const i18n_fr: ITranslationStore = require('tbrpg-static-data/src/weapon_compone
 ////////////////////////////////////
 
 let RSRCIDS = {
-	Schema: Symbol('Schema'),
-	StaticData: Symbol('StaticData'),
-	Factory: Symbol('Factory'),
+	schema: Symbol('schema'),
+	static_data: Symbol('static_data'),
+	factory: Symbol('factory'),
 }
 
 ////////////
 
 const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
-	bind<IJsonSchemaExtended>(RSRCIDS.Schema)
+	bind<IJsonSchemaExtended>(RSRCIDS.schema)
 		.toConstantValue(default_schema as IJsonSchemaExtended)
 
-	bind<IWeaponComponentCreationParams[]>(RSRCIDS.StaticData)
+	bind<IWeaponComponentCreationParams[]>(RSRCIDS.static_data)
 		.toConstantValue(default_static_data as IWeaponComponentCreationParams[])
 
-	bind<interfaces.Factory<WeaponComponentModel>>(RSRCIDS.Factory)
+	bind<interfaces.Factory<WeaponComponentModel>>(RSRCIDS.factory)
 		.toFactory<WeaponComponentModel>((context: interfaces.Context) => () => factory({
-			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.Schema)
+			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.schema)
 		}))
 
 	bind<ITranslationStore>('intl.en')

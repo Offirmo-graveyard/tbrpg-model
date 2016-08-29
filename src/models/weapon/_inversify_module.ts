@@ -23,21 +23,21 @@ const i18n_fr: ITranslationStore = require('./i18n/fr')
 ////////////////////////////////////
 
 let RSRCIDS = {
-	Schema: Symbol('Schema'),
-	Factory: Symbol('Factory'),
+	schema: Symbol('schema'),
+	factory: Symbol('factory'),
 }
 
 ////////////
 
 const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
-	bind<IJsonSchemaExtended>(RSRCIDS.Schema)
+	bind<IJsonSchemaExtended>(RSRCIDS.schema)
 		.toConstantValue(default_schema as IJsonSchemaExtended)
 
-	bind<interfaces.Factory<WeaponModel>>(RSRCIDS.Factory)
+	bind<interfaces.Factory<WeaponModel>>(RSRCIDS.factory)
 		.toFactory<WeaponModel>((context: interfaces.Context) => () => factory({
 			// TODO will need WeaponComponent model ?
-			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.Schema)
+			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.schema)
 		}))
 
 	bind<ITranslationStore>('intl.en')

@@ -23,7 +23,9 @@ interface InjectableDependencies extends ReducerInjectableDependencies {
 
 ////////////////////////////////////
 
-function factory(dependencies: InjectableDependencies): ReduxStore<IState> {
+type IStore = ReduxStore<IState>
+
+function factory(dependencies: InjectableDependencies): IStore {
 	const reducer = reducer_factory(dependencies)
 	const store = createStore<IState>(reducer)
 
@@ -39,6 +41,8 @@ function factory(dependencies: InjectableDependencies): ReduxStore<IState> {
 
 export {
 	InjectableDependencies,
+	IState,
+	IStore,
 	factory,
 }
 

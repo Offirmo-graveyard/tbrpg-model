@@ -6,8 +6,6 @@ import * as moment from 'moment'
 ////////////
 
 interface ISaga {
-	random_seed: number
-	random_usage_count: number
 	click_count: number
 	valid_click_count: number
 	next_allowed_click_date_moment_utc: moment.Moment
@@ -29,6 +27,10 @@ interface ISaga {
 	skills: any[]
 	flags: {
 		recent_adventure_ids: string[]
+	},
+	prng_state: {
+		seed: number
+		use_count: number
 	}
 }
 

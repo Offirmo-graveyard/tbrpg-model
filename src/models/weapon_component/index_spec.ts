@@ -24,17 +24,17 @@ describe('Weapon Component Model', function() {
 	describe('inversify bindings', function() {
 		it('should expose the schema', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.Schema)).to.be.true
+			expect(kernel.isBound(RSRCIDS.schema)).to.be.true
 		})
 
 		it('should expose the static data', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.StaticData)).to.be.true
+			expect(kernel.isBound(RSRCIDS.static_data)).to.be.true
 		})
 
 		it('should expose the factory', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.Factory)).to.be.true
+			expect(kernel.isBound(RSRCIDS.factory)).to.be.true
 		})
 
 		it('should expose the i18n data', function() {
@@ -47,7 +47,7 @@ describe('Weapon Component Model', function() {
 	describe('static data', function() {
 		it('should be valid', function() {
 			const kernel = make_kernel()
-			const static_data = kernel.get<IWeaponComponentCreationParams[]>(RSRCIDS.StaticData)
+			const static_data = kernel.get<IWeaponComponentCreationParams[]>(RSRCIDS.static_data)
 			expect(static_data).to.be.an.array
 		})
 	})
@@ -55,8 +55,8 @@ describe('Weapon Component Model', function() {
 	describe('factory', function() {
 		it('should work', function() {
 			const kernel = make_kernel()
-			const static_data = kernel.get<IWeaponComponentCreationParams[]>(RSRCIDS.StaticData)
-			const factory = kernel.get<() => WeaponComponentModel>(RSRCIDS.Factory)
+			const static_data = kernel.get<IWeaponComponentCreationParams[]>(RSRCIDS.static_data)
+			const factory = kernel.get<() => WeaponComponentModel>(RSRCIDS.factory)
 
 			const model = factory()
 
@@ -70,7 +70,7 @@ describe('Weapon Component Model', function() {
 	describe('i18n data', function() {
 		it('should be valid', function() {
 			const kernel = make_kernel()
-			const static_data = kernel.get<IWeaponComponentCreationParams[]>(RSRCIDS.StaticData);
+			const static_data = kernel.get<IWeaponComponentCreationParams[]>(RSRCIDS.static_data);
 
 			[ 'en', 'fr' ].forEach(lang => {
 				const i18n = kernel.getAll<ITranslationStore>('intl.' + lang)

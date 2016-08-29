@@ -3,18 +3,6 @@
 	"type": "object",
 	"additionalProperties": false,
 	"properties": {
-		"random_seed": {
-			"description": "for repeatability, a seed for a pseudo-random generator used in the game",
-			"type": "integer",
-			"minimum": 0,
-			"default": 123
-		},
-		"random_usage_count": {
-			"description": "for repeatability, the number of random used so far",
-			"type": "integer",
-			"minimum": 0,
-			"default": 0
-		},
 		"click_count": {
 			"description": "count of player interactions (good or bad)",
 			"type": "integer",
@@ -132,6 +120,24 @@
 					"maxItems": 10,
 					"uniqueItems": true,
 					"items": [ {}, {}, {}, {}, {}, {}, {}, {}, {}, {} ]
+				}
+			}
+		},
+		"prng_state": {
+			"description": "PRNG state",
+			"type": "object",
+			"properties": {
+				"seed": {
+					"description": "for repeatability, a seed for a pseudo-random generator used in the game",
+					"type": "integer",
+					"minimum": 0,
+					"default": 123
+				},
+				"use_count": {
+					"description": "for repeatability, the number of random used so far",
+					"type": "integer",
+					"minimum": 0,
+					"default": 0
 				}
 			}
 		}

@@ -22,12 +22,12 @@ describe('Weapon Model', function() {
 	describe('inversify bindings', function() {
 		it('should expose the schema', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.Schema)).to.be.true
+			expect(kernel.isBound(RSRCIDS.schema)).to.be.true
 		})
 
 		it('should expose the factory', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.Factory)).to.be.true
+			expect(kernel.isBound(RSRCIDS.factory)).to.be.true
 		})
 
 		it('should expose the i18n data', function() {
@@ -41,7 +41,7 @@ describe('Weapon Model', function() {
 
 		it('should work', function() {
 			const kernel = make_kernel()
-			const factory = kernel.get<() => WeaponModel>(RSRCIDS.Factory)
+			const factory = kernel.get<() => WeaponModel>(RSRCIDS.factory)
 
 			const model = factory()
 

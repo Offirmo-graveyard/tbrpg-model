@@ -45,7 +45,7 @@
     "underscore.string": "^3.3.4"
   },
   "devDependencies": {
-    "@offirmo/cli-toolbox": "^0.0.3",
+    "@offirmo/cli-toolbox": "^0.0.4",
     "@offirmo/unit-test-toolbox": "^0.0.1",
     "@types/jsen": "^0.0.17",
     "@types/lodash": "^4.14.30",

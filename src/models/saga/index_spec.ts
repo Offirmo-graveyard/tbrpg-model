@@ -19,12 +19,12 @@ describe('Saga Model', function() {
 	describe('inversify bindings', function() {
 		it('should expose the schema', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.Schema)).to.be.true
+			expect(kernel.isBound(RSRCIDS.schema)).to.be.true
 		})
 
 		it('should expose the factory', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.Factory)).to.be.true
+			expect(kernel.isBound(RSRCIDS.factory)).to.be.true
 		})
 	})
 
@@ -32,7 +32,7 @@ describe('Saga Model', function() {
 
 		it('should work', function() {
 			const kernel = make_kernel()
-			const factory = kernel.get<() => SagaModel>(RSRCIDS.Factory)
+			const factory = kernel.get<() => SagaModel>(RSRCIDS.factory)
 
 			const model = factory()
 
@@ -40,8 +40,6 @@ describe('Saga Model', function() {
 			expect(model).to.respondTo('validate')
 			expect(() => model.validate({foo: 42} as any as ISaga)).to.throw(Error)
 			expect(() => model.validate(model.create({
-				random_seed: 1234,
-				random_usage_count: 0,
 				click_count: 0,
 				valid_click_count: 0,
 				next_allowed_click_date_moment_utc: moment(),
@@ -63,6 +61,10 @@ describe('Saga Model', function() {
 				skills: [],
 				flags: {
 					recent_adventure_ids: []
+				},
+				prng_state: {
+					seed: 1234,
+					use_count: 0
 				}
 			}))).to.not.throw
 		})
