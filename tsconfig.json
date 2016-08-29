@@ -68,6 +68,7 @@
 		"src/models/weapon_component/types.ts",
 		"src/store/actions/index.ts",
 		"src/store/actions/index_spec.ts",
+		"src/store/_inversify_module.ts",
 		"src/store/index.ts",
 		"src/store/reducer.ts",
 		"src/store/reducer_spec.ts",

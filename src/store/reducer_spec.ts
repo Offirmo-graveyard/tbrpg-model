@@ -1,34 +1,44 @@
-
 import { Action as ReduxAction } from 'redux'
 import { Random } from '@offirmo/random'
+import { Kernel } from "inversify"
 
 import {
 	IActionTest_XXX
 } from './actions'
 
 import {
-	InjectableDependencies,
+	//InjectableDependencies,
+	IReducer,
 	IState,
 	initial_state,
-	factory,
+	//factory,
 } from './reducer'
+
+import { kernel_module as saga_kernel_module } from '../models/saga/_inversify_module'
+import { RSRCIDS, kernel_module } from './_inversify_module'
+
 
 // even if not expressed in Redux typings, state can be null (initial state)
 type PracticalReducer = <A extends ReduxAction>(state: IState | null, action: A) => IState
 
 describe.only('TBRPG Reducer', function() {
-
 	const EXPECTED_SEED = 1234
 
+	function make_kernel() {
+		const kernel = new Kernel()
+		kernel.load(saga_kernel_module)
+		kernel.load(kernel_module)
+		return kernel
+	}
+
 	function make_reducer(): PracticalReducer {
-		return factory({
-			saga_model: {
-				validate: () => undefined
-			}
-		} as any as InjectableDependencies) as PracticalReducer
+		const kernel = make_kernel()
+		const factory = kernel.get<() => IReducer>(RSRCIDS.reducer_factory)
+		return factory() as PracticalReducer
 	}
 
 	describe('state', function () {
+
 		describe('initial value', function() {
 
 			it('should be correct', () => {
@@ -58,10 +68,22 @@ describe.only('TBRPG Reducer', function() {
 				// wreck the state
 				(state as any).click_count = 'foo'
 
-				reducer(state, init_action)
+				expect(() => reducer(state, init_action)).to.throw(Error, 'TBRPG Reducer: inbound state is invalid !')
 			})
 
-			it('should be checked at the end')
+			it('should be checked at the end', () => {
+				const test_action: IActionTest_XXX = {
+					type: 'test_xxx',
+					op: (state: IState) => {
+						// wreck the state
+						(state as any).click_count = 'foo'
+						return state
+					}
+				}
+				const reducer = make_reducer()
+
+				expect(() => reducer(null, test_action)).to.throw(Error, 'TBRPG Reducer: outbound state is invalid !')
+			})
 		})
 	})
 
@@ -87,7 +109,7 @@ describe.only('TBRPG Reducer', function() {
 			expect(state.internal.prng!(), '2').to.equal(expected_prng())
 		})
 
-		it('should update prng state after use', () => {
+		it('should be made persistable after use', () => {
 			const USE_COUNT = 7
 			const test_action: IActionTest_XXX = {
 				type: 'test_xxx',

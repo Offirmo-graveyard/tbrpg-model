@@ -67,8 +67,11 @@ randoms: [number, number, number, number, number, number]
 		"src/models/adventure/types.ts",
 		"src/models/adventure_archetype/index.ts",
 		"src/models/adventure_archetype/types.ts",
-		"src/store/actions.ts",
-		"src/store/index.ts",
-		"src/store/reducer.ts",
 		"src/types.ts"
 		
+
+
+
+declare module "random-js" {
+	export = random;
+}

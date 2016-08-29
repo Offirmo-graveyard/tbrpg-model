@@ -1,4 +1,4 @@
-/** Saga's as a reduc state reducer
+/** Saga's as a redux state reducer
  */
 
 ////////////////////////////////////
@@ -26,12 +26,9 @@ interface InjectableDependencies {
 ////////////
 
 import {
-	IActionTest_XXX,
-	on_test_xxx,
-	IActionSetRandomSeed,
-	on_set_random_seed,
-	IActionPlay,
-	on_play,
+	IActionTest_XXX,      on_test_xxx,
+	IActionSetRandomSeed, on_set_random_seed,
+	IActionPlay,          on_play,
 } from './actions'
 
 ////////////
@@ -83,7 +80,11 @@ function factory(dependencies: InjectableDependencies): IReducer {
 			state = _.cloneDeep(initial_state)
 
 		// inbound check
-		saga_model.validate(state)
+		try { saga_model.validate(state) }
+		catch (e) {
+			e.message = 'TBRPG Reducer: inbound state is invalid !'
+			throw e
+		}
 
 		if (!state.internal.prng) {
 			state.internal.prng = Random.engines
@@ -115,7 +116,11 @@ function factory(dependencies: InjectableDependencies): IReducer {
 		state.prng_state.use_count = state.internal.prng!.getUseCount()
 
 		//  outbound check
-		saga_model.validate(state)
+		try { saga_model.validate(state) }
+		catch (e) {
+			e.message = 'TBRPG Reducer: outbound state is invalid !'
+			throw e
+		}
 
 		return state
 	}

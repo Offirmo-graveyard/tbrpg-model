@@ -140,6 +140,11 @@
 					"default": 0
 				}
 			}
+		},
+		"internal": {
+			"description": "placeholder for internal, temporary state. Will not be persisted.",
+			"type": "object",
+			"additionalProperties": true
 		}
 	},
 	"offirmo_extensions": {

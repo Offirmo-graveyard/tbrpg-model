@@ -51,7 +51,12 @@ function instantiate_model<IModel, IModelCreationParams>(
 		// jsen validation
 		if (!_validate(data)) {
 			err.validation_errors = _.cloneDeep(_validate.errors)
-			//console.error(err.message, err.bad_data, err.validation_errors)
+			/*
+			console.error(
+				err.message,
+				'\n! validation errors:', err.validation_errors,
+				'\n!  bad data:', err.bad_data)
+			*/
 			throw err
 		}
 
