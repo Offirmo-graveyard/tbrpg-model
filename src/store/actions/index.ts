@@ -5,14 +5,15 @@ import {
 } from 'redux'
 
 import * as moment from 'moment'
+import { Random } from '@offirmo/random'
 
 ////////////
 
 import { IState } from '../types'
 
 ////////////////////////////////////
-
 // for unit tests only, do not use !
+
 interface IActionTest_XXX extends ReduxAction {
 	type: 'test_xxx'
 	op: (state: IState) => IState
@@ -32,6 +33,10 @@ interface IActionSetRandomSeed extends ReduxAction {
 function on_set_random_seed(state: IState, action: IActionSetRandomSeed): IState {
 	state.prng_state.seed = action.seed
 	state.prng_state.use_count = 0
+
+	state.internal.prng = Random.engines
+		.mt19937()
+		.seed(state.prng_state.seed)
 
 	return state
 }

@@ -53,20 +53,12 @@ randoms: [number, number, number, number, number, number]
 
 
 
+		"src/mechanics/index.ts",
 		"src/common/i18n/en.ts",
 		"src/common/i18n/fr.ts",
 		"src/db/index.ts",
 		"src/db/types.ts",
 		"src/index.ts",
-		"src/mechanics/constants.ts",
-		"src/mechanics/index.ts",
-		"src/mechanics/types.ts",
-		"src/models/adventure/i18n/en.ts",
-		"src/models/adventure/i18n/fr.ts",
-		"src/models/adventure/index.ts",
-		"src/models/adventure/types.ts",
-		"src/models/adventure_archetype/index.ts",
-		"src/models/adventure_archetype/types.ts",
 		"src/types.ts"
 		
 

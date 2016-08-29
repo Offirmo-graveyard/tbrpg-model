@@ -2,16 +2,18 @@ import { Kernel } from "inversify"
 
 import { ITranslationStore } from '../../common/types'
 
-//import { IWeaponComponentCreationParams } from '../weapon_component'
-
-import { IWeapon, /*IWeaponCreationParams,*/ WeaponModel } from './index'
+import {
+	IAdventureArchetype,
+	IAdventureArchetypeCreationParams,
+	AdventureArchetypeModel,
+} from './index'
 
 import {
 	RSRCIDS,
 	kernel_module
 } from './_inversify_module'
 
-describe('Weapon Model', function() {
+describe('Adventure Archetype Model', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
@@ -25,6 +27,11 @@ describe('Weapon Model', function() {
 			expect(kernel.isBound(RSRCIDS.schema)).to.be.true
 		})
 
+		it('should expose the static data', function() {
+			const kernel = make_kernel()
+			expect(kernel.isBound(RSRCIDS.static_data)).to.be.true
+		})
+
 		it('should expose the factory', function() {
 			const kernel = make_kernel()
 			expect(kernel.isBound(RSRCIDS.factory)).to.be.true
@@ -36,58 +43,39 @@ describe('Weapon Model', function() {
 		})
 	})
 
-	describe('factory', function() {
+	describe('static data', function() {
+		it('should be valid', function() {
+			const kernel = make_kernel()
+			const static_data = kernel.get<IAdventureArchetypeCreationParams[]>(RSRCIDS.static_data)
+			expect(static_data).to.be.an.array
+		})
+	})
 
+	describe('factory', function() {
 		it('should work', function() {
 			const kernel = make_kernel()
-			const factory = kernel.get<() => WeaponModel>(RSRCIDS.factory)
+			const static_data = kernel.get<IAdventureArchetypeCreationParams[]>(RSRCIDS.static_data)
+			const factory = kernel.get<() => AdventureArchetypeModel>(RSRCIDS.factory)
 
 			const model = factory()
 
 			expect(model).to.respondTo('create')
 			expect(model).to.respondTo('validate')
-			expect(() => model.validate({foo: 42} as any as IWeapon)).to.throw(Error)
-			expect(() => model.validate(model.create({
-				base: {
-					hid: 'longsword',
-					type: 'base'
-				},
-				qualifier1: {
-					hid: 'invincible',
-					type: 'qualifier1'
-				},
-				qualifier2: {
-					hid: 'expert',
-					type: 'qualifier2'
-				},
-				quality: {
-					hid: 'epic',
-					type: 'quality'
-				},
-				base_strength: 7
-			}))).to.not.throw
+			expect(() => model.validate({foo: 42} as any as IAdventureArchetype)).to.throw(Error)
+			expect(() => model.validate(model.create(static_data[0]))).to.not.throw
 		})
-
 	})
 
 	describe('i18n data', function() {
-
 		it('should be valid', function() {
-			const kernel = make_kernel();
+			const kernel = make_kernel()
+			const static_data = kernel.get<IAdventureArchetypeCreationParams[]>(RSRCIDS.static_data);
 
 			[ 'en', 'fr' ].forEach(lang => {
 				const i18n = kernel.getAllTagged<ITranslationStore>('intl', 'lang', lang)
 				expect(i18n).to.have.lengthOf(1)
-				expect(Object.keys(i18n[0]).length).to.equal(1)
+				expect(Object.keys(i18n[0]).length).to.be.within(static_data.length, 2 * static_data.length + 1)
 			})
-		})
-
-		describe('weapon name', function() {
-
-			it('should work for en')
-
-			it('should work for fr')
-
 		})
 	})
 })

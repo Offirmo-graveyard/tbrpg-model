@@ -21,7 +21,7 @@ import { RSRCIDS, kernel_module } from './_inversify_module'
 // even if not expressed in Redux typings, state can be null (initial state)
 type PracticalReducer = <A extends ReduxAction>(state: IState | null, action: A) => IState
 
-describe.only('TBRPG Reducer', function() {
+describe('TBRPG Reducer', function() {
 	const EXPECTED_SEED = 1234
 
 	function make_kernel() {
@@ -104,9 +104,15 @@ describe.only('TBRPG Reducer', function() {
 
 			// check properly seeded
 			const expected_prng = Random.engines.mt19937().seed(EXPECTED_SEED)
+			const unexpected_prng = Random.engines.mt19937().seed(9999) // to check the test itself is correct
 
-			expect(state.internal.prng!(), '1').to.equal(expected_prng())
-			expect(state.internal.prng!(), '2').to.equal(expected_prng())
+			const gen01 = state.internal.prng!()
+			expect(gen01, '1a').to.equal(expected_prng())
+			expect(gen01, '1b').to.not.equal(unexpected_prng())
+
+			const gen02 = state.internal.prng!()
+			expect(gen02, '2a').to.equal(expected_prng())
+			expect(gen02, '2b').to.not.equal(unexpected_prng())
 		})
 
 		it('should be made persistable after use', () => {

@@ -39,8 +39,7 @@ describe('Weapon Component Model', function() {
 
 		it('should expose the i18n data', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound('intl.fr')).to.be.true
-			expect(kernel.isBound('intl.en')).to.be.true
+			expect(kernel.isBound('intl')).to.be.true
 		})
 	})
 
@@ -73,7 +72,7 @@ describe('Weapon Component Model', function() {
 			const static_data = kernel.get<IWeaponComponentCreationParams[]>(RSRCIDS.static_data);
 
 			[ 'en', 'fr' ].forEach(lang => {
-				const i18n = kernel.getAll<ITranslationStore>('intl.' + lang)
+				const i18n = kernel.getAllTagged<ITranslationStore>('intl', 'lang', lang)
 				expect(i18n).to.have.lengthOf(1)
 				expect(Object.keys(i18n[0]).length).to.be.within(static_data.length, 2 * static_data.length)
 			})

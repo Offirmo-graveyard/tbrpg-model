@@ -1,37 +1,35 @@
 ////////////////////////////////////
 
 //import * as _ from 'lodash'
-const Random = require('random-js')
+import { Random } from '@offirmo/random'
 
 ////////////
-
-import { getRandomIndex, getRandomIntInclusive } from '../_incubator/pure-random'
 
 import {
 	IAdventure,
 	IAdventureCreationParams,
 	AdventureModel,
-	default_instance as _adventure_model
+	//default_instance as _adventure_model
 } from '../models/adventure'
 
 import {
 	IAdventureArchetype,
 	AdventureArchetypeModel,
-	default_instance as _adventure_archetype_model
+	//default_instance as _adventure_archetype_model
 } from '../models/adventure_archetype'
 
 import {
 	IWeapon,
 	IWeaponCreationParams,
 	WeaponModel,
-	default_instance as _weapon_model
+	//default_instance as _weapon_model
 } from '../models/weapon'
 
 import {
 	IWeaponComponent,
 	WeaponComponentType,
 	WeaponComponentModel,
-	default_instance as _weapon_component_model
+	//default_instance as _weapon_component_model
 } from '../models/weapon_component'
 
 import { LokiDb, factory } from '../db'
@@ -47,17 +45,19 @@ import * as consts from './constants'
 ////////////
 
 interface InjectableDependencies {
-	static_db?: LokiDb
-	adventure_model?: AdventureModel
-	adventure_archetype_model?: AdventureArchetypeModel
-	weapon_model?: WeaponModel
-	weapon_component_model?: WeaponComponentModel
+	static_db: LokiDb
+	adventure_model: AdventureModel
+	adventure_archetype_model: AdventureArchetypeModel
+	weapon_model: WeaponModel
+	weapon_component_model: WeaponComponentModel
 }
 
 ////////////////////////////////////
 
+/*
 const engine = Random.engines.mt19937()
 engine.autoSeed()
+*/
 
 ////////////
 
@@ -72,12 +72,14 @@ engine.autoSeed()
 
  */
 
-function create_instance(dependencies: InjectableDependencies = {}) {
-	const static_db = (dependencies.static_db || factory()) as LokiDb
-	const adventure_model = (dependencies.adventure_model || _adventure_model) as AdventureModel
-	const adventure_archetype_model = (dependencies.adventure_archetype_model || _adventure_archetype_model) as AdventureArchetypeModel
-	const weapon_model = (dependencies.weapon_model || _weapon_model) as WeaponModel
-	const weapon_component_model = (dependencies.weapon_component_model || _weapon_component_model) as WeaponComponentModel
+function create_instance(dependencies: InjectableDependencies) {
+	const {
+		static_db,
+		adventure_model,
+		adventure_archetype_model,
+		weapon_model,
+		weapon_component_model
+	} = dependencies
 
 	const adventure_archetype_collection = static_db.getCollection<IAdventureArchetype>(adventure_archetype_model.hid)
 	const adventure_archetypes: { [k: string]: IAdventureArchetype[] } = {

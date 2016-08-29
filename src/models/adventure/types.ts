@@ -20,9 +20,9 @@ interface IAdventure {
 		coins: number
 		tokens: number
 		weapon: null | IWeapon
-armor: null
-improved_weapon_index: null | number
-improved_armor_index: null | number
+		armor: null
+		improved_weapon_index: null | number
+		improved_armor_index: null | number
 	}
 }
 
@@ -32,8 +32,8 @@ interface IAdventureCreationParams extends IAdventure {
 ////////////////////////////////////
 
 export {
-IAdventure,
-IAdventureCreationParams
+	IAdventure,
+	IAdventureCreationParams
 }
 
 ////////////////////////////////////

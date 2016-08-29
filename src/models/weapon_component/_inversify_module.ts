@@ -45,11 +45,13 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.schema)
 		}))
 
-	bind<ITranslationStore>('intl.en')
+	bind<ITranslationStore>('intl')
 		.toConstantValue(i18n_en)
+		.whenTargetTagged('lang', 'en')
 
-	bind<ITranslationStore>('intl.fr')
+	bind<ITranslationStore>('intl')
 		.toConstantValue(i18n_fr)
+		.whenTargetTagged('lang', 'fr')
 })
 
 export {

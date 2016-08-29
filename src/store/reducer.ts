@@ -75,7 +75,7 @@ function factory(dependencies: InjectableDependencies): IReducer {
 
 	return (state: IState = initial_state, action: ReduxAction): IState => {
 
-		console.log('* Saga reducer was dispatched an action: ', action)
+		console.log('* Saga reducer was dispatched an action: ', action.type)
 		if (!state)
 			state = _.cloneDeep(initial_state)
 
