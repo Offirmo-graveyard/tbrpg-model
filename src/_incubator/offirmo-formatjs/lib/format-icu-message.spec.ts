@@ -2,7 +2,7 @@ import * as sinon from 'sinon'
 
 import { format, IErrorReporter } from './format-icu-message'
 
-const timezone = false
+const timezone_plus_1 = !!process.env.TIMEZONE_PLUS_ONE
 
 describe('format-icu-message', function() {
 
@@ -44,7 +44,7 @@ describe('format-icu-message', function() {
 					locale: 'fr',
 					message: 'Il est {now, time, long} et tout va bien.',
 					// TODO check the suspicious triple space
-					expected: `Il est ${timezone ? 7 : 6}:56:07   et tout va bien.`,
+					expected: `Il est ${timezone_plus_1 ? 7 : 6}:56:07   et tout va bien.`,
 					values: {
 						now: new Date(1234567890)
 					}
@@ -53,7 +53,7 @@ describe('format-icu-message', function() {
 					locale: 'en',
 					message: 'It’s {now, time, long} and all is well.',
 					// TODO check the suspicious double space
-					expected: `It’s ${timezone ? 7 : 6}:56:07 AM  and all is well.`,
+					expected: `It’s ${timezone_plus_1 ? 7 : 6}:56:07 AM  and all is well.`,
 					values: {
 						now: 1234567890
 					}
@@ -104,7 +104,7 @@ describe('format-icu-message', function() {
 				{
 					locale: null, // will auto fallback to en
 					message: 'Il est {now, time, long} et tout va bien.',
-					expected: `Il est ${timezone ? 7 : 6}:56:07 AM  et tout va bien.`, // fr string with en formatted date
+					expected: `Il est ${timezone_plus_1 ? 7 : 6}:56:07 AM  et tout va bien.`, // fr string with en formatted date
 					values: {
 						now: 1234567890
 					}

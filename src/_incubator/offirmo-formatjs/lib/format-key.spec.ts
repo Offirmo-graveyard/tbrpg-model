@@ -1,7 +1,7 @@
 import * as _ from 'lodash'
 import * as sinon from 'sinon'
 
-const timezone = false
+const timezone_plus_1 = !!process.env.TIMEZONE_PLUS_ONE
 
 import {
 	IIntl,
@@ -82,7 +82,7 @@ describe('format-key', function() {
 	const expected_fr = {
 		foo: 'foo',
 		hello: 'Bonjour M. World !',
-		now: `Il est ${timezone ? 7 : 6}:56:07   et tout va bien.`,
+		now: `Il est ${timezone_plus_1 ? 7 : 6}:56:07   et tout va bien.`,
 		cats: 'J’ai 5 chats. Environ 23\u00A0% d’entre eux sont noirs.',
 		fn: 'épée sinistre d’apprenti',
 		//broken_fn: '[i18n|fr|?!?|test fr]'
@@ -91,7 +91,7 @@ describe('format-key', function() {
 	const expected_en = {
 		foo: 'foo',
 		hello: 'Hello M. World!',
-		now: `It’s ${timezone ? 7 : 6}:56:07 AM  and all is well.`,
+		now: `It’s ${timezone_plus_1 ? 7 : 6}:56:07 AM  and all is well.`,
 		cats: 'I have 5 cats. Almost 23% of them are black.',
 		fn: 'Apprentice’s Sinister Sword',
 		//broken_fn: '[i18n|en|?!?|test en]'
