@@ -24,7 +24,7 @@ const i18n_fr: ITranslationStore = require('tbrpg-static-data/src/adventure_arch
 
 ////////////////////////////////////
 
-let RSRCIDS = {
+const RSRCIDS = {
 	schema: Symbol('schema'),
 	static_data: Symbol('static_data'),
 	factory: Symbol('factory'),

@@ -22,7 +22,7 @@ const i18n_fr: ITranslationStore = require('./i18n/fr')
 
 ////////////////////////////////////
 
-let RSRCIDS = {
+const RSRCIDS = {
 	schema: Symbol('schema'),
 	factory: Symbol('factory'),
 }

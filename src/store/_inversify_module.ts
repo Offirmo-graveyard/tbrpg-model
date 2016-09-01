@@ -12,7 +12,7 @@ import { RSRCIDS as SAGA_RSRCIDS } from '../models/saga/_inversify_module'
 
 ////////////////////////////////////
 
-let RSRCIDS = {
+const RSRCIDS = {
 	reducer_factory: Symbol('reducer_factory'),
 	factory: Symbol('factory'),
 }

@@ -17,7 +17,7 @@ const default_schema = require('./schema.json')
 
 ////////////////////////////////////
 
-let RSRCIDS = {
+const RSRCIDS = {
 	schema: Symbol('schema'),
 	factory: Symbol('factory'),
 }

@@ -82,7 +82,8 @@
 		"src/store/index_spec.ts",
 		"src/store/reducer.ts",
 		"src/store/reducer_spec.ts",
-		"src/store/types.ts"
+		"src/store/types.ts",
+		"src/_inversify_module.ts"
 	],
 	"exclude": [
 		"dist",

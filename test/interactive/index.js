@@ -166,5 +166,5 @@ vorpal.ui.input('model adventure demo')
 ////////////////////////////////////
 
 game.store.subscribe(function () {
-	console.log('state changed ! (from UX)')
+	console.log('state changed !')
 })
