@@ -15,7 +15,7 @@ import {
 } from './index'
 
 
-describe.only('redux store actions', function() {
+describe('redux store actions', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
@@ -124,8 +124,10 @@ describe.only('redux store actions', function() {
 
 			it.skip('should properly update click next_allowed_click_date', () => {
 				const store = make_store_with_preconditions()
+				const initial_next_allowed_click_date = make_store().getState().next_allowed_click_date
 
 				let state = store.getState()
+				expect(state.next_allowed_click_date_moment_utc).to.be.afterMoment(initial_next_allowed_click_date)
 				expect(state.next_allowed_click_date_moment_utc).to.be.sameMoment(
 					moment(1).utc() // TODO mechanics
 				)
@@ -159,8 +161,10 @@ describe.only('redux store actions', function() {
 
 			it.skip('should properly update click next_allowed_click_date', () => {
 				const store = make_store_with_preconditions()
+				const initial_next_allowed_click_date = make_store().getState().next_allowed_click_date
 
 				let state = store.getState()
+				expect(state.next_allowed_click_date_moment_utc).to.be.afterMoment(initial_next_allowed_click_date)
 				expect(state).to.have.property('next_allowed_click_date_moment_utc', 1)
 			})
 
