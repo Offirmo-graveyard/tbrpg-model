@@ -33,7 +33,7 @@ describe('redux store actions', function() {
 	describe('set_random_seed', function() {
 		const NEW_SEED = 789
 
-		it('should set the seed', () => {
+		it('should set the PRNG seed', () => {
 			const store = make_store()
 
 			let state = store.getState()
@@ -48,7 +48,7 @@ describe('redux store actions', function() {
 			expect(state).to.have.deep.property('prng_state.seed', NEW_SEED)
 		})
 
-		it('should reset the use count', () => {
+		it('should reset the PRNG use count', () => {
 			const store = make_store()
 
 			store.dispatch({
@@ -71,7 +71,7 @@ describe('redux store actions', function() {
 			expect(state).to.have.deep.property('prng_state.use_count', 0)
 		})
 
-		it('should effectively reset the prng', () => {
+		it('should effectively reset the PRNG', () => {
 			const store = make_store()
 
 			store.dispatch({
@@ -100,6 +100,7 @@ describe('redux store actions', function() {
 		const INITIAL_WAIT_TIME = 1
 
 		context('of type "bad" (too early)', function() {
+
 			function make_store_with_preconditions(): IStore {
 				const store = make_store()
 
