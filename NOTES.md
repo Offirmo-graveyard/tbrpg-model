@@ -53,11 +53,8 @@ randoms: [number, number, number, number, number, number]
 
 
 
-		"src/mechanics/index.ts",
 		"src/common/i18n/en.ts",
 		"src/common/i18n/fr.ts",
-		"src/db/index.ts",
-		"src/db/types.ts",
 		"src/index.ts",
 		"src/types.ts"
 		

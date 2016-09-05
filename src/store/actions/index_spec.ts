@@ -124,7 +124,7 @@ describe('redux store actions', function() {
 
 			it.skip('should properly update click next_allowed_click_date', () => {
 				const store = make_store_with_preconditions()
-				const initial_next_allowed_click_date = make_store().getState().next_allowed_click_date
+				const initial_next_allowed_click_date = make_store().getState().next_allowed_click_date_moment_utc
 
 				let state = store.getState()
 				expect(state.next_allowed_click_date_moment_utc).to.be.afterMoment(initial_next_allowed_click_date)
@@ -161,7 +161,7 @@ describe('redux store actions', function() {
 
 			it.skip('should properly update click next_allowed_click_date', () => {
 				const store = make_store_with_preconditions()
-				const initial_next_allowed_click_date = make_store().getState().next_allowed_click_date
+				const initial_next_allowed_click_date = make_store().getState().next_allowed_click_date_moment_utc
 
 				let state = store.getState()
 				expect(state.next_allowed_click_date_moment_utc).to.be.afterMoment(initial_next_allowed_click_date)
