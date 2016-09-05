@@ -36,7 +36,7 @@ import {
 const initial_state: IState = {
 	click_count: 0,
 	valid_click_count: 0,
-	next_allowed_click_date_moment_utc: moment(0).utc(),
+	next_allowed_click_date_moment_utc: moment(1).utc(), // 1 helps for unit tests while not harming usability
 	stats: {
 		level: 1,
 		health: 1,
@@ -73,7 +73,7 @@ type IReducer = ReduxReducer<IState>
 function factory(dependencies: InjectableDependencies): IReducer {
 	const saga_model = dependencies.saga_model
 
-	return (state: IState = initial_state, action: ReduxAction): IState => {
+	return (state: IState, action: ReduxAction): IState => {
 
 		console.log('* TBRPG reducer was dispatched an action: ', action.type)
 		if (!state)

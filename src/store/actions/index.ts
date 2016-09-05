@@ -1,3 +1,5 @@
+// TODO immutable
+
 ////////////////////////////////////
 
 import {
@@ -51,11 +53,13 @@ interface IActionPlay extends ReduxAction {
 function on_play(state: IState, action: IActionPlay): IState {
 	state.click_count++
 
-	/*
-		next_allowed_click_date_moment_utc: number
-
-		valid_click_count: number
-	*/
+	if (action.click_date_moment_utc.isBefore(state.next_allowed_click_date_moment_utc)) {
+		// too early ! bad click
+	}
+	else {
+		// good click
+		state.valid_click_count++
+	}
 
 	return state
 }

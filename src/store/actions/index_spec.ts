@@ -15,7 +15,7 @@ import {
 } from './index'
 
 
-describe('redux store actions', function() {
+describe.only('redux store actions', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
@@ -122,17 +122,23 @@ describe('redux store actions', function() {
 				//next_allowed_click_date_moment_utc: moment.Moment
 			})
 
-			it('should properly update click next_allowed_click_date', () => {
+			it.skip('should properly update click next_allowed_click_date', () => {
 				const store = make_store_with_preconditions()
 
 				let state = store.getState()
-				expect(state).to.have.property('next_allowed_click_date_moment_utc', 1)
+				expect(state.next_allowed_click_date_moment_utc).to.be.sameMoment(
+					moment(1).utc() // TODO mechanics
+				)
 			})
 		})
 
 		context('of type "good"', function() {
+
 			function make_store_with_preconditions(): IStore {
 				const store = make_store()
+
+				let state = store.getState()
+				expect(state).to.have.property('click_count', 0, 'initial state leak') // yes I had it once :-(
 
 				// wait WAIT_TIME before clicking
 				store.dispatch({
@@ -151,7 +157,7 @@ describe('redux store actions', function() {
 				expect(state).to.have.property('valid_click_count', 1)
 			})
 
-			it('should properly update click next_allowed_click_date', () => {
+			it.skip('should properly update click next_allowed_click_date', () => {
 				const store = make_store_with_preconditions()
 
 				let state = store.getState()
