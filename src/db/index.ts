@@ -17,7 +17,6 @@ import {
 	AdventureArchetypeModel
 } from '../models/adventure_archetype'
 
-type LokiDb = Loki
 
 ////////////
 
@@ -31,7 +30,11 @@ interface InjectableDependencies {
 
 ////////////////////////////////////
 
+type LokiDb = Loki
+//type AdventureArchetypeLokiCollection = LokiCollection<IAdventureArchetype>
+
 function factory(dependencies: InjectableDependencies): LokiDb {
+	console.log('db factory')
 	const {
 		adventure_archetype_model,
 		adventure_archetype_static_data,
@@ -49,6 +52,10 @@ function factory(dependencies: InjectableDependencies): LokiDb {
 	weapon_component_collection.insert(weapon_component_static_data.map(weapon_component_model.create))
 
 	return static_db
+	/*return {
+		adventure_archetype_collection,
+		weapon_component_collection
+	}*/
 }
 
 ////////////////////////////////////

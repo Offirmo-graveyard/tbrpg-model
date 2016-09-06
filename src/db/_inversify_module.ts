@@ -17,15 +17,15 @@ import {
 ////////////////////////////////////
 
 const RSRCIDS = {
-	model: Symbol('model'),
+	static_db: Symbol('static_db'),
 }
 
 ////////////
 
 const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
-	bind<interfaces.Factory<LokiDb>>(RSRCIDS.model)
-		.toFactory<LokiDb>((context: interfaces.Context) => () => factory({
+	bind<LokiDb>(RSRCIDS.static_db)
+		.toDynamicValue((context: interfaces.Context) => factory({
 			adventure_archetype_model:
 				context.kernel.get<AdventureArchetypeModel>(ADVENTURE_ARCHETYPE_RSRCIDS.model),
 			adventure_archetype_static_data:
