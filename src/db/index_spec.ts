@@ -1,62 +1,31 @@
-////////////////////////////////////
-
-import * as Loki from 'lokijs'
-
-////////////
-
-// static data
-import {
-	IWeaponComponent,
-	IWeaponComponentCreationParams,
-	WeaponComponentModel
-} from '../models/weapon_component'
+import { Kernel } from "inversify"
 
 import {
-	IAdventureArchetype,
-	IAdventureArchetypeCreationParams,
-	AdventureArchetypeModel
-} from '../models/adventure_archetype'
-
-import { LokiDb } from './types'
-
-////////////
-
-interface InjectableDependencies {
-	static_db?: any
-	adventure_archetype_model: AdventureArchetypeModel
-	adventure_archetype_static_data: IAdventureArchetypeCreationParams[]
-	weapon_component_model: WeaponComponentModel
-	weapon_component_static_data: IWeaponComponentCreationParams[]
-}
-
-////////////////////////////////////
-
-function factory(dependencies: InjectableDependencies): LokiDb {
-	const {
-		adventure_archetype_model,
-		adventure_archetype_static_data,
-		weapon_component_model,
-		weapon_component_static_data
-	} = dependencies
-
-	const static_db = (dependencies.static_db || new Loki('loki_static.json')) as LokiDb
-	//const dynamic_db = (dependencies.dynamic_db || new Loki('loki_dynamic.json')) as LokiDb
-
-	const adventure_archetype_collection = static_db.addCollection<IAdventureArchetype>(adventure_archetype_model.schema.offirmo_extensions.hid)
-	adventure_archetype_collection.insert(adventure_archetype_static_data.map(adventure_archetype_model.create))
-
-	const weapon_component_collection = static_db.addCollection<IWeaponComponent>(weapon_component_model.schema.offirmo_extensions.hid)
-	weapon_component_collection.insert(weapon_component_static_data.map(weapon_component_model.create))
-
-	return static_db
-}
-
-////////////////////////////////////
-
-export {
-	InjectableDependencies,
 	LokiDb,
-	factory,
-}
+} from './index'
 
-////////////////////////////////////
+import { kernel_module as weapon_component_kernel_module } from '../models/weapon_component/_inversify_module'
+import { kernel_module as adventure_archetype_kernel_module } from '../models/adventure_archetype/_inversify_module'
+import { RSRCIDS, kernel_module } from './_inversify_module'
+
+describe('TBRPG Store', function() {
+
+	function make_kernel() {
+		const kernel = new Kernel()
+		kernel.load(weapon_component_kernel_module, adventure_archetype_kernel_module, kernel_module)
+		return kernel
+	}
+
+	function make_db(): LokiDb {
+		const kernel = make_kernel()
+		const model = kernel.get<() => IStore>(RSRCIDS.model)
+		return factory()
+	}
+
+	it('should have a proper initial state', () => {
+		const store = make_store()
+		const state = store.getState()
+		expect(state).to.have.property('click_count', 0)
+		expect(state).to.have.deep.property('internal.prng')
+	})
+})

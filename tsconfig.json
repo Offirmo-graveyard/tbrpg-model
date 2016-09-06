@@ -54,7 +54,6 @@
 		"src/_incubator/offirmo-formatjs/typings-custom/intl-messageformat.d.ts",
 		"src/db/_inversify_module.ts",
 		"src/db/index.ts",
-		"src/db/types.ts",
 		"src/mechanics/constants.ts",
 		"src/mechanics/item_inspection.ts",
 		"src/mechanics/types.ts",

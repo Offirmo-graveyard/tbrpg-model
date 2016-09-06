@@ -18,8 +18,7 @@ describe('TBRPG Store', function() {
 
 	function make_store(): IStore {
 		const kernel = make_kernel()
-		const factory = kernel.get<() => IStore>(RSRCIDS.factory)
-		return factory()
+		return kernel.get<IStore>(RSRCIDS.store)
 	}
 
 	it('should have a proper initial state', () => {

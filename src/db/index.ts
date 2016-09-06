@@ -17,7 +17,7 @@ import {
 	AdventureArchetypeModel
 } from '../models/adventure_archetype'
 
-import { LokiDb } from './types'
+type LokiDb = Loki
 
 ////////////
 

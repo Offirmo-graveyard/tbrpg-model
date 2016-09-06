@@ -19,15 +19,13 @@ describe('redux store actions', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
-		kernel.load(saga_kernel_module)
-		kernel.load(kernel_module)
+		kernel.load(saga_kernel_module, kernel_module)
 		return kernel
 	}
 
 	function make_store(): IStore {
 		const kernel = make_kernel()
-		const factory = kernel.get<() => IStore>(RSRCIDS.factory)
-		return factory()
+		return kernel.get<IStore>(RSRCIDS.store)
 	}
 
 	describe('set_random_seed', function() {

@@ -13,22 +13,22 @@ import { RSRCIDS as SAGA_RSRCIDS } from '../models/saga/_inversify_module'
 ////////////////////////////////////
 
 const RSRCIDS = {
-	reducer_factory: Symbol('reducer_factory'),
-	factory: Symbol('factory'),
+	reducer: Symbol('reducer'),
+	store: Symbol('store'),
 }
 
 ////////////
 
 const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
-	bind<interfaces.Factory<Reducer.IReducer>>(RSRCIDS.reducer_factory)
-		.toFactory<Reducer.IReducer>((context: interfaces.Context) => () => Reducer.factory({
-			saga_model: context.kernel.get<() => SagaModel>(SAGA_RSRCIDS.factory)()
+	bind<Reducer.IReducer>(RSRCIDS.reducer)
+		.toDynamicValue((context: interfaces.Context) => Reducer.factory({
+			saga_model: context.kernel.get<SagaModel>(SAGA_RSRCIDS.model)
 		}))
 
-	bind<interfaces.Factory<Store.IStore>>(RSRCIDS.factory)
-		.toFactory<Store.IStore>((context: interfaces.Context) => () => Store.factory({
-			saga_model: context.kernel.get<() => SagaModel>(SAGA_RSRCIDS.factory)()
+	bind<Store.IStore>(RSRCIDS.store)
+		.toDynamicValue((context: interfaces.Context) => Store.factory({
+			saga_model: context.kernel.get<SagaModel>(SAGA_RSRCIDS.model)
 		}))
 })
 

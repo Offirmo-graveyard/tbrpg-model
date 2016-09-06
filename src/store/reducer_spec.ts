@@ -33,8 +33,8 @@ describe('TBRPG Reducer', function() {
 
 	function make_reducer(): PracticalReducer {
 		const kernel = make_kernel()
-		const factory = kernel.get<() => IReducer>(RSRCIDS.reducer_factory)
-		return factory() as PracticalReducer
+		const reducer = kernel.get<IReducer>(RSRCIDS.reducer)
+		return reducer as PracticalReducer
 	}
 
 	describe('state', function () {

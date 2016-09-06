@@ -17,21 +17,21 @@ import {
 ////////////////////////////////////
 
 const RSRCIDS = {
-	factory: Symbol('factory'),
+	model: Symbol('model'),
 }
 
 ////////////
 
 const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
-	bind<interfaces.Factory<LokiDb>>(RSRCIDS.factory)
+	bind<interfaces.Factory<LokiDb>>(RSRCIDS.model)
 		.toFactory<LokiDb>((context: interfaces.Context) => () => factory({
 			adventure_archetype_model:
-				context.kernel.get<() => AdventureArchetypeModel>(ADVENTURE_ARCHETYPE_RSRCIDS.factory)(),
+				context.kernel.get<AdventureArchetypeModel>(ADVENTURE_ARCHETYPE_RSRCIDS.model),
 			adventure_archetype_static_data:
 				context.kernel.get<IAdventureArchetypeCreationParams[]>(ADVENTURE_ARCHETYPE_RSRCIDS.static_data),
 			weapon_component_model:
-				context.kernel.get<() => WeaponComponentModel>(WEAPON_COMPONENT_RSRCIDS.factory)(),
+				context.kernel.get<WeaponComponentModel>(WEAPON_COMPONENT_RSRCIDS.model),
 			weapon_component_static_data:
 				context.kernel.get<IWeaponComponentCreationParams[]>(WEAPON_COMPONENT_RSRCIDS.static_data)
 		}))

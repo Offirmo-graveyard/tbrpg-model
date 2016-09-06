@@ -27,7 +27,7 @@ const i18n_fr: ITranslationStore = require('tbrpg-static-data/src/adventure_arch
 const RSRCIDS = {
 	schema: Symbol('schema'),
 	static_data: Symbol('static_data'),
-	factory: Symbol('factory'),
+	model: Symbol('model'),
 }
 
 ////////////
@@ -40,8 +40,8 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 	bind<IAdventureArchetypeCreationParams[]>(RSRCIDS.static_data)
 		.toConstantValue(default_static_data as IAdventureArchetypeCreationParams[])
 
-	bind<interfaces.Factory<AdventureArchetypeModel>>(RSRCIDS.factory)
-		.toFactory<AdventureArchetypeModel>((context: interfaces.Context) => () => factory({
+	bind<AdventureArchetypeModel>(RSRCIDS.model)
+		.toDynamicValue((context: interfaces.Context) => factory({
 			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.schema)
 		}))
 

@@ -19,7 +19,7 @@ const default_schema = require('./schema.json')
 
 const RSRCIDS = {
 	schema: Symbol('schema'),
-	factory: Symbol('factory'),
+	model: Symbol('model'),
 }
 
 ////////////
@@ -29,8 +29,8 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 	bind<IJsonSchemaExtended>(RSRCIDS.schema)
 		.toConstantValue(default_schema as IJsonSchemaExtended)
 
-	bind<interfaces.Factory<AdventureModel>>(RSRCIDS.factory)
-		.toFactory<AdventureModel>((context: interfaces.Context) => () => factory({
+	bind<AdventureModel>(RSRCIDS.model)
+		.toDynamicValue((context: interfaces.Context) => factory({
 			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.schema)
 		}))
 })
