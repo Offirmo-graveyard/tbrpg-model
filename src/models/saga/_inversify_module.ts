@@ -34,6 +34,7 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 			// TODO will need Weapon model ?
 			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.schema)
 		}))
+		.inSingletonScope()
 })
 
 export {

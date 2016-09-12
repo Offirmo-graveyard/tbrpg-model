@@ -44,6 +44,7 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 		.toDynamicValue((context: interfaces.Context) => factory({
 			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.schema)
 		}))
+		.inSingletonScope()
 
 	bind<ITranslationStore>('intl')
 		.toConstantValue(i18n_en)
