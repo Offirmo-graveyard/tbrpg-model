@@ -1,6 +1,6 @@
 ////////////////////////////////////
 
-//import { KernelModule } from "inversify"
+import { KernelModule } from "inversify"
 
 ////////////
 
@@ -37,6 +37,7 @@ const RSRCIDS = {
 ////////////////////////////////////
 
 export {
+	KernelModule,
 	kernel_modules,
 	RSRCIDS,
 }
