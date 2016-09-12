@@ -19,7 +19,7 @@ const default_schema = require('./schema.json')
 
 const RSRCIDS = {
 	schema: Symbol('schema'),
-	factory: Symbol('factory'),
+	model: Symbol('model'),
 }
 
 ////////////
@@ -29,8 +29,8 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 	bind<IJsonSchemaExtended>(RSRCIDS.schema)
 		.toConstantValue(default_schema as IJsonSchemaExtended)
 
-	bind<interfaces.Factory<SagaModel>>(RSRCIDS.factory)
-		.toFactory<SagaModel>((context: interfaces.Context) => () => factory({
+	bind<SagaModel>(RSRCIDS.model)
+		.toDynamicValue((context: interfaces.Context) => factory({
 			// TODO will need Weapon model ?
 			schema: context.kernel.get<IJsonSchemaExtended>(RSRCIDS.schema)
 		}))

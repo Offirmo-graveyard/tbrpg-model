@@ -22,19 +22,17 @@ describe('Saga Model', function() {
 			expect(kernel.isBound(RSRCIDS.schema)).to.be.true
 		})
 
-		it('should expose the factory', function() {
+		it('should expose the model', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.factory)).to.be.true
+			expect(kernel.isBound(RSRCIDS.model)).to.be.true
 		})
 	})
 
-	describe('factory', function() {
+	describe('model', function() {
 
 		it('should work', function() {
 			const kernel = make_kernel()
-			const factory = kernel.get<() => SagaModel>(RSRCIDS.factory)
-
-			const model = factory()
+			const model = kernel.get<SagaModel>(RSRCIDS.model)
 
 			expect(model).to.respondTo('create')
 			expect(model).to.respondTo('validate')

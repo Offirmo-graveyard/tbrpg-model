@@ -1,62 +1,44 @@
-////////////////////////////////////
+import { Kernel } from "inversify"
 
-import * as Loki from 'lokijs'
+import {
+	LokiDb,
+} from './index'
 
-////////////
-
-// static data
 import {
 	IWeaponComponent,
-	IWeaponComponentCreationParams,
-	WeaponComponentModel
+	WeaponComponentType,
+	WeaponComponentModel,
 } from '../models/weapon_component'
+import { kernel_module as weapon_component_kernel_module } from '../models/weapon_component/_inversify_module'
 
-import {
-	IAdventureArchetype,
-	IAdventureArchetypeCreationParams,
-	AdventureArchetypeModel
-} from '../models/adventure_archetype'
+import { kernel_module as adventure_archetype_kernel_module } from '../models/adventure_archetype/_inversify_module'
 
-import { LokiDb } from './types'
+import { RSRCIDS, kernel_module } from './_inversify_module'
 
-////////////
+describe.only('TBRPG Db', function() {
 
-interface InjectableDependencies {
-	static_db?: any
-	adventure_archetype_model: AdventureArchetypeModel
-	adventure_archetype_static_data: IAdventureArchetypeCreationParams[]
-	weapon_component_model: WeaponComponentModel
-	weapon_component_static_data: IWeaponComponentCreationParams[]
-}
+	function make_kernel() {
+		const kernel = new Kernel()
+		kernel.load(weapon_component_kernel_module, adventure_archetype_kernel_module, kernel_module)
+		return kernel
+	}
 
-////////////////////////////////////
+	function make_static_db(): LokiDb {
+		const kernel = make_kernel()
+		return kernel.get<LokiDb>(RSRCIDS.static_db)
+	}
 
-function factory(dependencies: InjectableDependencies): LokiDb {
-	const {
-		adventure_archetype_model,
-		adventure_archetype_static_data,
-		weapon_component_model,
-		weapon_component_static_data
-	} = dependencies
+	describe('inversify bindings', function() {
+		it('should expose the static_db', function() {
+			const kernel = make_kernel()
+			expect(kernel.isBound(RSRCIDS.static_db)).to.be.true
+		})
+	})
 
-	const static_db = (dependencies.static_db || new Loki('loki_static.json')) as LokiDb
-	//const dynamic_db = (dependencies.dynamic_db || new Loki('loki_dynamic.json')) as LokiDb
-
-	const adventure_archetype_collection = static_db.addCollection<IAdventureArchetype>(adventure_archetype_model.schema.offirmo_extensions.hid)
-	adventure_archetype_collection.insert(adventure_archetype_static_data.map(adventure_archetype_model.create))
-
-	const weapon_component_collection = static_db.addCollection<IWeaponComponent>(weapon_component_model.schema.offirmo_extensions.hid)
-	weapon_component_collection.insert(weapon_component_static_data.map(weapon_component_model.create))
-
-	return static_db
-}
-
-////////////////////////////////////
-
-export {
-	InjectableDependencies,
-	LokiDb,
-	factory,
-}
-
-////////////////////////////////////
+	describe('static db', function() {
+		it('should expose weapon components', () => {
+			const db = make_static_db()
+			//const weapon_component_collection = static_db.getCollection<IWeaponComponent>(weapon_component_model.hid)
+		})
+	})
+})

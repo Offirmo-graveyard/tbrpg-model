@@ -25,9 +25,9 @@ describe('Weapon Model', function() {
 			expect(kernel.isBound(RSRCIDS.schema)).to.be.true
 		})
 
-		it('should expose the factory', function() {
+		it('should expose the model', function() {
 			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.factory)).to.be.true
+			expect(kernel.isBound(RSRCIDS.model)).to.be.true
 		})
 
 		it('should expose the i18n data', function() {
@@ -36,13 +36,11 @@ describe('Weapon Model', function() {
 		})
 	})
 
-	describe('factory', function() {
+	describe('model', function() {
 
 		it('should work', function() {
 			const kernel = make_kernel()
-			const factory = kernel.get<() => WeaponModel>(RSRCIDS.factory)
-
-			const model = factory()
+			const model = kernel.get<WeaponModel>(RSRCIDS.model)
 
 			expect(model).to.respondTo('create')
 			expect(model).to.respondTo('validate')
