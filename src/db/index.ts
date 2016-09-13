@@ -42,7 +42,6 @@ function factory(dependencies: InjectableDependencies): LokiDb {
 	} = dependencies
 
 	const static_db = (dependencies.static_db || new Loki('loki_static.json')) as LokiDb
-	//const dynamic_db = (dependencies.dynamic_db || new Loki('loki_dynamic.json')) as LokiDb
 
 	const adventure_archetype_collection = static_db.addCollection<IAdventureArchetype>(adventure_archetype_model.schema.offirmo_extensions.hid)
 	adventure_archetype_collection.insert(adventure_archetype_static_data.map(adventure_archetype_model.create))

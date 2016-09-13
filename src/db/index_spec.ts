@@ -1,13 +1,9 @@
-import { Kernel } from "inversify"
-
-import {
-	LokiDb,
-} from './index'
+import { Kernel } from 'inversify'
 
 import { IWeaponComponent } from '../models/weapon_component'
 import { kernel_module as weapon_component_kernel_module } from '../models/weapon_component/_inversify_module'
 
-import { IAdventureArchetype } from '../models/adventure_archetype'
+//import { IAdventureArchetype } from '../models/adventure_archetype'
 import { kernel_module as adventure_archetype_kernel_module } from '../models/adventure_archetype/_inversify_module'
 
 import { RSRCIDS, kernel_module } from './_inversify_module'
@@ -40,9 +36,16 @@ describe.only('TBRPG Dbs', function() {
 				const weapon_component_collection = kernel.get<LokiCollection<IWeaponComponent>>(RSRCIDS.static.weapon_components)
 				//const adventure_archetype_collection = kernel.get<LokiCollection<IAdventureArchetype>>(RSRCIDS.static.adventure_archetypes)
 
-				console.log(weapon_component_collection.get(1))
+				expect(weapon_component_collection.get(1)).to.have.property('$loki', 1)
+				expect(weapon_component_collection.get(1)).to.have.property('hid', 'axe')
+				expect(weapon_component_collection.get(1)).to.have.property('type', 'base')
+
 				//console.log(adventure_archetype_collection.get(1))
-				console.log(weapon_component_collection.find( {'name':'Sleipnir'} ))
+				/*console.log(weapon_component_collection.find({
+					type: { '$eq': 'base'},
+					hid: { '$eq': 'sword'}
+				}))*/
+				//console.log(weapon_component_collection.chain().find({type: 'base'}).where(obj => obj.hid === 'sword').data())
 			})
 		})
 	})
