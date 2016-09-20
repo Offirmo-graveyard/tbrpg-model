@@ -67,7 +67,6 @@
     "np": "^2.6.0",
     "npm-run-all": "^3.0.0",
     "pre-commit": "^1.1.3",
-    "reflect-metadata": "^0.1.8",
     "rollup": "^0.36.0",
     "rollup-plugin-babel": "^2.4.0",
     "rollup-plugin-uglify": "^1.0.1",
@@ -76,5 +75,8 @@
     "tslint": "^3.13.0",
     "typed-immutable-record": "^0.0.5",
     "typescript": "^2.0.2"
+  },
+  "commentedout": {
+    "reflect-metadata": "^0.1.8"
   }
 }

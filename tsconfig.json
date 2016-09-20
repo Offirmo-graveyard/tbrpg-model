@@ -3,7 +3,6 @@
 	"compilerOptions": {
 		"listFiles": false,
 		"pretty": true,
-		"locale": "fr",
 
 		"moduleResolution": "node",
 		"traceResolution": false,
