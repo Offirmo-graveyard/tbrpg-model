@@ -6,8 +6,7 @@
   "scripts": {
     "__prod": "~~~~~~~ PRODUCTION ~~~~~~~",
     "test": "mocha --opts test/unit/mocha.opts node_modules/@offirmo/unit-test-toolbox/mocha-chai-init-node.js test/unit/init.js 'test/unit/src/**/*spec.js'",
-    "xtest": "mocha --opts test/unit/mocha.opts test/unit/index.js 'test/unit/src/**/*spec.js'",
-    "x": "offirmo_mocha",
+    "test:watch": "npm run test -- --watch",
     "build": "node scripts/build.js",
     "np": "np",
     "__dev": "~~~~~~~ DEVELOPMENT ~~~~~~~",
@@ -18,7 +17,9 @@
     "test:interactive": "nodemon test/interactive/index.js",
     "test:quick": "test/quick/index.js",
     "__misc": "~~~~~~~ MISC ~~~~~~~",
-    "tsc": "tsc"
+    "tsc": "tsc",
+    "__misc": "~~~~~~~ Shortcuts ~~~~~~~",
+    "tw": "npm run test:watch"
   },
   "repository": {
     "type": "git",

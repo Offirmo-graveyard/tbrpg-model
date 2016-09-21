@@ -31,7 +31,6 @@
 	"files": [
 		"node_modules/@types/lodash/index.d.ts",
 		"node_modules/@types/node/index.d.ts",
-		"node_modules/reflect-metadata/reflect-metadata.d.ts",
 		"typings-custom/non-standard-formats.d.ts",
 		"typings-custom/unit-tests-global-variables.d.ts",
 		"typings-custom/untyped-modules.d.ts",

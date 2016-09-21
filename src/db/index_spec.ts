@@ -8,7 +8,7 @@ import { kernel_module as adventure_archetype_kernel_module } from '../models/ad
 
 import { RSRCIDS, kernel_module } from './_inversify_module'
 
-describe.only('TBRPG Dbs', function() {
+describe('TBRPG Dbs', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
@@ -46,6 +46,17 @@ describe.only('TBRPG Dbs', function() {
 					hid: { '$eq': 'sword'}
 				}))*/
 				//console.log(weapon_component_collection.chain().find({type: 'base'}).where(obj => obj.hid === 'sword').data())
+			})
+
+			it.only('should offer a convenient query API', () => {
+				const kernel = make_kernel()
+				const weapon_component_collection = kernel.get<LokiCollection<IWeaponComponent>>(RSRCIDS.static.weapon_components)
+
+				console.log(weapon_component_collection.find({
+				 type: { '$eq': 'base'},
+				 hid: { '$eq': 'sword'}
+				 }))
+				console.log(weapon_component_collection.chain().find({type: 'base'}).where(obj => obj.hid === 'sword').data())
 			})
 		})
 	})

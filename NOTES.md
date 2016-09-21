@@ -27,6 +27,7 @@ randoms: [number, number, number, number, number, number]
 		
 				--skipLibCheck                      Skip type checking of declaration files.
 
+		"node_modules/reflect-metadata/reflect-metadata.d.ts",
 
 
 		
