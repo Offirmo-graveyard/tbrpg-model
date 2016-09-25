@@ -41,13 +41,17 @@ function factory(dependencies: InjectableDependencies): IStaticData {
 	} = dependencies
 
 	return {
-		item_quality: [],
+		item_quality: {
+			all: []
+		},
 		weapon_components: {
+			all: [],
 			base: [],
 			qualifier_1: [],
 			qualifier_2: []
 		},
 		adventure_archetypes: {
+			all: [],
 			good: [],
 			bad: []
 		}

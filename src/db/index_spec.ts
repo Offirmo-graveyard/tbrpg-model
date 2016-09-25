@@ -8,7 +8,7 @@ import { kernel_module as adventure_archetype_kernel_module } from '../models/ad
 
 import { RSRCIDS, kernel_module } from './_inversify_module'
 
-describe('TBRPG Dbs', function() {
+describe.only('TBRPG Dbs', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
@@ -21,15 +21,16 @@ describe('TBRPG Dbs', function() {
 		describe('inversify bindings', function() {
 			it('should expose the full static_db', function() {
 				const kernel = make_kernel()
-				expect(kernel.isBound(RSRCIDS.static_db)).to.be.true
+				expect(kernel.isBound(RSRCIDS.db.static.full)).to.be.true
 			})
 
-			it('should expose the weapon component collection', function() {
+			it('should expose the adventure archetype collection', function() {
 				const kernel = make_kernel()
-				expect(kernel.isBound(RSRCIDS.static.weapon_components)).to.be.true
+				expect(kernel.isBound(RSRCIDS.db.static.adventure_archetypes.all)).to.be.true
 			})
 		})
 
+		/*
 		describe('weapon components', function() {
 			it('should be exposed', () => {
 				const kernel = make_kernel()
@@ -41,10 +42,10 @@ describe('TBRPG Dbs', function() {
 				expect(weapon_component_collection.get(1)).to.have.property('type', 'base')
 
 				//console.log(adventure_archetype_collection.get(1))
-				/*console.log(weapon_component_collection.find({
+				console.log(weapon_component_collection.find({
 					type: { '$eq': 'base'},
 					hid: { '$eq': 'sword'}
-				}))*/
+				}))
 				//console.log(weapon_component_collection.chain().find({type: 'base'}).where(obj => obj.hid === 'sword').data())
 			})
 
@@ -59,5 +60,6 @@ describe('TBRPG Dbs', function() {
 				console.log(weapon_component_collection.chain().find({type: 'base'}).where(obj => obj.hid === 'sword').data())
 			})
 		})
+*/
 	})
 })

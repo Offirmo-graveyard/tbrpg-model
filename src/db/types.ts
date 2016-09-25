@@ -6,7 +6,9 @@ import { IWeaponComponent, IWeaponComponentCreationParams, WeaponComponentModel 
 ////////////////////////////////////
 
 interface IStaticData {
-	item_quality: any[]
+	item_quality: {
+		all: any[]
+	}
 	weapon_components: {
 		all: IWeaponComponent[]
 		base: IWeaponComponent[]

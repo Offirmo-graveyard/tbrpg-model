@@ -3,6 +3,7 @@
 // Also declare them into typescript.
 // NOTE: using those globals is optional, a require() (+boilerplate) still work and will even give correct typings.
 
+/*
 type IChainMemberSignature = (t: string, f: Function) => void
 
 interface IChainMember {
@@ -18,5 +19,6 @@ declare const beforeEach: any
 declare const afterEach: any
 declare const before: any
 declare const after: any
-declare const expect: any
 //declare const sinon: any
+*/
+declare const expect: any
