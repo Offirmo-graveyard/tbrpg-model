@@ -1,24 +1,25 @@
 ////////////////////////////////////
 
 import { IAdventureArchetype } from '../models/adventure_archetype'
-import { IWeaponComponent, IWeaponComponentCreationParams, WeaponComponentModel } from '../models/weapon_component'
+import { IItemQuality } from '../models/item_quality'
+import { IWeaponComponent } from '../models/weapon_component'
 
 ////////////////////////////////////
 
 interface IStaticData {
-	item_quality: {
-		all: any[]
+	adventure_archetype: {
+		all: IAdventureArchetype[]
+		good: IAdventureArchetype[]
+		bad: IAdventureArchetype[]
 	}
-	weapon_components: {
+	item_quality: {
+		all: IItemQuality[]
+	}
+	weapon_component: {
 		all: IWeaponComponent[]
 		base: IWeaponComponent[]
 		qualifier_1: IWeaponComponent[]
 		qualifier_2: IWeaponComponent[]
-	}
-	adventure_archetypes: {
-		all: IAdventureArchetype[]
-		good: IAdventureArchetype[]
-		bad: IAdventureArchetype[]
 	}
 }
 

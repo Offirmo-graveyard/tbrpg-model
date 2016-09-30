@@ -1,9 +1,8 @@
 ////////////////////////////////////
 
-type WeaponComponentType = 'base' | 'qualifier1' | 'qualifier2' | 'quality'
-//type WeaponQualityType = 'common' | 'uncommon' | 'rare' | 'epic' | 'legendary' | 'artifact'
+type WeaponComponentType = 'base' | 'qualifier1' | 'qualifier2'
 
-interface IWeaponComponent /* extends ITBRPGModel */ {
+interface IWeaponComponent {
 	hid: string
 	type: WeaponComponentType
 }
@@ -17,7 +16,6 @@ interface IWeaponComponentCreationParams {
 
 export {
 	WeaponComponentType,
-	//WeaponQualityType,
 	IWeaponComponent,
 	IWeaponComponentCreationParams
 }

@@ -19,15 +19,43 @@ describe.only('TBRPG Dbs', function() {
 	describe('static', function () {
 
 		describe('inversify bindings', function() {
+
 			it('should expose the full static_db', function() {
 				const kernel = make_kernel()
-				expect(kernel.isBound(RSRCIDS.db.static.full)).to.be.true
+				expect(kernel.isBound(RSRCIDS.db.static.all)).to.be.true
 			})
 
 			it('should expose the adventure archetype collection', function() {
 				const kernel = make_kernel()
-				expect(kernel.isBound(RSRCIDS.db.static.adventure_archetypes.all)).to.be.true
+				expect(kernel.isBound(RSRCIDS.db.static.adventure_archetype.all)).to.be.true
 			})
+		})
+
+		describe('[all] adventure archetypes', function () {
+			it('should be exposed')
+		})
+		describe('[good] adventure archetypes', function () {
+			it('should be exposed')
+		})
+		describe('[bad] adventure archetypes', function () {
+			it('should be exposed')
+		})
+
+		describe('[all] item qualities', function () {
+			it('should be exposed')
+		})
+
+		describe('[all] weapon components', function () {
+			it('should be exposed')
+		})
+		describe('[base] weapon components', function () {
+			it('should be exposed')
+		})
+		describe('[qualifier1] weapon components', function () {
+			it('should be exposed')
+		})
+		describe('[qualifier2] weapon components', function () {
+			it('should be exposed')
 		})
 
 		/*
