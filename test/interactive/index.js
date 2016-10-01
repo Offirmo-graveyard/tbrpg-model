@@ -33,13 +33,6 @@ const stylizeString = require('@offirmo/cli-toolbox/string/stylize')
 
 ////////////
 
-const icu_container = require('../unit/src/_incubator/offirmo-formatjs/lib/icu-data-container').default_instance
-const format_key = require('../unit/src/_incubator/offirmo-formatjs/lib/format-key')
-
-const TBRPG = require('../unit/src')
-const DB = require('../unit/src/db')
-const mechanics = TBRPG.mechanics.create_instance()
-
 const game = require('./game')
 
 ////////////
@@ -49,6 +42,7 @@ const ux = require('./ux')
 ////////////////////////////////////////////////////////////
 
 let locale = 'en'
+/*
 let intl
 icu_container.on_locale_change(i => {
 	intl = i
