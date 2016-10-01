@@ -6,7 +6,7 @@ import { IWeaponComponent, kernel_module as weapon_component_kernel_module } fro
 
 import { IStaticData, RSRCIDS, kernel_module } from './_inversify_module'
 
-describe.only('TBRPG Dbs', function() {
+describe('TBRPG Dbs', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()

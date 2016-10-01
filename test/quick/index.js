@@ -11,4 +11,4 @@ const kernel = new Kernel()
 kernel.load(...kernel_modules)
 
 
-const store = kernel.get(RSRCIDS.Store.factory)()
+const store = kernel.get(RSRCIDS.store.store)

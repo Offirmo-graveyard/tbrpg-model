@@ -16,13 +16,13 @@ clear_cli()
 const displayInAsciiArtFont = require('@offirmo/cli-toolbox/stdout/display_in_ascii_art_font')
 
 displayInAsciiArtFont('TBRPG reloaded', {colors: ['yellow', 'candy']})
-/*console.log('\n' +
+console.log('\n' +
 	' _____       _  _              _____    _                 _                        \n' +
 	'|     | ___ | ||_| ___  ___   |  _  | _| | _ _  ___  ___ | |_  _ _  ___  ___  ___  \n' +
 	'|  |  ||   || || ||   || -_|  |     || . || | || -_||   ||  _|| | ||  _|| -_||_ -| \n' +
 	'|_____||_|_||_||_||_|_||___|  |__|__||___| \\_/ |___||_|_||_|  |___||_|  |___||___| \n' +
 	'                                                                                   \n'
-)*/
+)
 
 ////////////
 
