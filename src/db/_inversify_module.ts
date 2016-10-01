@@ -4,12 +4,18 @@ import { KernelModule, interfaces } from "inversify"
 
 ////////////
 
-import { IAdventureArchetype, IAdventureArchetypeCreationParams, AdventureArchetypeModel } from '../models/adventure_archetype'
-import { RSRCIDS as ADVENTURE_ARCHETYPE_RSRCIDS } from '../models/adventure_archetype/_inversify_module'
-import { IItemQuality, IItemQualityCreationParams, ItemQualityModel } from '../models/item_quality'
-import { RSRCIDS as ITEM_QUALITY_RSRCIDS } from '../models/item_quality/_inversify_module'
-import { IWeaponComponent, IWeaponComponentCreationParams, WeaponComponentModel } from '../models/weapon_component'
-import { RSRCIDS as WEAPON_COMPONENT_RSRCIDS } from '../models/weapon_component/_inversify_module'
+import {
+	IAdventureArchetype, IAdventureArchetypeCreationParams, AdventureArchetypeModel,
+	RSRCIDS as ADVENTURE_ARCHETYPE_RSRCIDS
+} from '../models/adventure_archetype/_inversify_module'
+import {
+	IItemQuality, IItemQualityCreationParams, ItemQualityModel,
+	RSRCIDS as ITEM_QUALITY_RSRCIDS
+} from '../models/item_quality/_inversify_module'
+import {
+	IWeaponComponent, IWeaponComponentCreationParams, WeaponComponentModel,
+	RSRCIDS as WEAPON_COMPONENT_RSRCIDS
+} from '../models/weapon_component/_inversify_module'
 
 import { IStaticData, factory } from './index'
 
@@ -56,7 +62,8 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
 export {
 	RSRCIDS,
-	kernel_module
+	kernel_module,
+	IStaticData,
 }
 
 ////////////////////////////////////

@@ -7,6 +7,8 @@ import { IJsonSchemaExtended } from '../../_incubator/json-schema-based-model'
 ////////////
 
 import {
+	IAdventure,
+	IAdventureCreationParams,
 	AdventureModel,
 	factory
 } from './index'
@@ -38,7 +40,10 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
 export {
 	RSRCIDS,
-	kernel_module
+	kernel_module,
+	IAdventure,
+	IAdventureCreationParams,
+	AdventureModel,
 }
 
 ////////////////////////////////////
