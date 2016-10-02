@@ -28,6 +28,16 @@ randoms: [number, number, number, number, number, number]
 				--skipLibCheck                      Skip type checking of declaration files.
 
 		"node_modules/reflect-metadata/reflect-metadata.d.ts",
+		"src/_incubator/offirmo-formatjs/lib/are-intl-locales-supported.ts",
+		"src/_incubator/offirmo-formatjs/lib/format-icu-message.spec.ts",
+		"src/_incubator/offirmo-formatjs/lib/format-icu-message.ts",
+		"src/_incubator/offirmo-formatjs/lib/format-key.spec.ts",
+		"src/_incubator/offirmo-formatjs/lib/format-key.ts",
+		"src/_incubator/offirmo-formatjs/lib/icu-data-container.spec.ts",
+		"src/_incubator/offirmo-formatjs/lib/icu-data-container.ts",
+		"src/_incubator/offirmo-formatjs/lib/node/auto-intl-polyfiller.ts",
+		"src/_incubator/offirmo-formatjs/lib/types.ts",
+		"src/_incubator/offirmo-formatjs/typings-custom/intl-messageformat.d.ts",
 
 
 		
