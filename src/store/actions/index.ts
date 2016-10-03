@@ -59,10 +59,20 @@ function on_play(state: IState, action: IActionPlay): IState {
 	else {
 		// good click
 		state.valid_click_count++
+		state =  on_good_click(state)
 	}
 
 	return state
 }
+
+function on_good_click(state: IState): IState {
+	// pick an adventure archetype
+
+	// instantiate it to an adventure
+
+	return state
+}
+
 
 ////////////////////////////////////
 

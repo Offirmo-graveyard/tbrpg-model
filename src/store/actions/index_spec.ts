@@ -5,6 +5,7 @@ import { Random } from '@offirmo/random'
 import { IStore, IState } from '../index'
 import { kernel_module as saga_kernel_module } from '../../models/saga/_inversify_module'
 import { RSRCIDS, kernel_module } from '../_inversify_module'
+import * as AdventureArchetypeModel from '../../models/adventure_archetype/_inversify_module'
 
 import {
 	/*IActionSetRandomSeed,
@@ -166,10 +167,27 @@ describe('redux store actions', function() {
 				expect(state).to.have.property('next_allowed_click_date_moment_utc', 1)
 			})
 
-			describe('generated adventure', function() {
+			describe.only('generated adventure', function() {
 
 				context('having a "level increase" flag', function() {
-					it('should update stats accordingly')
+					it('should update stats accordingly', () => {
+						const kernel = make_kernel()
+						kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
+							.toConstantValue([
+								{ hid: "test", good: true, post: { gains: { level: true }}},
+							])
+						const store = kernel.get<IStore>(RSRCIDS.store)
+
+						expect(store.getState().stats.level).to.equal(1)
+
+						store.dispatch({
+							type: 'play',
+							click_date_moment_utc: moment(INITIAL_WAIT_TIME).utc()
+						})
+
+						let state = store.getState()
+						expect(state.stats.level).to.equal(2)
+					})
 				})
 
 				context('having a "give new weapon" flag', function() {

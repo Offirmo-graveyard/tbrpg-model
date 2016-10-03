@@ -46,7 +46,7 @@
   },
   "devDependencies": {
     "@offirmo/cli-toolbox": "^0.0.4",
-    "@offirmo/unit-test-toolbox": "^0.0.1",
+    "@offirmo/unit-test-toolbox": "^0.0.2",
     "@types/jsen": "^0.0.18",
     "@types/lodash": "^4.14.30",
     "@types/moment": "^2.13.0",
