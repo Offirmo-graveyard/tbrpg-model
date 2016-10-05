@@ -38,6 +38,8 @@ randoms: [number, number, number, number, number, number]
 		"src/_incubator/offirmo-formatjs/lib/node/auto-intl-polyfiller.ts",
 		"src/_incubator/offirmo-formatjs/lib/types.ts",
 		"src/_incubator/offirmo-formatjs/typings-custom/intl-messageformat.d.ts",
+		"src/mechanics/constants.ts",
+		"src/mechanics/item_inspection.ts",
 
 
 		
