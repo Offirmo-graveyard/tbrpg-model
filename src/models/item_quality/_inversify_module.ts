@@ -26,9 +26,9 @@ const i18n_fr: ITranslationStore = require('tbrpg-static-data/src/item_quality/i
 ////////////////////////////////////
 
 const RSRCIDS = {
-	schema: Symbol('schema'),
-	static_data: Symbol('static_data'),
-	model: Symbol('model'),
+	schema: Symbol('[item quality model] schema'),
+	static_data: Symbol('[item quality model] static_data'),
+	model: Symbol('[item quality model] model'),
 }
 
 ////////////

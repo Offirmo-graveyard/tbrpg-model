@@ -26,9 +26,9 @@ const i18n_fr: ITranslationStore = require('tbrpg-static-data/src/weapon_compone
 ////////////////////////////////////
 
 const RSRCIDS = {
-	schema: Symbol('schema'),
-	static_data: Symbol('static_data'),
-	model: Symbol('model'),
+	schema: Symbol('[weapon component model] schema'),
+	static_data: Symbol('[weapon component model] static_data'),
+	model: Symbol('[weapon component model] model'),
 }
 
 ////////////

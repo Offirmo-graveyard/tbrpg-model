@@ -1,11 +1,9 @@
 import { Kernel } from "inversify"
 
-import { ITranslationStore } from '../../common/types'
-
 import {
-	IAdventureArchetype,
-	IAdventureArchetypeCreationParams,
-	AdventureArchetypeModel,
+	IAdventure,
+	IAdventureCreationParams,
+	AdventureModel,
 } from './index'
 
 import { RSRCIDS } from './_inversify_module'
@@ -25,53 +23,40 @@ describe('Adventure Model', function() {
 			expect(kernel.isBound(RSRCIDS.schema)).to.be.true
 		})
 
-		it('should expose the static data', function() {
-			const kernel = make_kernel()
-			expect(kernel.isBound(RSRCIDS.static_data)).to.be.true
-		})
-
 		it('should expose the model', function() {
 			const kernel = make_kernel()
 			expect(kernel.isBound(RSRCIDS.model)).to.be.true
-		})
-
-		it('should expose the i18n data', function() {
-			const kernel = make_kernel()
-			expect(kernel.isBound('intl')).to.be.true
-		})
-	})
-
-	describe('static data', function() {
-		it('should be valid', function() {
-			const kernel = make_kernel()
-			const static_data = kernel.get<IAdventureArchetypeCreationParams[]>(RSRCIDS.static_data)
-			expect(static_data).to.be.an.array
 		})
 	})
 
 	describe('model', function() {
 		it('should work', function() {
 			const kernel = make_kernel()
-			const static_data = kernel.get<IAdventureArchetypeCreationParams[]>(RSRCIDS.static_data)
-			const model = kernel.get<AdventureArchetypeModel>(RSRCIDS.model)
+			const model = kernel.get<AdventureModel>(RSRCIDS.model)
 
 			expect(model).to.respondTo('create')
 			expect(model).to.respondTo('validate')
-			expect(() => model.validate({foo: 42} as any as IAdventureArchetype)).to.throw(Error)
-			expect(() => model.validate(model.create(static_data[0]))).to.not.throw
-		})
-	})
-
-	describe('i18n data', function() {
-		it('should be valid', function() {
-			const kernel = make_kernel()
-			const static_data = kernel.get<IAdventureArchetypeCreationParams[]>(RSRCIDS.static_data);
-
-			[ 'en', 'fr' ].forEach(lang => {
-				const i18n = kernel.getAllTagged<ITranslationStore>('intl', 'lang', lang)
-				expect(i18n).to.have.lengthOf(1)
-				expect(Object.keys(i18n[0]).length).to.be.within(static_data.length, 2 * static_data.length + 1)
-			})
+			expect(() => model.validate({foo: 42} as any as IAdventure)).to.throw(Error)
+			expect(() => model.validate(model.create({
+				archetype_hid: 'foo',
+				good: true,
+				gains: {
+					level: 0,
+					health: 0,
+					mana: 0,
+					strength: 0,
+					agility: 0,
+					vitality: 0,
+					wisdom: 0,
+					luck: 0,
+					coins: 0,
+					tokens: 0,
+					weapon: null,
+					armor: null,
+					improved_weapon_index: null,
+					improved_armor_index: null,
+				}
+			}))).to.not.throw
 		})
 	})
 })

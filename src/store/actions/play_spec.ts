@@ -3,27 +3,29 @@ import { Kernel } from "inversify"
 import { Random } from '@offirmo/random'
 
 import { IStore, IState } from '../index'
-import { kernel_module as adventure_archetype_kernel_module } from '../../models/adventure_archetype/_inversify_module'
-import { kernel_module as db_kernel_module } from '../../db/_inversify_module'
-import { kernel_module as item_quality_kernel_module } from '../../models/item_quality/_inversify_module'
-import { kernel_module as saga_kernel_module } from '../../models/saga/_inversify_module'
-import { kernel_module as weapon_component_kernel_module } from '../../models/weapon_component/_inversify_module'
 
-import { RSRCIDS, kernel_module } from '../_inversify_module'
+/*
+ import { kernel_module as adventure_archetype_kernel_module } from '../../models/adventure_archetype/_inversify_module'
+ import { kernel_module as db_kernel_module } from '../../db/_inversify_module'
+ import { kernel_module as item_quality_kernel_module } from '../../models/item_quality/_inversify_module'
+ import { kernel_module as saga_kernel_module } from '../../models/saga/_inversify_module'
+ import { kernel_module as weapon_component_kernel_module } from '../../models/weapon_component/_inversify_module'
+ */
+
+import { RSRCIDS } from '../_inversify_module'
+import { modules } from '../_inversify_needed_modules'
+
 import * as AdventureArchetypeModel from '../../models/adventure_archetype/_inversify_module'
 
-describe.only('redux store action "play"', function() {
+describe('redux store action "play"', function() {
 
 	function make_kernel() {
+		const parent_kernel = new Kernel()
+		parent_kernel.load(...modules)
+
 		const kernel = new Kernel()
-		kernel.load(
-			adventure_archetype_kernel_module,
-			db_kernel_module,
-			item_quality_kernel_module,
-			saga_kernel_module,
-			weapon_component_kernel_module,
-			kernel_module
-		)
+		kernel.parent = parent_kernel
+
 		return kernel
 	}
 
@@ -107,7 +109,7 @@ describe.only('redux store action "play"', function() {
 		describe('generated adventure', function() {
 
 			context('having a "level increase" flag', function() {
-				it('should update stats accordingly', () => {
+				it.only('should update stats accordingly', () => {
 					const kernel = make_kernel()
 					kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
 						.toConstantValue([

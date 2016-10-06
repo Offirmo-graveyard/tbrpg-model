@@ -25,8 +25,8 @@ const i18n_fr: ITranslationStore = require('./i18n/fr')
 ////////////////////////////////////
 
 const RSRCIDS = {
-	schema: Symbol('schema'),
-	model: Symbol('model'),
+	schema: Symbol('[weapon model] schema'),
+	model: Symbol('[weapon model] model'),
 }
 
 ////////////

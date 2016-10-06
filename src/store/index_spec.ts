@@ -4,15 +4,14 @@ import {
 	IStore,
 } from './index'
 
-import { kernel_module as saga_kernel_module } from '../models/saga/_inversify_module'
-import { RSRCIDS, kernel_module } from './_inversify_module'
+import { RSRCIDS } from './_inversify_module'
+import { modules } from './_inversify_needed_modules'
 
 describe('TBRPG Store', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
-		kernel.load(saga_kernel_module)
-		kernel.load(kernel_module)
+		kernel.load(...modules)
 		return kernel
 	}
 

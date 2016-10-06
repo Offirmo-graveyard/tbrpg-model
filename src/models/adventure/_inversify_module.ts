@@ -20,8 +20,8 @@ const default_schema = require('./schema.json')
 ////////////////////////////////////
 
 const RSRCIDS = {
-	schema: Symbol('schema'),
-	model: Symbol('model'),
+	schema: Symbol('[adventure model] schema'),
+	model: Symbol('[adventure model] model'),
 }
 
 ////////////
