@@ -1,16 +1,13 @@
 import { Kernel } from 'inversify'
 
-import { IAdventureArchetype, kernel_module as adventure_archetype_kernel_module } from '../models/adventure_archetype/_inversify_module'
-import { IItemQuality, kernel_module as item_quality_kernel_module } from '../models/item_quality/_inversify_module'
-import { IWeaponComponent, kernel_module as weapon_component_kernel_module } from '../models/weapon_component/_inversify_module'
-
-import { IStaticData, RSRCIDS, kernel_module } from './_inversify_module'
+import { IStaticData, RSRCIDS } from './_inversify_module'
+import { modules } from './_inversify_needed_modules'
 
 describe('TBRPG Dbs', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
-		kernel.load(adventure_archetype_kernel_module, item_quality_kernel_module, weapon_component_kernel_module, kernel_module)
+		kernel.load(...modules)
 		return kernel
 	}
 

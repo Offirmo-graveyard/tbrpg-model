@@ -11,7 +11,7 @@ import {
 import { RSRCIDS } from './_inversify_module'
 import { modules } from './_inversify_needed_modules'
 
-describe('Adventure Archetype Model', function() {
+describe('Adventure Model', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
