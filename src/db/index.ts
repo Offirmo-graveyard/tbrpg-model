@@ -64,8 +64,8 @@ function factory(dependencies: InjectableDependencies): IStaticData {
 		weapon_component: {
 			all: weapon_component_all,
 			base: _.filter(weapon_component_all, {type: 'base'}),
-			qualifier_1:  _.filter(weapon_component_all, {type: 'qualifier1'}),
-			qualifier_2:  _.filter(weapon_component_all, {type: 'qualifier2'}),
+			qualifier_1: _.filter(weapon_component_all, {type: 'qualifier1'}),
+			qualifier_2: _.filter(weapon_component_all, {type: 'qualifier2'}),
 		}
 	}
 }

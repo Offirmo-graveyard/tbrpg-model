@@ -22,12 +22,10 @@ import { IStaticData, factory } from './index'
 ////////////////////////////////////
 
 const RSRCIDS = {
-	db: {
-		static: {
-			all: Symbol('db.static.all'),
-			adventure_archetype: {
-				all: Symbol('db.static.adventure_archetype')
-			}
+	static: {
+		all: Symbol('db.static.all'),
+		adventure_archetype: {
+			all: Symbol('db.static.adventure_archetype')
 		}
 	}
 }
@@ -36,7 +34,7 @@ const RSRCIDS = {
 
 const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 
-	bind<IStaticData>(RSRCIDS.db.static.all)
+	bind<IStaticData>(RSRCIDS.static.all)
 		.toDynamicValue((context: interfaces.Context) => factory({
 			adventure_archetype_model:
 				context.kernel.get<AdventureArchetypeModel>(ADVENTURE_ARCHETYPE_RSRCIDS.model),
@@ -53,9 +51,9 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 		}))
 		.inSingletonScope()
 
-	bind<IAdventureArchetype[]>(RSRCIDS.db.static.adventure_archetype.all)
+	bind<IAdventureArchetype[]>(RSRCIDS.static.adventure_archetype.all)
 		.toDynamicValue((context: interfaces.Context) =>
-				context.kernel.get<IStaticData>(RSRCIDS.db.static.all).adventure_archetype.all
+				context.kernel.get<IStaticData>(RSRCIDS.static.all).adventure_archetype.all
 		)
 		.inSingletonScope()
 })

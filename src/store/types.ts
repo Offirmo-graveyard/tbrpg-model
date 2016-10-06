@@ -5,6 +5,7 @@ import { MT19937 } from '@offirmo/random'
 ////////////
 
 import { ISaga } from '../models/saga'
+import { IStaticData } from '../db'
 
 ////////////////////////////////////
 
@@ -13,6 +14,7 @@ import { ISaga } from '../models/saga'
 interface IState extends ISaga {
 	internal: {
 		prng: MT19937 | null
+		static_data: IStaticData | null
 	}
 }
 

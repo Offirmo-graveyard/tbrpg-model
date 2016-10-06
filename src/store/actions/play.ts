@@ -24,7 +24,7 @@ function on_play(state: IState, action: IActionPlay): IState {
 	else {
 		// good click
 		state.valid_click_count++
-		state =  on_good_click(state)
+		state = on_good_click(state)
 	}
 
 	return state

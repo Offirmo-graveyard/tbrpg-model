@@ -16,11 +16,13 @@ import { Random } from '@offirmo/random'
 ////////////
 
 import { SagaModel } from '../models/saga'
+import { IStaticData } from '../db'
 
 import { IState } from './types'
 
 interface InjectableDependencies {
 	saga_model: SagaModel
+	static_data: IStaticData
 }
 
 ////////////
@@ -60,9 +62,10 @@ const initial_state: IState = {
 		seed: 1234,
 		use_count: 0
 	},
-	// additions, non persistable
+	// additions, non persistable, null at start
 	internal: {
-		prng: null
+		prng: null,
+		static_data: null,
 	}
 }
 
@@ -71,7 +74,10 @@ const initial_state: IState = {
 type IReducer = ReduxReducer<IState>
 
 function factory(dependencies: InjectableDependencies): IReducer {
-	const saga_model = dependencies.saga_model
+	const {
+		saga_model,
+		static_data
+	} = dependencies
 
 	return (state: IState, action: ReduxAction): IState => {
 
@@ -92,6 +98,7 @@ function factory(dependencies: InjectableDependencies): IReducer {
 				.seed(state.prng_state.seed)
 				.discard(state.prng_state.use_count)
 		}
+		state.internal.static_data = state.internal.static_data || static_data
 
 		switch (action.type) {
 			case 'test_xxx':
