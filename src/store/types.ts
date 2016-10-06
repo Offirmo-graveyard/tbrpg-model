@@ -14,7 +14,9 @@ import { IStaticData } from '../db'
 interface IState extends ISaga {
 	internal: {
 		prng: MT19937 | null
-		static_data: IStaticData | null
+		deps: {
+			static_data: IStaticData | null
+		}
 	}
 }
 

@@ -65,8 +65,10 @@ const initial_state: IState = {
 	// additions, non persistable, null at start
 	internal: {
 		prng: null,
-		static_data: null,
-	}
+		deps: {
+			static_data: null,
+		}
+	},
 }
 
 ////////////
@@ -88,6 +90,7 @@ function factory(dependencies: InjectableDependencies): IReducer {
 		// inbound check
 		try { saga_model.validate(state) }
 		catch (e) {
+			console.error(e)
 			e.message = 'TBRPG Reducer: inbound state is invalid !'
 			throw e
 		}
@@ -98,7 +101,7 @@ function factory(dependencies: InjectableDependencies): IReducer {
 				.seed(state.prng_state.seed)
 				.discard(state.prng_state.use_count)
 		}
-		state.internal.static_data = state.internal.static_data || static_data
+		state.internal.deps.static_data = state.internal.deps.static_data || static_data
 
 		switch (action.type) {
 			case 'test_xxx':
