@@ -38,6 +38,7 @@ function on_good_click(state: IState): IState {
 
 	// instantiate it to an adventure
 
+
 	return state
 }
 
