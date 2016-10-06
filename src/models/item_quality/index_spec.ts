@@ -8,16 +8,14 @@ import {
 	ItemQualityModel,
 } from './index'
 
-import {
-	RSRCIDS,
-	kernel_module
-} from './_inversify_module'
+import { RSRCIDS } from './_inversify_module'
+import { modules } from './_inversify_needed_modules'
 
 describe('Item Quality Model', function() {
 
 	function make_kernel() {
 		const kernel = new Kernel()
-		kernel.load(kernel_module)
+		kernel.load(...modules)
 		return kernel
 	}
 
