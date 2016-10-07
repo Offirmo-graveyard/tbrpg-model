@@ -38,7 +38,7 @@ describe('Adventure Model', function() {
 			expect(model).to.respondTo('validate')
 			expect(() => model.validate({foo: 42} as any as IAdventure)).to.throw(Error)
 			expect(() => model.validate(model.create({
-				archetype_hid: 'foo',
+				adventure_archetype_hid: 'foo',
 				good: true,
 				gains: {
 					level: 0,

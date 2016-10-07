@@ -8,6 +8,8 @@ interface IConstHash {
 	[k: string]: number
 }
 
+////////////
+
 const quality_related_strength_bonus_at_generation: IConstHash = {
 	common:    0,
 	uncommon:  1,
@@ -39,6 +41,10 @@ const quality_related_weapon_strength_spread: IConstHash = {
 
 const weapon_enhancement_multiplier = 0.2
 
+////////////
+
+const coins_gain_per_level_multiplier = 1.1
+
 const coins_gain_intervals: { [k: string]: [number, number] } = {
 	none:   [  0,    0],
 	small:  [  1,   20],
@@ -55,6 +61,7 @@ export {
 	quality_related_weapon_strength_multiplier,
 	quality_related_weapon_strength_spread,
 	weapon_enhancement_multiplier,
+	coins_gain_per_level_multiplier,
 	coins_gain_intervals,
 }
 

@@ -6,8 +6,11 @@ import { Random } from '@offirmo/random'
 
 ////////////
 
+import { IAdventure } from '../../models/adventure'
 import { IAdventureArchetype } from '../../models/adventure_archetype'
 import { IState } from '../types'
+
+import { generate_coin_gain } from '../../mechanics/coins'
 
 ////////////////////////////////////
 
@@ -37,7 +40,27 @@ function on_good_click(state: IState): IState {
 	console.log(aa)
 
 	// instantiate it to an adventure
-
+	const gains = aa.post.gains // shorcut
+	const a: IAdventure = {
+		adventure_archetype_hid: aa.hid,
+		good: aa.good,
+		gains: {
+			level: gains.level ? 1 : 0,
+			health: gains.health,
+			mana: gains.mana,
+			strength: gains.strength,
+			agility: gains.agility,
+			vitality: gains.vitality,
+			wisdom: gains.wisdom,
+			luck: gains.luck,
+			coins: generate_coin_gain(state.internal.prng!, gains.coins, state.stats.level),
+			tokens: gains.tokens,
+			weapon: null, // TODO
+			armor: null, // TODO
+			improved_weapon_index: null, // TODO
+			improved_armor_index: null, // TODO
+		}
+	}
 
 	return state
 }

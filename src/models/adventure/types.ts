@@ -6,7 +6,7 @@ import { IWeapon } from '../weapon'
 ////////////////////////////////////
 
 interface IAdventure {
-	archetype_hid: string
+	adventure_archetype_hid: string
 	good: boolean
 	gains: {
 		level: number

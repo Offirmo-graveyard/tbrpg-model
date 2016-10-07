@@ -105,7 +105,7 @@ function create_instance(dependencies: InjectableDependencies) {
 		let random_use_count = 0
 		const gains = aa.post.gains
 		const adventure_data: IAdventureCreationParams = {
-			archetype_hid: aa.hid,
+			adventure_archetype_hid: aa.hid,
 			good: aa.good,
 			gains: {
 				level: gains.level ? 1 : 0,
