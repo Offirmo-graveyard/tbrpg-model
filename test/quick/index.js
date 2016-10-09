@@ -1,11 +1,25 @@
 #!/bin/sh
 ':' //# http://sambal.org/?p=1014 ; exec /usr/bin/env node "$0" "$@"
 
-const { Kernel } = require('inversify')
+////////////////////////////////////
 
-const { kernel_modules, RSRCIDS } = require('../unit/src/_inversify_module')
+const moment = require('moment')
 
-const kernel = new Kernel()
-kernel.load(...kernel_modules)
+////////////
 
-const store = kernel.get(RSRCIDS.store.store)
+const { factory } = require('../unit/src')
+const store = factory()
+
+////////////////////////////////////
+
+store.subscribe(() => console.log('* Game state change detected ! (from game)', store.getState()))
+
+store.dispatch({
+	type: 'set_random_seed',
+	seed: 1234,
+})
+
+store.dispatch({
+	type: 'play',
+	click_date_moment_utc: moment.utc(),
+})

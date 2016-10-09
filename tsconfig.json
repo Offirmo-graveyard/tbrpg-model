@@ -88,6 +88,7 @@
 		"src/store/reducer_spec.ts",
 		"src/store/types.ts",
 		"src/_inversify_module.ts",
+		"src/index.ts",
 		"typings-custom/non-standard-formats.d.ts",
 		"typings-custom/unit-tests-global-variables.d.ts",
 		"typings-custom/untyped-modules.d.ts"

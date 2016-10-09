@@ -81,12 +81,9 @@ function factory(dependencies: InjectableDependencies): IReducer {
 		static_data
 	} = dependencies
 
-	return (state: IState, action: ReduxAction): IState => {
+	////////////
 
-		console.log('* TBRPG reducer was dispatched an action: ', action.type)
-		if (!state)
-			state = _.cloneDeep(initial_state)
-
+	function inbound(state: IState) {
 		// inbound check
 		try { saga_model.validate(state) }
 		catch (e) {
@@ -102,6 +99,29 @@ function factory(dependencies: InjectableDependencies): IReducer {
 				.discard(state.prng_state.use_count)
 		}
 		state.internal.deps.static_data = state.internal.deps.static_data || static_data
+	}
+
+	////////////
+
+	function outbound(state: IState) {
+		state.prng_state.use_count = state.internal.prng!.getUseCount()
+
+		//  outbound check
+		try { saga_model.validate(state) }
+		catch (e) {
+			e.message = 'TBRPG Reducer: outbound state is invalid !'
+			throw e
+		}
+	}
+
+	////////////
+
+	return (state: IState, action: ReduxAction): IState => {
+		console.log('* TBRPG reducer was dispatched an action:', action.type)
+
+		state = state || _.cloneDeep(initial_state)
+
+		inbound(state)
 
 		switch (action.type) {
 			case 'test_xxx':
@@ -123,14 +143,7 @@ function factory(dependencies: InjectableDependencies): IReducer {
 				throw new Error('Reducer: Unknown action !')
 		}
 
-		state.prng_state.use_count = state.internal.prng!.getUseCount()
-
-		//  outbound check
-		try { saga_model.validate(state) }
-		catch (e) {
-			e.message = 'TBRPG Reducer: outbound state is invalid !'
-			throw e
-		}
+		outbound(state)
 
 		return state
 	}
