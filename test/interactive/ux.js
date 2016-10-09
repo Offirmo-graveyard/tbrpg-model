@@ -12,8 +12,8 @@ const stylize_string = require('@offirmo/cli-toolbox/string/stylize')
 ////////////
 
 const mechanics = require('../unit/src/mechanics')
-const format_key = require('../unit/src/_incubator/offirmo-formatjs/lib/format-key')
-const _i = format_key.format
+//const format_key = require('../unit/src/_incubator/offirmo-formatjs/lib/format-key')
+//const _i = format_key.format
 
 ////////////////////////////////////
 

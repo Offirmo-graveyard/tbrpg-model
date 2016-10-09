@@ -4,6 +4,8 @@ import { KernelModule } from "inversify"
 
 ////////////
 
+import * as Db                     from './db/_inversify_module'
+
 import * as AdventureModel          from './models/adventure/_inversify_module'
 import * as AdventureArchetypeModel from './models/adventure_archetype/_inversify_module'
 import * as ItemQualityModel        from './models/item_quality/_inversify_module'
@@ -16,6 +18,7 @@ import * as Store from './store/_inversify_module'
 ////////////////////////////////////
 
 const kernel_modules = [
+	                     Db.kernel_module,
 	         AdventureModel.kernel_module,
 	AdventureArchetypeModel.kernel_module,
 	       ItemQualityModel.kernel_module,
@@ -26,6 +29,7 @@ const kernel_modules = [
 ]
 
 const RSRCIDS = {
+	db: Db.RSRCIDS,
 	model: {
 		adventure: AdventureModel.RSRCIDS,
 		adventure_archetype: AdventureArchetypeModel.RSRCIDS,
@@ -34,7 +38,7 @@ const RSRCIDS = {
 		weapon: WeaponModel.RSRCIDS,
 		weapon_component: WeaponComponentModel.RSRCIDS,
 	},
-	store: Store.RSRCIDS
+	store: Store.RSRCIDS,
 }
 
 ////////////////////////////////////

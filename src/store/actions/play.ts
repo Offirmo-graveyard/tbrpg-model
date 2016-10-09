@@ -40,7 +40,7 @@ function on_good_click(state: IState): IState {
 	console.log(aa)
 
 	// instantiate it to an adventure
-	const gains = aa.post.gains // shorcut
+	const gains = aa.post.gains // shortcut
 	const a: IAdventure = {
 		adventure_archetype_hid: aa.hid,
 		good: aa.good,
