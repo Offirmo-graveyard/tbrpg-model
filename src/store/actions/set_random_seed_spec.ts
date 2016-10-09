@@ -31,8 +31,8 @@ describe('redux store action "set_random_seed"', function() {
 			seed: NEW_SEED
 		})
 
-		state = store.getState()
-		expect(state).to.have.deep.property('prng_state.seed', NEW_SEED)
+		let saga = store.getState().saga
+		expect(saga).to.have.deep.property('prng_state.seed', NEW_SEED)
 	})
 
 	it('should reset the PRNG use count', () => {
@@ -46,16 +46,16 @@ describe('redux store action "set_random_seed"', function() {
 			}
 		})
 
-		let state = store.getState()
-		expect(state).to.have.deep.property('prng_state.use_count', 1)
+		let saga = store.getState().saga
+		expect(saga).to.have.deep.property('prng_state.use_count', 1)
 
 		store.dispatch({
 			type: 'set_random_seed',
 			seed: NEW_SEED
 		})
 
-		state = store.getState()
-		expect(state).to.have.deep.property('prng_state.use_count', 0)
+		saga = store.getState().saga
+		expect(saga).to.have.deep.property('prng_state.use_count', 0)
 	})
 
 	it('should effectively reset the PRNG', () => {

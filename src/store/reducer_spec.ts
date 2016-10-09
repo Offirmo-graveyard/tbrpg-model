@@ -43,7 +43,7 @@ describe('TBRPG Reducer', function() {
 
 			it('should be correct', () => {
 				expect(initial_state).to.be.an.object
-				expect(initial_state.prng_state).to.deep.equal({
+				expect(initial_state.saga.prng_state).to.deep.equal({
 					seed: EXPECTED_SEED,
 					use_count: 0
 				})
@@ -128,7 +128,7 @@ describe('TBRPG Reducer', function() {
 			const reducer = make_reducer()
 			const state = reducer(null, test_action)
 
-			expect(state.prng_state.use_count).to.equal(USE_COUNT)
+			expect(state.saga.prng_state.use_count).to.equal(USE_COUNT)
 		})
 	})
 })

@@ -1,6 +1,6 @@
 ////////////////////////////////////
 
-//import { IWeapon } from '../weapon'
+import { IAdventure } from '../adventure'
 import * as moment from 'moment'
 
 ////////////
@@ -8,7 +8,8 @@ import * as moment from 'moment'
 interface ISaga {
 	click_count: number
 	valid_click_count: number
-	next_allowed_click_date_moment_utc: moment.Moment
+	last_adventure: IAdventure | null
+	next_allowed_click_date_unix_timestamp_utc: number
 	stats: {
 		level: number
 		health: number

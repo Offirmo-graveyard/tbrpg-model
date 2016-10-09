@@ -23,7 +23,7 @@ describe('TBRPG Store', function() {
 	it('should have a proper initial state', () => {
 		const store = make_store()
 		const state = store.getState()
-		expect(state).to.have.property('click_count', 0)
+		expect(state).to.have.property('saga.click_count', 0)
 		expect(state).to.have.deep.property('internal.prng')
 	})
 })

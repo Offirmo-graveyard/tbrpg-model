@@ -38,7 +38,8 @@ describe('Saga Model', function() {
 			expect(() => model.validate(model.create({
 				click_count: 0,
 				valid_click_count: 0,
-				next_allowed_click_date_moment_utc: moment(),
+				last_adventure: null,
+				next_allowed_click_date_unix_timestamp_utc: 1,
 				stats: {
 					level: 1,
 					health: 1,

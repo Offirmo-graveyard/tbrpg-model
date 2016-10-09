@@ -4,14 +4,6 @@ import { Random } from '@offirmo/random'
 
 import { IStore, IState } from '../index'
 
-/*
- import { kernel_module as adventure_archetype_kernel_module } from '../../models/adventure_archetype/_inversify_module'
- import { kernel_module as db_kernel_module } from '../../db/_inversify_module'
- import { kernel_module as item_quality_kernel_module } from '../../models/item_quality/_inversify_module'
- import { kernel_module as saga_kernel_module } from '../../models/saga/_inversify_module'
- import { kernel_module as weapon_component_kernel_module } from '../../models/weapon_component/_inversify_module'
- */
-
 import { RSRCIDS } from '../_inversify_module'
 import { modules } from '../_inversify_needed_modules'
 
@@ -45,7 +37,7 @@ describe('redux store action "play"', function() {
 			// immediate next click without waiting
 			store.dispatch({
 				type: 'play',
-				click_date_moment_utc: moment(INIT_TIME).utc()
+				click_date_unix_timestamp_utc: INIT_TIME
 			})
 
 			return store
@@ -54,19 +46,18 @@ describe('redux store action "play"', function() {
 		it('should properly update click counts', () => {
 			const store = make_store_with_preconditions()
 
-			let state = store.getState()
-			expect(state).to.have.property('click_count', 1)
-			expect(state).to.have.property('valid_click_count', 0)
-			//next_allowed_click_date_moment_utc: moment.Moment
+			let saga = store.getState().saga
+			expect(saga).to.have.property('click_count', 1)
+			expect(saga).to.have.property('valid_click_count', 0)
 		})
 
 		it.skip('should properly update click next_allowed_click_date', () => {
 			const store = make_store_with_preconditions()
-			const initial_next_allowed_click_date = make_store().getState().next_allowed_click_date_moment_utc
+			const initial_next_allowed_click_date = make_store().getState().saga.next_allowed_click_date_unix_timestamp_utc
 
-			let state = store.getState()
-			expect(state.next_allowed_click_date_moment_utc).to.be.afterMoment(initial_next_allowed_click_date)
-			expect(state.next_allowed_click_date_moment_utc).to.be.sameMoment(
+			let saga = store.getState().saga
+			expect(saga.next_allowed_click_date_unix_timestamp_utc).to.be.afterMoment(initial_next_allowed_click_date)
+			expect(saga.next_allowed_click_date_unix_timestamp_utc).to.be.sameMoment(
 				moment(1).utc() // TODO mechanics
 			)
 		})
@@ -83,7 +74,7 @@ describe('redux store action "play"', function() {
 			// wait WAIT_TIME before clicking
 			store.dispatch({
 				type: 'play',
-				click_date_moment_utc: moment(INITIAL_WAIT_TIME).utc()
+				click_date_unix_timestamp_utc: INITIAL_WAIT_TIME
 			})
 
 			return store
@@ -92,18 +83,18 @@ describe('redux store action "play"', function() {
 		it('should properly update click counts', () => {
 			const store = make_store_with_preconditions()
 
-			let state = store.getState()
-			expect(state).to.have.property('click_count', 1)
-			expect(state).to.have.property('valid_click_count', 1)
+			let saga = store.getState().saga
+			expect(saga).to.have.property('click_count', 1)
+			expect(saga).to.have.property('valid_click_count', 1)
 		})
 
 		it.skip('should properly update click next_allowed_click_date', () => {
 			const store = make_store_with_preconditions()
-			const initial_next_allowed_click_date = make_store().getState().next_allowed_click_date_moment_utc
+			const initial_next_allowed_click_date = make_store().getState().saga.next_allowed_click_date_unix_timestamp_utc
 
-			let state = store.getState()
-			expect(state.next_allowed_click_date_moment_utc).to.be.afterMoment(initial_next_allowed_click_date)
-			expect(state).to.have.property('next_allowed_click_date_moment_utc', 1)
+			let saga = store.getState().saga
+			expect(saga.next_allowed_click_date_unix_timestamp_utc).to.be.afterMoment(initial_next_allowed_click_date)
+			expect(saga).to.have.property('next_allowed_click_date_unix_timestamp_utc', 1)
 		})
 
 		describe('generated adventure', function() {
@@ -117,15 +108,15 @@ describe('redux store action "play"', function() {
 						])
 					const store = kernel.get<IStore>(RSRCIDS.store)
 
-					expect(store.getState().stats.level).to.equal(1)
+					expect(store.getState().saga.stats.level).to.equal(1)
 
 					store.dispatch({
 						type: 'play',
-						click_date_moment_utc: moment(INITIAL_WAIT_TIME).utc()
+						click_date_unix_timestamp_utc: INITIAL_WAIT_TIME
 					})
 
-					let state = store.getState()
-					expect(state.stats.level).to.equal(2)
+					let saga = store.getState().saga
+					expect(saga.stats.level).to.equal(2)
 				})
 			})
 

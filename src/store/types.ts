@@ -11,12 +11,13 @@ import { IStaticData } from '../db'
 
 /** Attached to state for convenience, but not adding that much info
  */
-interface IState extends ISaga {
+interface IState {
+	saga: ISaga
 	internal: {
 		prng: MT19937 | null
-		deps: {
-			static_data: IStaticData | null
-		}
+	}
+	deps: {
+		static_data: IStaticData | null
 	}
 }
 

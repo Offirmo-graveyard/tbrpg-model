@@ -15,9 +15,13 @@
 			"minimum": 0,
 			"default": 0
 		},
-		"next_allowed_click_date_moment_utc": {
+		"last_adventure": {
+			"description": "last adventure",
+			"default": null
+		},
+		"next_allowed_click_date_unix_timestamp_utc": {
 			"description": "exact date after when the user is allowed to validly click again, in moment.utc() format",
-			"format": "date-time",
+			"format": "integer",
 			"default": 0
 		},
 		"stats": {
@@ -140,11 +144,6 @@
 					"default": 0
 				}
 			}
-		},
-		"internal": {
-			"description": "placeholder for internal, temporary state. Will not be persisted.",
-			"type": "object",
-			"additionalProperties": true
 		}
 	},
 	"offirmo_extensions": {

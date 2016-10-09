@@ -16,20 +16,30 @@ import { generate_coin_gain } from '../../mechanics/coins'
 
 interface IActionPlay extends ReduxAction {
 	type: 'play'
-	click_date_moment_utc: moment.Moment
+	click_date_unix_timestamp_utc: number
 }
 
 function on_play(state: IState, action: IActionPlay): IState {
-	state.click_count++
+	state.saga.click_count++
 
-	if (action.click_date_moment_utc.isBefore(state.next_allowed_click_date_moment_utc)) {
+	if (action.click_date_unix_timestamp_utc < state.saga.next_allowed_click_date_unix_timestamp_utc) {
 		// too early ! bad click
+		console.error('bad click', action.click_date_unix_timestamp_utc, state.saga.next_allowed_click_date_unix_timestamp_utc)
+		state = on_bad_click(state)
 	}
 	else {
 		// good click
-		state.valid_click_count++
+		state.saga.valid_click_count++
 		state = on_good_click(state)
 	}
+
+	return state
+}
+
+
+function on_bad_click(state: IState): IState {
+
+	// TODO
 
 	return state
 }
@@ -37,11 +47,11 @@ function on_play(state: IState, action: IActionPlay): IState {
 function on_good_click(state: IState): IState {
 
 	const aa = pickNextAdventureArchetype(state)
-	console.log(aa)
+	//console.log('picked adventure', aa)
 
 	// instantiate it to an adventure
 	const gains = aa.post.gains // shortcut
-	const a: IAdventure = {
+	state.saga.last_adventure = {
 		adventure_archetype_hid: aa.hid,
 		good: aa.good,
 		gains: {
@@ -53,7 +63,7 @@ function on_good_click(state: IState): IState {
 			vitality: gains.vitality,
 			wisdom: gains.wisdom,
 			luck: gains.luck,
-			coins: generate_coin_gain(state.internal.prng!, gains.coins, state.stats.level),
+			coins: generate_coin_gain(state.internal.prng!, gains.coins, state.saga.stats.level),
 			tokens: gains.tokens,
 			weapon: null, // TODO
 			armor: null, // TODO
@@ -67,7 +77,7 @@ function on_good_click(state: IState): IState {
 
 // ~mutate state due to prn consumption
 function pickNextAdventureArchetype(state: IState): IAdventureArchetype {
-	const all = state.internal.deps.static_data!.adventure_archetype.all
+	const all = state.deps.static_data!.adventure_archetype.good
 
 	return Random.pick<IAdventureArchetype>(
 		state.internal.prng!,

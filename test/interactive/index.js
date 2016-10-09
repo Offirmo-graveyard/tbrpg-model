@@ -7,11 +7,6 @@
 const clear_cli = require('@offirmo/cli-toolbox/stdout/clear-cli')
 clear_cli()
 
-
-//const json = require('@offirmo/cli-toolbox/fs/json')
-//json.read(__dirname + '/../../src/adventure/schema.json').then(data => console.log(data))
-
-
 // thank you http://patorjk.com/software/taag/#p=display&h=3&v=0&f=Rectangles&t=Online%20%20Adventures
 const displayInAsciiArtFont = require('@offirmo/cli-toolbox/stdout/display_in_ascii_art_font')
 
@@ -41,51 +36,8 @@ const ux = require('./ux')
 
 ////////////////////////////////////////////////////////////
 
-let locale = 'en'
+game.store.subscribe(() => ux.render(game.store.getState()))
 
-import { polyfill_intl_for_locales } from '../../src/node/auto-intl-polyfiller'
-polyfill_intl_for_locales([ 'en', 'fr'])
-
-console.log('Hello world !')
-
-
-import { factory } from '../../src/index'
-
-const i18n = factory()
-i18n.setErrorReporter((err: Error) => {})
-i18n.addTranslations('fr', {
-	hello: 'Bonjour',
-	savings: '{count, number} heures économisées par an',
-	security_score: 'Score {score, number, percent}',
-	total_to_pay: 'Total à payer : {total, number, price}',
-	joined_team: '{name} a rejoint l’équipe le {date, date, long}',
-	x_items: `{count, plural, =0 {Pas d’éléments.} =1 {Un élément.} other {{count} éléments.}}`,
-})
-i18n.addCustomFormats('fr', {
-	number: {
-		price: {
-			style: 'currency',
-			currency: 'EUR'
-		}
-	}
-})
-
-i18n.addTranslations('en', {
-	hello: 'Hello',
-	savings: '{count, number} hours saved each year',
-	security_score: 'Score {score, number, percent}',
-	total_to_pay: 'Total due: {total, number, price}',
-	joined_team: '{name} joined the team on {date, date, short}',
-	x_items: `{count, plural, =0 {No items.} =1 {One item.} other {{count} items.}}`
-})
-i18n.addCustomFormats('en', {
-	number: {
-		price: {
-			style: 'currency',
-			currency: 'USD'
-		}
-	}
-})
 
 /*
 let intl
@@ -97,6 +49,7 @@ icu_container.on_locale_change(i => {
 	const greetings = format_key.format('hello', {}, intl)
 	console.log(greetings)
 })
+*/
 
 ////////////
 const APP_ID = 'TBRPG model'
@@ -104,13 +57,12 @@ vorpal.history(APP_ID)
 vorpal.localStorage(APP_ID)
 
 vorpal.log('\nHello from vorpal-based TBRPG UX !');
-vorpal.log('\nAvailable models:\n' + prettify_json(Object.keys(TBRPG)) + '\n');
+//vorpal.log('\nAvailable models:\n' + prettify_json(Object.keys(TBRPG)) + '\n');
 
 ////////////
 
 vorpal
 .command('x', 'clear screen')
-.autocomplete(Object.keys(TBRPG))
 .action((args, callback) => {
 	clear_cli()
 	return callback()
@@ -118,6 +70,18 @@ vorpal
 
 ////////////
 
+vorpal
+.command('p', 'go on an adventure')
+.action((args, callback) => {
+
+	game.play()
+
+	return callback()
+})
+
+////////////
+
+/*
 vorpal
 .command('set_locale <locale>', 'change locale')
 .autocomplete(TBRPG.supported_locales)
@@ -131,9 +95,10 @@ vorpal
 
 	callback()
 })
+*/
 
 ////////////
-
+/*
 vorpal
 .command('model <model> <cmd>', 'display infos about the target model')
 .autocomplete(Object.keys(TBRPG))
@@ -189,6 +154,7 @@ vorpal
 
 	callback()
 })
+*/
 
 ////////////////////////////////////
 
@@ -196,14 +162,10 @@ vorpal
 .delimiter(stylizeString.red('test>'))
 .show()
 
-vorpal.exec('set_locale fr')
+//vorpal.exec('set_locale fr')
 //vorpal.ui.input('model adventure_archetype raw')
 //vorpal.ui.input('model weapon_component raw')
 //vorpal.ui.input('model weapon demo')
-vorpal.ui.input('model adventure demo')
+//vorpal.ui.input('model adventure demo')
 
 ////////////////////////////////////
-
-game.store.subscribe(function () {
-	console.log('state changed !')
-})

@@ -36,39 +36,42 @@ import {
 ////////////
 
 const initial_state: IState = {
-	click_count: 0,
-	valid_click_count: 0,
-	next_allowed_click_date_moment_utc: moment(1).utc(), // 1 helps for unit tests while not harming usability
-	stats: {
-		level: 1,
-		health: 1,
-		mana: 0,
-		strength: 1,
-		agility: 1,
-		vitality: 1,
-		wisdom: 1,
-		luck: 1
-	},
-	currencies: {
-		coins: 0,
-		tokens: 0
-	},
-	inventory: [],
-	skills: [],
-	flags: {
-		recent_adventure_ids: []
-	},
-	prng_state: {
-		seed: 1234,
-		use_count: 0
+	saga: {
+		click_count: 0,
+		valid_click_count: 0,
+		last_adventure: null,
+		next_allowed_click_date_unix_timestamp_utc: 1, // 1 helps for unit tests while not harming usability
+		stats: {
+			level: 1,
+			health: 1,
+			mana: 0,
+			strength: 1,
+			agility: 1,
+			vitality: 1,
+			wisdom: 1,
+			luck: 1
+		},
+		currencies: {
+			coins: 0,
+			tokens: 0
+		},
+		inventory: [],
+		skills: [],
+		flags: {
+			recent_adventure_ids: []
+		},
+		prng_state: {
+			seed: 1234,
+			use_count: 0
+		},
 	},
 	// additions, non persistable, null at start
 	internal: {
 		prng: null,
-		deps: {
-			static_data: null,
-		}
 	},
+	deps: {
+		static_data: null,
+	}
 }
 
 ////////////
@@ -85,7 +88,7 @@ function factory(dependencies: InjectableDependencies): IReducer {
 
 	function inbound(state: IState) {
 		// inbound check
-		try { saga_model.validate(state) }
+		try { saga_model.validate(state.saga) }
 		catch (e) {
 			console.error(e)
 			e.message = 'TBRPG Reducer: inbound state is invalid !'
@@ -95,19 +98,19 @@ function factory(dependencies: InjectableDependencies): IReducer {
 		if (!state.internal.prng) {
 			state.internal.prng = Random.engines
 				.mt19937()
-				.seed(state.prng_state.seed)
-				.discard(state.prng_state.use_count)
+				.seed(state.saga.prng_state.seed)
+				.discard(state.saga.prng_state.use_count)
 		}
-		state.internal.deps.static_data = state.internal.deps.static_data || static_data
+		state.deps.static_data = state.deps.static_data || static_data
 	}
 
 	////////////
 
 	function outbound(state: IState) {
-		state.prng_state.use_count = state.internal.prng!.getUseCount()
+		state.saga.prng_state.use_count = state.internal.prng!.getUseCount()
 
 		//  outbound check
-		try { saga_model.validate(state) }
+		try { saga_model.validate(state.saga) }
 		catch (e) {
 			e.message = 'TBRPG Reducer: outbound state is invalid !'
 			throw e
