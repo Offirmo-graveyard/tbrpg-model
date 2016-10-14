@@ -50,8 +50,8 @@ function on_good_click(state: IState): IState {
 	//console.log('picked adventure', aa)
 
 	// instantiate it to an adventure
-	const gains = aa.post.gains // shortcut
-	state.saga.last_adventure = {
+	let gains: any = aa.post.gains // shortcut
+	const a: IAdventure = state.saga.last_adventure = {
 		adventure_archetype_hid: aa.hid,
 		good: aa.good,
 		gains: {
@@ -71,6 +71,32 @@ function on_good_click(state: IState): IState {
 			improved_armor_index: null, // TODO
 		}
 	}
+
+	// change state according to it
+	gains = a.gains;
+	//console.log(gains);
+	// stats
+	[
+		'agility',
+		'health',
+		'level',
+		'luck',
+		'mana',
+		'strength',
+		'vitality',
+		'wisdom',
+	].forEach((stat: string) => (state.saga.stats as any)[stat] += gains[stat])
+
+	state.saga.currencies.coins += gains.coins
+	state.saga.currencies.tokens += gains.tokens
+
+	/*
+	 inventory: any[]
+	 skills: any[]
+	 flags: {
+	 recent_adventure_ids: string[]
+	 },
+	 */
 
 	return state
 }

@@ -9,7 +9,7 @@ import { modules } from '../_inversify_needed_modules'
 
 import * as AdventureArchetypeModel from '../../models/adventure_archetype/_inversify_module'
 
-describe('redux store action "play"', function() {
+describe.only('redux store action "play"', function() {
 
 	function make_kernel() {
 		const parent_kernel = new Kernel()
@@ -97,10 +97,10 @@ describe('redux store action "play"', function() {
 			expect(saga).to.have.property('next_allowed_click_date_unix_timestamp_utc', 1)
 		})
 
-		describe('generated adventure', function() {
+		context('for a generated adventure', function() {
 
 			context('having a "level increase" flag', function() {
-				it.only('should update stats accordingly', () => {
+				it('should update stats accordingly', () => {
 					const kernel = make_kernel()
 					kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
 						.toConstantValue([
@@ -108,7 +108,7 @@ describe('redux store action "play"', function() {
 						])
 					const store = kernel.get<IStore>(RSRCIDS.store)
 
-					expect(store.getState().saga.stats.level).to.equal(1)
+					expect(store.getState().saga.stats.level, 'initial value').to.equal(1)
 
 					store.dispatch({
 						type: 'play',
@@ -116,9 +116,94 @@ describe('redux store action "play"', function() {
 					})
 
 					let saga = store.getState().saga
-					expect(saga.stats.level).to.equal(2)
+					expect(saga.stats.level, 'final value').to.equal(2)
 				})
-			})
+			});
+
+			[
+			'agility',
+				'health',
+				'luck',
+				'mana',
+				'strength',
+				'vitality',
+				'wisdom',
+			].forEach(stat => context(`having a "${stat} increase" flag`, function() {
+				it('should update stats accordingly', () => {
+					const kernel = make_kernel()
+					kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
+						.toConstantValue([
+							{ hid: "test", good: true, post: { gains: { [stat]: 3 }}},
+						])
+					const store = kernel.get<IStore>(RSRCIDS.store)
+
+					const initial_value: number = (store.getState().saga.stats as any)[stat]
+
+					store.dispatch({
+						type: 'play',
+						click_date_unix_timestamp_utc: INITIAL_WAIT_TIME
+					})
+
+					let saga = store.getState().saga
+					expect((saga.stats as any)[stat], 'final value').to.equal(initial_value + 3)
+				})
+			}))
+
+			context.only('having a "coin increase" flag', function() {
+
+				const CASES: { id: AdventureArchetypeModel.CoinsGain, expected_by_level: {[key: number]: number}}[] = [
+					{
+						id: 'none',
+					 	expected_by_level: { 1: 0,   12: 0},
+					},
+					{
+						id: 'small',
+					 	expected_by_level: { 1: 6,   12: 208},
+					},
+					{
+						id: 'medium',
+						expected_by_level: { 1: 110,  12: 883},
+					},
+					{
+						id: 'big',
+						expected_by_level: { 1: 590,  12: 7874},
+					},
+					{
+						id: 'huge',
+						expected_by_level: { 1: 1437, 12: 25089},
+					},
+				]
+
+				CASES.forEach(coins_gain => context(`having a '${coins_gain.id}' amount`, function() {
+
+					[1, 12].forEach(level => context(`when player is level ${level}`, function() {
+						it('should update stats accordingly', () => {
+							const kernel = make_kernel()
+							kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
+								.toConstantValue([
+									{ hid: "test", good: true, post: { gains: { coins: coins_gain.id }}},
+								])
+							const store = kernel.get<IStore>(RSRCIDS.store)
+
+							expect(store.getState().saga.currencies.coins, 'initial value').to.equal(0)
+
+							store.dispatch({
+								type: 'test_xxx',
+								op: (state: IState) => { state.saga.stats.level = level; return state }
+							})
+							expect(store.getState().saga.stats.level, 'forced level').to.equal(level)
+
+							store.dispatch({
+								type: 'play',
+								click_date_unix_timestamp_utc: INITIAL_WAIT_TIME
+							})
+
+							let saga = store.getState().saga
+							expect(saga.currencies.coins, 'final value').to.equal(coins_gain.expected_by_level[saga.stats.level])
+						})
+					}))
+				}))
+			});
 
 			context('having a "give new weapon" flag', function() {
 

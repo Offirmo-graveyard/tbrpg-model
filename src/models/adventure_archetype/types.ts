@@ -9,19 +9,19 @@ interface IAdventureArchetype {
 	post: {
 		gains: {
 			level: boolean
+			agility: number
 			health: number
+			luck: number
 			mana: number
 			strength: number
-			agility: number
 			vitality: number
 			wisdom: number
-			luck: number
 			coins: CoinsGain
 			tokens: number
-			weapon: boolean
 			armor: boolean
-			weapon_improvement: boolean
+			weapon: boolean
 			armor_improvement: boolean
+			weapon_improvement: boolean
 			flags: any
 		}
 	}
@@ -34,13 +34,13 @@ interface IAdventureArchetypeCreationParams {
 	post?: {
 		gains?: {
 			level?: boolean
+			agility?: number
 			health?: number
+			luck?: number
 			mana?: number
 			strength?: number
-			agility?: number
 			vitality?: number
 			wisdom?: number
-			luck?: number
 			coins?: CoinsGain
 			tokens?: number
 			weapon?: boolean

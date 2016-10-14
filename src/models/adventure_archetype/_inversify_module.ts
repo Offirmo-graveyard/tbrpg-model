@@ -9,6 +9,7 @@ import { IJsonSchemaExtended } from '../../_incubator/json-schema-based-model'
 import { ITranslationStore } from '../../common/types'
 
 import {
+	CoinsGain,
 	IAdventureArchetype,
 	IAdventureArchetypeCreationParams,
 	AdventureArchetypeModel,
@@ -59,6 +60,7 @@ const kernel_module = new KernelModule((bind: interfaces.Bind) => {
 export {
 	RSRCIDS,
 	kernel_module,
+	CoinsGain,
 	IAdventureArchetype,
 	IAdventureArchetypeCreationParams,
 	AdventureArchetypeModel,

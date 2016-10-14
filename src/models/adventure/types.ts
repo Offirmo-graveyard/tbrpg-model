@@ -1,6 +1,5 @@
 ////////////////////////////////////
 
-//import { CoinsGain } from '../adventure_archetype'
 import { IWeapon } from '../weapon'
 
 ////////////////////////////////////
