@@ -10,7 +10,7 @@
     "__dev": "~~~~~~~ DEVELOPMENT ~~~~~~~",
     "clean": "rm -rf test/unit/src",
     "dev1": "node scripts/build-for-unit-tests.js",
-    "dev2": "cpx 'src/**/*.json' test/unit/src --watch",
+    "dev2": "cpx 'src/**/*.{json}' test/unit/src --watch",
     "dev": "run-p dev1 dev2",
     "test": "mocha --opts test/unit/mocha.opts node_modules/@offirmo/unit-test-toolbox/mocha-chai-init-node.js test/unit/init.js 'test/unit/src/**/*spec.js'",
     "test:interactive": "nodemon test/interactive/index.js",
