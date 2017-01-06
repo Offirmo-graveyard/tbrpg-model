@@ -9,8 +9,6 @@ import { IStaticData } from '../db'
 
 ////////////////////////////////////
 
-/** Attached to state for convenience, but not adding that much info
- */
 interface IState {
 	saga: ISaga
 	internal: {

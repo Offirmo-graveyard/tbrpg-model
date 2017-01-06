@@ -1,25 +1,3 @@
-////////////////////////////////////
-
-//import * as _ from 'lodash'
-import { Random } from '@offirmo/random'
-
-////////////
-
-import {
-	IWeapon,
-	IWeaponCreationParams,
-	WeaponModel,
-} from '../models/weapon'
-
-import {
-	IWeaponComponent,
-	WeaponComponentType,
-	WeaponComponentModel,
-} from '../models/weapon_component'
-
-import { LokiDb, factory } from '../db'
-
-import * as consts from './constants'
 
 
 ////////////

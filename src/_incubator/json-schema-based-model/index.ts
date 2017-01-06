@@ -86,9 +86,9 @@ function instantiate_model<IModel, IModelCreationParams>(
 ////////////////////////////////////
 
 export {
-IJsonSchemaExtended,
-IJsonSchemaBasedModel,
-instantiate_model
+	IJsonSchemaExtended,
+	IJsonSchemaBasedModel,
+	instantiate_model
 }
 
 ////////////////////////////////////

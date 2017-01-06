@@ -9,7 +9,7 @@ import { modules } from '../_inversify_needed_modules'
 
 import * as AdventureArchetypeModel from '../../models/adventure_archetype/_inversify_module'
 
-describe.only('redux store action "play"', function() {
+describe('redux store action "play"', function() {
 
 	function make_kernel() {
 		const parent_kernel = new Kernel()
@@ -69,7 +69,8 @@ describe.only('redux store action "play"', function() {
 			const store = make_store()
 
 			let state = store.getState()
-			expect(state).to.have.property('click_count', 0, 'initial state leak') // yes I had it once :-(
+			expect(state)
+				.to.have.deep.property('saga.click_count', 0, 'initial state leak across tests ?') // yes I had it once :-(
 
 			// wait WAIT_TIME before clicking
 			store.dispatch({
@@ -149,7 +150,7 @@ describe.only('redux store action "play"', function() {
 				})
 			}))
 
-			context.only('having a "coin increase" flag', function() {
+			context('having a "coin increase" flag', function() {
 
 				const CASES: { id: AdventureArchetypeModel.CoinsGain, expected_by_level: {[key: number]: number}}[] = [
 					{
@@ -203,18 +204,40 @@ describe.only('redux store action "play"', function() {
 						})
 					}))
 				}))
-			});
+			})
 
-			context('having a "give new weapon" flag', function() {
+			context.only('having a "give new weapon" flag', function() {
+
+				function make_store_with_weapon_giving_adventure_only() {
+					const kernel = make_kernel()
+					kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
+					.toConstantValue([
+						{ hid: "test", good: true, post: { gains: { weapon: true }}},
+					])
+					const store = kernel.get<IStore>(RSRCIDS.store)
+					return store
+				}
 
 				context('when inventory has room', function () {
-					it('should update inventory accordingly')
+					it('should update inventory accordingly', () => {
+						const store = make_store_with_weapon_giving_adventure_only()
+
+						expect(store.getState().saga.inventory).to.have.lengthOf(0)
+
+						store.dispatch({
+							type: 'play',
+							click_date_unix_timestamp_utc: INITIAL_WAIT_TIME
+						})
+
+						let saga = store.getState().saga
+						expect(store.getState().saga.inventory).to.have.lengthOf(1)
+					})
 				})
+
 				context('when inventory has no more room', function () {
 					it('should update inventory accordingly')
 				})
 			})
-
 		})
 	})
 })
