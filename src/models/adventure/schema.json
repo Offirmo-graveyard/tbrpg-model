@@ -10,7 +10,7 @@
 			"maxLength": 50
 		},
 		"good": {
-			"description": "wether this adventure is the result of a good or bad click",
+			"description": "whether this adventure is the result of a good or bad click",
 			"type": "boolean"
 		},
 		"gains": {

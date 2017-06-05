@@ -4,9 +4,11 @@
   "description": "Internal model for \"The Boring RPG reloaded\" game",
   "main": "TODO",
   "scripts": {
+
     "__prod": "~~~~~~~ PRODUCTION ~~~~~~~",
     "build": "node scripts/build.js",
     "np": "np",
+
     "__dev": "~~~~~~~ DEVELOPMENT ~~~~~~~",
     "clean": "rm -rf test/unit/src",
     "dev1": "tsc --project meta/test --watch",
@@ -16,13 +18,16 @@
     "test:interactive": "nodemon test/interactive/index.js",
     "test:quick": "test/quick/index.js",
     "test:watch": "npm run test -- --watch",
+
     "__misc": "~~~~~~~ MISC ~~~~~~~",
     "cpx": "cpx",
     "tsc": "tsc",
     "npm-run-all": "npm-run-all",
     "run-p": "run-p",
+
     "__shortcuts": "~~~~~~~ Shortcuts ~~~~~~~",
     "tw": "npm run test:watch",
+
     "__tosort": "~~~~~~~ TOSORT ~~~~~~~",
     "xdev1": "node scripts/build-for-unit-tests.js"
   },
@@ -55,7 +60,6 @@
     "@offirmo/unit-test-toolbox": "^1.0.0",
     "@types/jsen": "^0.0.18",
     "@types/lodash": "^4.14.30",
-    "@types/moment": "^2.13.0",
     "@types/node": "^6.0.51",
     "@types/prettyjson": "^0.0.28",
     "@types/redux": "^3.6.0",
