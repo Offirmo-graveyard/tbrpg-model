@@ -9,7 +9,7 @@ import { modules } from '../_inversify_needed_modules'
 
 import * as AdventureArchetypeModel from '../../models/adventure_archetype/_inversify_module'
 
-describe('redux store action "play"', function() {
+describe('👷🏻 redux store action "play"', function() {
 
 	function make_kernel() {
 		const parent_kernel = new Kernel()
@@ -29,7 +29,7 @@ describe('redux store action "play"', function() {
 	const INIT_TIME = 0
 	const INITIAL_WAIT_TIME = 1
 
-	context('of type "bad" (too early)', function() {
+	context('🙅🏻‍♀️ of type "bad" (too early)', function() {
 
 		function make_store_with_preconditions(): IStore {
 			const store = make_store()
@@ -63,7 +63,7 @@ describe('redux store action "play"', function() {
 		})
 	})
 
-	context('of type "good"', function() {
+	context('🙆🏼  of type "good"', function() {
 
 		function make_store_with_preconditions(): IStore {
 			const store = make_store()
@@ -98,9 +98,9 @@ describe('redux store action "play"', function() {
 			expect(saga).to.have.property('next_allowed_click_date_unix_timestamp_utc', 1)
 		})
 
-		context('for a generated adventure', function() {
+		context('for a generated adventure 📜 ', function() {
 
-			context('having a "level increase" flag', function() {
+			context('having a "level increase" flag 📈', function() {
 				it('should update stats accordingly', () => {
 					const kernel = make_kernel()
 					kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
@@ -129,7 +129,7 @@ describe('redux store action "play"', function() {
 				'strength',
 				'vitality',
 				'wisdom',
-			].forEach(stat => context(`having a "${stat} increase" flag`, function() {
+			].forEach(stat => context(`having a "${stat} increase" flag 📈`, function() {
 				it('should update stats accordingly', () => {
 					const kernel = make_kernel()
 					kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
@@ -150,7 +150,7 @@ describe('redux store action "play"', function() {
 				})
 			}))
 
-			context('having a "coin increase" flag', function() {
+			context('having a "coin increase" flag 💰', function() {
 
 				const CASES: { id: AdventureArchetypeModel.CoinsGain, expected_by_level: {[key: number]: number}}[] = [
 					{
@@ -206,7 +206,7 @@ describe('redux store action "play"', function() {
 				}))
 			})
 
-			context.only('having a "give new weapon" flag', function() {
+			context.only('having a "give new weapon" flag 📦', function() {
 
 				function make_store_with_weapon_giving_adventure_only() {
 					const kernel = make_kernel()
@@ -230,7 +230,7 @@ describe('redux store action "play"', function() {
 						})
 
 						let saga = store.getState().saga
-						expect(store.getState().saga.inventory).to.have.lengthOf(1)
+						expect(saga.inventory).to.have.lengthOf(1)
 					})
 				})
 

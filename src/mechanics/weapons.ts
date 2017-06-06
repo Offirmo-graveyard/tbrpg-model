@@ -48,32 +48,29 @@ function generate_random_demo_weapon(db: WeaponStaticData, model: WeaponModel): 
 		qualifier1: pick_random_weapon_component(rng, db.qualifier_1),
 		qualifier2: pick_random_weapon_component(rng, db.qualifier_2),
 		quality: pick_random_quality(rng, db.quality),
-		base_strength: getRandomIntInclusive(
-			Math.random(),
-			(weapon_model.schema.properties as any).base_strength.minimum,
-			(weapon_model.schema.properties as any).base_strength.maximum
-		),
-		enhancement_level: getRandomIntInclusive(
-			Math.random(),
-			(weapon_model.schema.properties as any).enhancement_level.minimum,
-			(weapon_model.schema.properties as any).enhancement_level.maximum
-		),
+		base_strength: Random.integer(
+				(model.schema.properties as any).base_strength.minimum,
+				(model.schema.properties as any).base_strength.maximum
+			)(rng),
+		enhancement_level: Random.integer(
+				(model.schema.properties as any).enhancement_level.minimum,
+				(model.schema.properties as any).enhancement_level.maximum
+			)(rng),
 	}
 
 	return weapon_data
 }
 
-function generate_weapon(db: WeaponStaticData, rng: Engine, spec?: WeaponGenerationSpec): IWeaponCreationParams {
+function generate_weapon(model: WeaponModel, db: WeaponStaticData, rng: Engine, spec?: WeaponGenerationSpec): IWeaponCreationParams {
 	const weapon_data: IWeaponCreationParams = {
 		base: pick_random_weapon_component(rng, db.base),
 		qualifier1: pick_random_weapon_component(rng, db.qualifier_1),
 		qualifier2: pick_random_weapon_component(rng, db.qualifier_2),
 		quality: pick_random_quality(rng, db.quality),
-		base_strength: getRandomIntInclusive(
-			Math.random(),
-			(weapon_model.schema.properties as any).base_strength.minimum,
-			(weapon_model.schema.properties as any).base_strength.maximum
-		),
+		base_strength: Random.integer(
+			(model.schema.properties as any).base_strength.minimum,
+			(model.schema.properties as any).base_strength.maximum
+		)(rng),
 		enhancement_level: 0,
 	}
 
