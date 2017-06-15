@@ -11,6 +11,7 @@ import { IAdventureArchetype } from '../../models/adventure_archetype'
 import { IState } from '../types'
 
 import { generate_coin_gain } from '../../mechanics/coins'
+import { generate_weapon } from '../../mechanics/weapons'
 
 ////////////////////////////////////
 
@@ -65,7 +66,7 @@ function on_good_click(state: IState): IState {
 			luck: gains.luck,
 			coins: generate_coin_gain(state.internal.prng!, gains.coins, state.saga.stats.level),
 			tokens: gains.tokens,
-			weapon: null, // TODO
+			weapon: gains.weapon ? generate_weapon(state.internal.prng!) : null,
 			armor: null, // TODO
 			improved_weapon_index: null, // TODO
 			improved_armor_index: null, // TODO

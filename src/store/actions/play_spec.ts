@@ -100,7 +100,7 @@ describe('👷🏻 redux store action "play"', function() {
 
 		context('for a generated adventure 📜 ', function() {
 
-			context('having a "level increase" flag 📈', function() {
+			context('having a "level increase" flag ⤴', function() {
 				it('should update stats accordingly', () => {
 					const kernel = make_kernel()
 					kernel.bind<AdventureArchetypeModel.IAdventureArchetypeCreationParams[]>(AdventureArchetypeModel.RSRCIDS.static_data)
